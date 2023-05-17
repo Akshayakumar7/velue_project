@@ -32,7 +32,7 @@ const Home = () => {
       company: 'Bluish - Water gun Stainless Steellll',
       mrp: '900',
       discount: '350',
-      velue:'Velue'
+      velue: 'Velue',
     },
     {
       image:
@@ -65,7 +65,7 @@ const Home = () => {
       company: 'Bluish - Water gun Stainless Steellll',
       mrp: '900',
       discount: '350',
-      velue:'Velue'
+      velue: 'Velue',
     },
     {
       image:
@@ -95,13 +95,25 @@ const Home = () => {
 
   const renderProductList = item => {
     return (
-      <View style={{alignSelf:'center',width:'49%'}}>
-        <ProductCard data={item} />
+     
+        <View style={{alignSelf: 'center', width: '50%'}}>
+          <ProductCard data={item} />
+          {/* <View style={{height:hp(1)}}/> */}
+        </View>
+    
+    );
+  };
+
+  const itemSeperator = () => {
+    return (
+      <View>
+        <View style={styles.verticalDivider} />
+        <View style={styles.doubleHeight}/>
       </View>
     );
   };
   return (
-    <View>
+    <View style={style.mainView}>
       <ScrollView>
         <View style={styles.doubleHeight} />
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -123,11 +135,12 @@ const Home = () => {
         <View style={styles.doubleHeight} />
         <View style={styles.doubleHeight} />
         {/* <View style={styles.doubleHeight} /> */}
-        <View style={{alignItems: 'center',width:'100%'}}>
+        <View style={{alignItems: 'center', width: '100%',marginLeft:wp(2.5)}}>
           <FlatList
             data={productData}
             renderItem={({item}) => renderProductList(item)}
             numColumns={2}
+            ItemSeparatorComponent={itemSeperator()}
           />
         </View>
       </ScrollView>
@@ -137,7 +150,7 @@ const Home = () => {
 
 const style = StyleSheet.create({
   mainView: {
-    backgroundColor: color.grey,
+    backgroundColor: color.lightGreen,
   },
   searchbarView: {
     paddingHorizontal: '4%',
