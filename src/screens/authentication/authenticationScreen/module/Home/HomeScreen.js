@@ -1,5 +1,12 @@
 import React from 'react';
-import {Text, View, StyleSheet, TextInput} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  FlatList,
+  ScrollView,
+} from 'react-native';
 import SvgImage from '../../../../../component/common/svgImage';
 import {
   ACCOUNT_ICON,
@@ -13,11 +20,54 @@ import styles from '../../../../../general/generalStyleSheet';
 import CustomTextInput from '../../../../../component/common/customTextInput';
 import {SEARCH_PRODUCTS_TEXT} from './HomeScreenUtility';
 import ImageSlider from '../../../../../component/common/ImageSliderScreen';
+import ProductCard from '../../../../../component/common/productCard';
 
 const Home = () => {
+  const productData = [
+    {
+      image:
+        'https://media.istockphoto.com/id/1400295846/photo/jets-of-clean-water-flowing-in-the-shower-cabin.jpg?s=1024x1024&w=is&k=20&c=lRcwHVhkSfX4bQS5KlnITpuImjfvfGokNJ_G8LtaG1A=',
+      productName: 'Bluish - Water gun Stainless Steellll',
+      company: 'Bluish - Water gun Stainless Steellll',
+      mrp: '900',
+      discount: '350',
+    },
+    {
+      image:
+        'https://media.istockphoto.com/id/140806786/photo/water-pouring-out-of-modern-bathroom-faucet.jpg?s=612x612&w=0&k=20&c=5MejdFXtgyypJTGe-UeDavjSUWlmml834LSslarCgss=',
+      productName: 'Bluish - Water gun Stainless Steellll',
+      company: 'Bluish - Water gun Stainless Steellll',
+      mrp: '900',
+      discount: '350',
+    },
+    {
+      image:
+        'https://media.istockphoto.com/id/140806786/photo/water-pouring-out-of-modern-bathroom-faucet.jpg?s=612x612&w=0&k=20&c=5MejdFXtgyypJTGe-UeDavjSUWlmml834LSslarCgss=',
+      productName: 'Bluish - Water gun Stainless Steellll',
+      company: 'Bluish - Water gun Stainless Steellll',
+      mrp: '900',
+      discount: '350',
+    },
+    {
+      image:
+        'https://media.istockphoto.com/id/140806786/photo/water-pouring-out-of-modern-bathroom-faucet.jpg?s=612x612&w=0&k=20&c=5MejdFXtgyypJTGe-UeDavjSUWlmml834LSslarCgss=',
+      productName: 'Bluish - Water gun Stainless Steellll',
+      company: 'Bluish - Water gun Stainless Steellll',
+      mrp: '900',
+      discount: '350',
+    },
+  ];
+
+  const renderProductList = item => {
+    return (
+      <View>
+        <ProductCard data={item} />
+      </View>
+    );
+  };
   return (
     <View>
-      <View>
+      <ScrollView>
         <View style={styles.doubleHeight} />
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <View style={style.searchbarView}>
@@ -36,7 +86,14 @@ const Home = () => {
         <View style={styles.doubleHeight} />
 
         <ImageSlider />
-      </View>
+        <View style={{alignItems: 'center'}}>
+          <FlatList
+            data={productData}
+            renderItem={({item}) => renderProductList(item)}
+            numColumns={2}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 };

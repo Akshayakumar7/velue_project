@@ -8,15 +8,16 @@ export const getJoke = async () => {
   return res;
 };
 
-export const storeUserDataToDB = async userData => {
+export const addNewUserData = data => {
   try {
-    const res = await axios({
-      method: 'POST',
-      url: 'http://202,21,32.168:8080/customer/saveCustomers',
-      data: userData,
+    const url = 'https://0b10-202-21-32-168.in.ngrok.io/customer/saveCustomers';
+    const res = axios.post(url, data).then(response => {
+      console.log('response', response.data);
     });
-  } catch (e) {
-    console.log('Error>>>', e);
+    return res;
+  } catch (error) {
+    console.log('error', error);
   }
-  return res;
 };
+
+// https://jsonplaceholder.typicode.com/posts?

@@ -13,6 +13,9 @@ export const color = {
     lightGreen:'#E8FCFF',
     mediumGreen:'#008A92',
     borderBlueColor:'#27396120',
-    shadowColor:'#52006A'
+    shadowColor:'#52006A',
+    boxGrey:'#8D8D8D20',
+    grey1:'#868686',
+    darkCyan:'#008A92'
 
 }

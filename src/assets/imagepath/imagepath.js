@@ -20,7 +20,10 @@ import CART_ICON from '../../assets/images/cart-icon.svg';
 import BLUE_BALL_ICON from '../../assets/images/blue-ball-icon.svg';
 import RIGHT_MARK_ICON from '../../assets/images/right-mark-icon.svg';
 import SEARCH_ICON from '../../assets/images/search-icon.svg';
-import BELL_ICON from '../../assets/images/bell-icon.svg'
+import BELL_ICON from '../../assets/images/bell-icon.svg';
+import DELETE_ICON from '../../assets/images/delete-icon.svg';
+import PLUS_ICON from '../../assets/images/plus-icon.svg';
+import MINUS_ICON from '../../assets/images/minus-icon.svg'
 
 export {
     BATH_TUB_IMAGE,
@@ -45,5 +48,8 @@ export {
     BLUE_BALL_ICON,
     RIGHT_MARK_ICON,
     SEARCH_ICON,
-    BELL_ICON
+    BELL_ICON,
+    DELETE_ICON,
+    PLUS_ICON,
+    MINUS_ICON
 }

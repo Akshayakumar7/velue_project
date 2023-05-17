@@ -88,14 +88,19 @@ import {
   validatePhoneNumber,
 } from '../../../../commonMethod/fieldValidator';
 import {ERROR_MESSAGE} from '../../../../general/validationMessage';
-import {getJoke, storeUserDataToDB} from './registerNetworkCall';
+import {
+  addData,
+  addNewUserData,
+  getJoke,
+  storeUserDataToDB,
+} from './registerNetworkCall';
 
 const Register = ({navigation}) => {
   const CELL_COUNT = 4;
   const [currentButton, setCurrent] = useState(0);
   const [isEnabled, setIsEnabled] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showResetPassword, setShowResetPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
+  const [showResetPassword, setShowResetPassword] = useState(true);
   const [gstNumber, setShowGstNumber] = useState('');
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -190,8 +195,45 @@ const Register = ({navigation}) => {
     navigation.goBack();
   };
 
-  const onPressFinishButton = () => {
-    navigation.navigate(SCREEN_NAME.OnboardingCompleted);
+  const onPressFinishButton = async () => {
+    console.log("CLICKED")
+    const isVerfied = await verifyAllFields();
+    if (true) {
+      var payLoad = {
+        customerName: 'HindHardware',
+        contactName: fullName,
+        primaryNumber: primaryContact,
+        whatsAppNumber: whatsAppNumer,
+        contactGmail: email,
+        creditLimitAmount: 100000,
+        creditLimitDays: 35,
+        gstno: 'GST2023002',
+        customerBank: {
+          accountNumber: accountNumber,
+          bankName: 'YES BANK',
+          ifscCode: ifscCode,
+          panCard: 'PAN00101101',
+        },
+      };
+      var oneMorePayload = {
+        customerName: 'HindHardware',
+        contactName: 'Akshay',
+        primaryNumber: '7022326895',
+        whatsAppNumber: '',
+        contactGmail: 'shravan@gmail.com',
+        creditLimitAmount: 100000,
+        creditLimitDays: 35,
+        gstno: 'GST2023002',
+        customerBank: {
+          accountNumber: '20230809',
+          bankName: 'YES BANK',
+          ifscCode: 'IFSC00101',
+          panCard: 'PAN00101101',
+        },
+      };
+      const result = await addNewUserData(oneMorePayload);
+      console.log("result",result);
+    }
   };
 
   const onPressVerifyText = () => {
@@ -220,43 +262,6 @@ const Register = ({navigation}) => {
       return false;
     }
     return true;
-  };
-
-  const onPressSecondNextButton = async () => {
-    const isAllDataVerified = await verifyAllFields();
-    if (isAllDataVerified) {
-      var data = {
-        customerName: 'HindHardware',
-        contactName: fullName,
-        primaryNumber: primaryContact,
-        whatsAppNumber: whatsAppNumer,
-        contactGmail: email,
-        creditLimitAmount: '100000',
-        creditLimitDays: 35,
-        gstno: 'GST2023002',
-        customerBank: {
-          accountNumber: accountNumber,
-          bankName: 'YES BANK',
-          ifscCode: ifscCode,
-          panCard: 'PAN00101101',
-        },
-      };
-      var ans = await storeUserDataToDB(data);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const getData = async () => {
-    await getJoke()
-      .then(res => {
-        console.log(res?.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
   };
 
   return (

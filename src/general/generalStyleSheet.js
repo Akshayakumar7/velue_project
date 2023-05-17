@@ -42,7 +42,10 @@ const styles = StyleSheet.create({
         fontSize:hp(2)
     },
     thripleVerticleDivider:{
-        width:wp(3)
+        width:wp(4)
+    },
+    extraVerticalDivider:{
+        width:wp(7)
     }
 })
 
