@@ -21,7 +21,7 @@ const Fastphoto = props => {
 const style = StyleSheet.create({
   mainView: {
     width: wp(89),
-    height: hp(30),
+    height: hp(22),
   },
 });
 

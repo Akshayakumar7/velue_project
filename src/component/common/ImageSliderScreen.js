@@ -121,7 +121,7 @@ const style = StyleSheet.create({
     margin: hp(1),
   },
   productStyle: {
-    height: hp(33),
+    height: hp(30),
     width: wp(75),
     resizeMode: 'contain',
     marginTop: hp(-6),

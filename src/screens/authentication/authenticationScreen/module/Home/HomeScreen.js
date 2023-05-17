@@ -21,6 +21,7 @@ import CustomTextInput from '../../../../../component/common/customTextInput';
 import {SEARCH_PRODUCTS_TEXT} from './HomeScreenUtility';
 import ImageSlider from '../../../../../component/common/ImageSliderScreen';
 import ProductCard from '../../../../../component/common/productCard';
+import ImageSliderV2 from '../../../../../component/common/ImageSliderV2';
 
 const Home = () => {
   const productData = [
@@ -31,10 +32,44 @@ const Home = () => {
       company: 'Bluish - Water gun Stainless Steellll',
       mrp: '900',
       discount: '350',
+      velue:'Velue'
     },
     {
       image:
         'https://media.istockphoto.com/id/140806786/photo/water-pouring-out-of-modern-bathroom-faucet.jpg?s=612x612&w=0&k=20&c=5MejdFXtgyypJTGe-UeDavjSUWlmml834LSslarCgss=',
+      productName: 'Bluish - Water gun Stainless Steellll',
+      company: 'Bluish - Water gun Stainless Steellll',
+      mrp: '900',
+      discount: '350',
+    },
+    {
+      image:
+        'https://cdn.pixabay.com/photo/2020/04/21/14/09/soap-5073231_640.jpg',
+      productName: 'Bluish - Water gun Stainless Steellll',
+      company: 'Bluish - Water gun Stainless Steellll',
+      mrp: '900',
+      discount: '350',
+    },
+    {
+      image:
+        'https://cdn.pixabay.com/photo/2015/10/01/01/21/bathroom-966358_640.jpg',
+      productName: 'Bluish - Water gun Stainless Steellll',
+      company: 'Bluish - Water gun Stainless Steellll',
+      mrp: '900',
+      discount: '350',
+    },
+    {
+      image:
+        'https://media.istockphoto.com/id/1400295846/photo/jets-of-clean-water-flowing-in-the-shower-cabin.jpg?s=1024x1024&w=is&k=20&c=lRcwHVhkSfX4bQS5KlnITpuImjfvfGokNJ_G8LtaG1A=',
+      productName: 'Bluish - Water gun Stainless Steellll',
+      company: 'Bluish - Water gun Stainless Steellll',
+      mrp: '900',
+      discount: '350',
+      velue:'Velue'
+    },
+    {
+      image:
+        'https://cdn.pixabay.com/photo/2018/09/17/13/27/hotel-bathroom-3683837_640.jpg',
       productName: 'Bluish - Water gun Stainless Steellll',
       company: 'Bluish - Water gun Stainless Steellll',
       mrp: '900',
@@ -60,7 +95,7 @@ const Home = () => {
 
   const renderProductList = item => {
     return (
-      <View>
+      <View style={{alignSelf:'center',width:'49%'}}>
         <ProductCard data={item} />
       </View>
     );
@@ -84,9 +119,11 @@ const Home = () => {
           <SvgImage Source={BELL_ICON} height={hp(5)} width={wp(6)} />
         </View>
         <View style={styles.doubleHeight} />
-
-        <ImageSlider />
-        <View style={{alignItems: 'center'}}>
+        <ImageSliderV2 />
+        <View style={styles.doubleHeight} />
+        <View style={styles.doubleHeight} />
+        {/* <View style={styles.doubleHeight} /> */}
+        <View style={{alignItems: 'center',width:'100%'}}>
           <FlatList
             data={productData}
             renderItem={({item}) => renderProductList(item)}
