@@ -11,5 +11,10 @@ export  const SCREEN_NAME = {
     Orders:'Orders',
     Account:'Account',
     Cart:'Cart',
-    OnboardingCompleted:'OnboardingCompleted'
+    OnboardingCompleted:'OnboardingCompleted',
+    ProductDescription:'ProductDescription'
+}
+
+export const BOTTOM_TAB_SCREEN_NAMES = {
+    NestedHomeScreenNavigation:'NestedHomeScreenNavigation'
 }

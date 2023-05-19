@@ -15,7 +15,8 @@ import {
 import {hp, wp} from '../commonMethod/screenRatio';
 import SvgImage from '../component/common/svgImage';
 import {color} from '../assets/colors/color';
-import {SCREEN_NAME} from '../general/screenName';
+import {BOTTOM_TAB_SCREEN_NAMES, SCREEN_NAME} from '../general/screenName';
+import NestedHomeScreenNavigation from './NestedNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,8 +36,8 @@ const BottomTab = () => {
           },
         })}>
         <Tab.Screen
-          name={SCREEN_NAME.Home}
-          component={Home}
+          name={BOTTOM_TAB_SCREEN_NAMES.NestedHomeScreenNavigation}
+          component={NestedHomeScreenNavigation}
           options={{
             tabBarLabel: () => (
               <Text style={{color: color.white}}>{SCREEN_NAME.Home}</Text>
@@ -63,7 +64,9 @@ const BottomTab = () => {
           name={SCREEN_NAME.Orders}
           component={Order} // Replaced Screen 2
           options={{
-            tabBarLabel: () => <Text style={{color: color.white}}>{SCREEN_NAME.Orders}</Text>,
+            tabBarLabel: () => (
+              <Text style={{color: color.white}}>{SCREEN_NAME.Orders}</Text>
+            ),
             tabBarIcon: ({focused}) => {
               return (
                 <View>
