@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Text,
   View,
@@ -6,6 +6,7 @@ import {
   TextInput,
   FlatList,
   ScrollView,
+  LogBox,
 } from 'react-native';
 import SvgImage from '../../../../../component/common/svgImage';
 import {

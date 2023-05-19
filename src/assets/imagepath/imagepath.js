@@ -1,4 +1,4 @@
-import  BATH_TUB_IMAGE  from "../../assets/images/bathtub.jpg";
+import BATH_TUB_IMAGE from '../../assets/images/bathtub.jpg';
 import LOGO from '../../assets/images/Vector.svg';
 import PERSON_ICON from '../../assets/images/person-icon.svg';
 import LOCK_ICON from '../../assets/images/lock-icon.svg';
@@ -23,33 +23,37 @@ import SEARCH_ICON from '../../assets/images/search-icon.svg';
 import BELL_ICON from '../../assets/images/bell-icon.svg';
 import DELETE_ICON from '../../assets/images/delete-icon.svg';
 import PLUS_ICON from '../../assets/images/plus-icon.svg';
-import MINUS_ICON from '../../assets/images/minus-icon.svg'
+import MINUS_ICON from '../../assets/images/minus-icon.svg';
+import ROUND_BACK_HANDLER from '../../assets/images/round-back-handler';
+import UP_ARROW from '../../assets/images/new-up-arrow.svg';
 
 export {
-    BATH_TUB_IMAGE,
-    LOGO,
-    PERSON_ICON,
-    LOCK_ICON,
-    OPENED_EYE_ICON,
-    CLOSED_EYE_ICON,
-    BACK_ARROW,
-    GREY_BANK_ICON,
-    WHITE_BUSSINESS_ICON,
-    GREY_CONTACT_ICON,
-    BLUE_BUSSINESS_ICON,
-    WHITE_CONTACT_ICON,
-    WHITE_BANK_ICON,
-    RIGHT_MARK,
-    DOWN_ICON,
-    HOME_ICON,
-    ORDER_ICON,
-    ACCOUNT_ICON,
-    CART_ICON,
-    BLUE_BALL_ICON,
-    RIGHT_MARK_ICON,
-    SEARCH_ICON,
-    BELL_ICON,
-    DELETE_ICON,
-    PLUS_ICON,
-    MINUS_ICON
-}
+  BATH_TUB_IMAGE,
+  LOGO,
+  PERSON_ICON,
+  LOCK_ICON,
+  OPENED_EYE_ICON,
+  CLOSED_EYE_ICON,
+  BACK_ARROW,
+  GREY_BANK_ICON,
+  WHITE_BUSSINESS_ICON,
+  GREY_CONTACT_ICON,
+  BLUE_BUSSINESS_ICON,
+  WHITE_CONTACT_ICON,
+  WHITE_BANK_ICON,
+  RIGHT_MARK,
+  DOWN_ICON,
+  HOME_ICON,
+  ORDER_ICON,
+  ACCOUNT_ICON,
+  CART_ICON,
+  BLUE_BALL_ICON,
+  RIGHT_MARK_ICON,
+  SEARCH_ICON,
+  BELL_ICON,
+  DELETE_ICON,
+  PLUS_ICON,
+  MINUS_ICON,
+  ROUND_BACK_HANDLER,
+  UP_ARROW
+};
