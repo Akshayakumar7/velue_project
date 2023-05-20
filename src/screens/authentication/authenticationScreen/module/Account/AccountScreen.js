@@ -1,16 +1,21 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import Header from '../../../../../component/common/appHeader';
+import { color } from '../../../../../assets/colors/color';
 
-const Account = () => {
+const Profile = () => {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <Text>Hello, Account!</Text>
+    <View>
+      <View style={style.mainView}>
+        <Header />
+      </View>
     </View>
   );
 };
-export default Account;
+
+const style = StyleSheet.create({
+  mainView: {
+    backgroundColor: color.lightGreen,
+  },
+});
+export default Profile;

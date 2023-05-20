@@ -1,16 +1,16 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import Header from '../component/common/appHeader';
 
 const Profile = () => {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <Text>Hello, world!</Text>
+    <View>
+     <Header/>
     </View>
   );
 };
+
+const style = StyleSheet.create({
+  mainView:{}
+})
 export default Profile;
