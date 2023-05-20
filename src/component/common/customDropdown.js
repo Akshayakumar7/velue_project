@@ -6,7 +6,7 @@ import {hp} from '../../commonMethod/screenRatio';
 import styles from '../../general/generalStyleSheet';
 
 const CustomDropdown = props => {
-  const {placeholder, rightIcon, rightIconHeight, rightIconWidth, customStyle} =
+  const {placeholder, rightIcon, rightIconHeight, rightIconWidth, customStyle, getBankName} =
     props;
   const [showDropdowm, setShowDropdown] = useState(false);
   const [value, setValue] = useState('');
@@ -31,6 +31,9 @@ const CustomDropdown = props => {
 
   const onPressBankName = item => {
     setValue(item?.name ?? '');
+    getBankName(item?.name ?? '');
+    setShowDropdown(!showDropdowm)
+  
   };
 
 
@@ -38,7 +41,7 @@ const CustomDropdown = props => {
     return (
       <View style={style.whiteBackground}>
         <View style={styles.singleHeight} />
-        <TouchableOpacity onPress={() => onPressBankName()}>
+        <TouchableOpacity onPress={() => onPressBankName(item)}>
           <Text style={style.bankListText}>{item?.name ?? ''}</Text>
         </TouchableOpacity>
         <View style={styles.smallHeight} />

@@ -88,7 +88,7 @@ const ProductDescription = () => {
         <ScrollView>
           <ImageBackground
             source={{
-              uri: 'https://cdn.pixabay.com/photo/2017/03/26/01/17/bathtub-2174699_640.jpg',
+              uri: 'https://cdn.pixabay.com/photo/2010/12/13/10/02/bath-2192_640.jpg',
             }}
             style={style.productImage}
             resizeMode={'cover'}>

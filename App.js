@@ -20,67 +20,67 @@ const Tab = createBottomTabNavigator();
 
 function App() {
   return (
-    // <NavigationContainer>
-    //   <Stack.Navigator>
-    //     <Stack.Screen
-    //       name={SCREEN_NAME.GetStarted}
-    //       component={GetStarted}
-    //       options={{
-    //         headerShown: false,
-    //       }}
-    //     />
-    //     <Stack.Screen
-    //       name={SCREEN_NAME.Login}
-    //       component={Login}
-    //       options={{
-    //         headerShown: false,
-    //       }}
-    //     />
-    //     <Stack.Screen
-    //       name={SCREEN_NAME.RegisterScreen}
-    //       component={RegisterScreen}
-    //       options={{
-    //         headerShown: false,
-    //       }}
-    //     />
-    //     <Stack.Screen
-    //       name={SCREEN_NAME.ForgotPassword}
-    //       component={ForgotPassword}
-    //       options={{
-    //         headerShown: false,
-    //       }}
-    //     />
-    //     <Stack.Screen
-    //       name={SCREEN_NAME.OtpVerification}
-    //       component={OtpVerfication}
-    //       options={{
-    //         headerShown: false,
-    //       }}
-    //     />
-    //     <Stack.Screen
-    //       name={SCREEN_NAME.PasswordReset}
-    //       component={PasswordReset}
-    //       options={{
-    //         headerShown: false,
-    //       }}
-    //     />
-    //     <Stack.Screen
-    //       name={SCREEN_NAME.Register}
-    //       component={Register}
-    //       options={{
-    //         headerShown: false,
-    //       }}
-    //     />
-    //      <Stack.Screen
-    //       name={SCREEN_NAME.OnboardingCompleted}
-    //       component={OnboardingCompleted}
-    //       options={{
-    //         headerShown: false,
-    //       }}
-    //     />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
-     <BottomTab/>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name={SCREEN_NAME.GetStarted}
+          component={GetStarted}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.Login}
+          component={Login}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.RegisterScreen}
+          component={RegisterScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.ForgotPassword}
+          component={ForgotPassword}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.OtpVerification}
+          component={OtpVerfication}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.PasswordReset}
+          component={PasswordReset}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.Register}
+          component={Register}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name={SCREEN_NAME.OnboardingCompleted}
+          component={OnboardingCompleted}
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+    //  <BottomTab/>
   );
 }
 

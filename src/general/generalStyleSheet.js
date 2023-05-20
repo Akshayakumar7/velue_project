@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
     },
     extraVerticalDivider:{
         width:wp(7)
+    },
+    maxContentDivider:{
+        height:hp(20)
     }
 })
 

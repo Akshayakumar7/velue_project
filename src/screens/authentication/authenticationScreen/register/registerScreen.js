@@ -91,6 +91,7 @@ import {ERROR_MESSAGE} from '../../../../general/validationMessage';
 import {
   addData,
   addNewUserData,
+  apiTest,
   getJoke,
   storeUserDataToDB,
 } from './registerNetworkCall';
@@ -119,6 +120,7 @@ const Register = ({navigation}) => {
   const [conformPasswordError, setConformPasswordError] = useState('');
   const [otpError, setOtpError] = useState('');
   const [accountNumberError, setAccountNumberError] = useState('');
+  const [bankName, setBankName] = useState('');
   const [bankNameError, setBankNameError] = useState('');
   const [ifscCodeError, setIfscCodeError] = useState('');
   const [showModal, setShowModal] = useState(false);
@@ -137,6 +139,14 @@ const Register = ({navigation}) => {
 
   const onPressContact = () => {
     setCurrent(1);
+  };
+
+  const onPressFirstNextButton = () => {
+    setCurrent(1);
+  };
+
+  const onPressSecondNextButton = () => {
+    setCurrent(2);
   };
 
   const onPressBankIcon = () => {
@@ -196,44 +206,38 @@ const Register = ({navigation}) => {
   };
 
   const onPressFinishButton = async () => {
-    console.log("CLICKED")
-    const isVerfied = await verifyAllFields();
-    if (true) {
-      var payLoad = {
-        customerName: 'HindHardware',
-        contactName: fullName,
-        primaryNumber: primaryContact,
-        whatsAppNumber: whatsAppNumer,
-        contactGmail: email,
-        creditLimitAmount: 100000,
-        creditLimitDays: 35,
-        gstno: 'GST2023002',
-        customerBank: {
-          accountNumber: accountNumber,
-          bankName: 'YES BANK',
-          ifscCode: ifscCode,
-          panCard: 'PAN00101101',
-        },
-      };
-      var oneMorePayload = {
-        customerName: 'HindHardware',
-        contactName: 'Akshay',
-        primaryNumber: '7022326895',
-        whatsAppNumber: '',
-        contactGmail: 'shravan@gmail.com',
-        creditLimitAmount: 100000,
-        creditLimitDays: 35,
-        gstno: 'GST2023002',
-        customerBank: {
-          accountNumber: '20230809',
-          bankName: 'YES BANK',
-          ifscCode: 'IFSC00101',
-          panCard: 'PAN00101101',
-        },
-      };
-      const result = await addNewUserData(oneMorePayload);
-      console.log("result",result);
-    }
+    var oneMorePayload = {
+      customerName: fullName,
+      contactName: fullName,
+      primaryNumber: primaryContact,
+      whatsAppNumber: whatsAppNumer,
+      contactGmail: email,
+      creditLimitAmount: 10000,
+      creditLimitDays: 30,
+      gstno: 'GST2023202',
+      customerBank: {
+        accountNumber: accountNumber,
+        bankName: bankName,
+        ifscCode: ifscCode,
+        panCard: 'ABCTY1234D',
+      },
+    };
+    apiTest(oneMorePayload)
+      .then(res => {
+        console.log('res', res.status);
+        if (res.status == 200) {
+          setFullName('');
+          setPrimaryContact('');
+          setWhatsAppNumber('');
+          setEmail('');
+          setAccountNumber('');
+          setBankName('');
+          setIfscCode('');
+        }
+      })
+      .catch(err => {
+        console.log('err', err);
+      });
   };
 
   const onPressVerifyText = () => {
@@ -264,13 +268,18 @@ const Register = ({navigation}) => {
     return true;
   };
 
+  const getBankName = val => {
+    console.log('Bank Name', val);
+    setBankName(val ?? '');
+  };
+
   return (
     <View>
       <Header
         headerTitle={REGISTRATION_TEXT}
         onPressBackButton={() => onPressBankHandlear()}
       />
-      <ScrollView style={style.mainView}>
+      <View style={[style.mainView]}>
         <View style={styles.doubleHeight} />
         <View style={style.flexView}>
           <TouchableOpacity
@@ -447,7 +456,10 @@ const Register = ({navigation}) => {
             <View style={styles.doubleHeight} />
 
             <View>
-              <MandatoryText mandatoryText={GST_CERTIFICATE_TEXT} />
+              <MandatoryText
+                mandatoryText={GST_CERTIFICATE_TEXT}
+                needMandatoryIcon={false}
+              />
               <View style={styles.singleHeight} />
               <TouchableOpacity>
                 <View style={style.uploadGstBox}>
@@ -457,7 +469,10 @@ const Register = ({navigation}) => {
                 </View>
               </TouchableOpacity>
               <View style={styles.doubleHeight} />
-              <MandatoryText mandatoryText={PAN_NUMBER_TEXT} />
+              <MandatoryText
+                mandatoryText={PAN_NUMBER_TEXT}
+                needMandatoryIcon={false}
+              />
               <View style={styles.singleHeight} />
               <TouchableOpacity>
                 <View style={style.uploadGstBox}>
@@ -471,20 +486,22 @@ const Register = ({navigation}) => {
             <AppButton
               title={NEXT_TEXT}
               customButtonStyle={style.nextButtonStyle}
-              onPress={() => onPressSecondNextButton()}
+              onPress={() => onPressFirstNextButton()}
             />
+            <View style={styles.maxContentDivider} />
+            <View style={styles.maxContentDivider} />
             <View style={styles.doubleContentDivider} />
-            <View style={styles.contentDivider} />
+            <View style={styles.doubleContentDivider} />
           </ScrollView>
         )}
         {REGISTER_SCREEN_INDEX.second == currentButton && (
-          <View style={style.fieldView}>
+          <ScrollView style={style.fieldView}>
             <View style={styles.doubleHeight} />
             <MandatoryText mandatoryText={FIRST_NAME_TEXT} />
             <View style={styles.singleHeight} />
             <View>
               <CustomTextInput
-                // placeholder={'Mithunlal'}
+                placeholder={'           '}
                 needIconDivider={false}
                 customStyle={style.gstTextInput}
                 multiLine={true}
@@ -499,7 +516,7 @@ const Register = ({navigation}) => {
             <View style={styles.singleHeight} />
             <View>
               <CustomTextInput
-                // placeholder={'Mithunlal@business.com'}
+                placeholder={'       '}
                 needIconDivider={false}
                 customStyle={style.gstTextInput}
                 multiLine={true}
@@ -518,7 +535,7 @@ const Register = ({navigation}) => {
               <View style={styles.verticalDivider} />
               <View style={{width: '86%'}}>
                 <CustomTextInput
-                  // placeholder={'989898989898'}
+                  placeholder={'       '}
                   needIconDivider={false}
                   customStyle={style.gstTextInput}
                   multiLine={true}
@@ -555,7 +572,7 @@ const Register = ({navigation}) => {
               <View style={styles.verticalDivider} />
               <View style={{width: '86%'}}>
                 <CustomTextInput
-                  // placeholder={'989898989898'}
+                  placeholder={'          '}
                   needIconDivider={false}
                   customStyle={style.gstTextInput}
                   multiLine={true}
@@ -570,7 +587,7 @@ const Register = ({navigation}) => {
             <View style={styles.singleHeight} />
             <View>
               <CustomTextInput
-                // placeholder={'*********'}
+                placeholder={'          '}
                 needIconDivider={false}
                 needIndianCode={true}
                 rightIcon={showPassword ? CLOSED_EYE_ICON : OPENED_EYE_ICON}
@@ -589,7 +606,7 @@ const Register = ({navigation}) => {
             <View style={styles.singleHeight} />
             <View>
               <CustomTextInput
-                // placeholder={'*********'}
+                placeholder={'         '}
                 needIconDivider={false}
                 multiLine={true}
                 needIndianCode={true}
@@ -604,10 +621,10 @@ const Register = ({navigation}) => {
                 rightIconWidth={wp(6)}
                 onChangeText={e => onChangeConformPassword(e)}
                 value={conformPassword}
-                leftIcon={PERSON_ICON}
                 leftIconHeight={hp(5)}
                 leftIconWidth={wp(6)}
                 errorText={conformPasswordError}
+                customStyle={style.passwordTextinput}
               />
             </View>
             <View style={styles.doubleHeight} />
@@ -627,10 +644,13 @@ const Register = ({navigation}) => {
               customButtonStyle={style.nextButtonStyle}
               onPress={() => onPressSecondNextButton()}
             />
-            <View style={styles.doubleContentDivider} />
-          </View>
+            <View style={styles.maxContentDivider} />
+            <View style={styles.maxContentDivider} />
+            <View style={styles.maxContentDivider} />
+          </ScrollView>
         )}
-      </ScrollView>
+      </View>
+      <View style={style.singleHeight} />
       {REGISTER_SCREEN_INDEX.third == currentButton && (
         <ScrollView>
           <View style={style.fieldView}>
@@ -657,6 +677,7 @@ const Register = ({navigation}) => {
               rightIconHeight={hp(3)}
               rightIconWidth={wp(5)}
               customStyle={style.dropDownStyle}
+              getBankName={getBankName}
             />
             <View style={styles.doubleHeight} />
             <MandatoryText mandatoryText={IFSC_CODE_TEXT} />
@@ -676,14 +697,14 @@ const Register = ({navigation}) => {
             <View style={styles.doubleHeight} />
             <View style={styles.doubleContentDivider} />
             <View style={styles.doubleContentDivider} />
-
             <AppButton
               title={FINISH_TEXT}
               customButtonStyle={style.nextButtonStyle}
               onPress={() => onPressFinishButton()}
             />
-            <View style={styles.doubleContentDivider} />
-            <View style={styles.doubleContentDivider} />
+            <View style={styles.maxContentDivider} />
+            <View style={styles.maxContentDivider} />
+            <View style={styles.maxContentDivider} />
           </View>
         </ScrollView>
       )}
@@ -741,6 +762,10 @@ const Register = ({navigation}) => {
 const style = StyleSheet.create({
   mainView: {
     backgroundColor: color.white,
+  },
+  shadow: {
+    elevation: 20,
+    shadowColor: color.red,
   },
   flexView: {
     flexDirection: 'row',
