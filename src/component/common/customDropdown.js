@@ -43,13 +43,13 @@ const CustomDropdown = props => {
   const renderBankList = item => {
     return (
       <View style={style.whiteBackground}>
-        <View style={styles.singleHeight} />
         <TouchableOpacity onPress={() => onPressBankName(item)}>
+          <View style={styles.singleHeight} />
           <Text style={style.bankListText}>{item?.name ?? ''}</Text>
+          <View style={styles.smallHeight} />
+          <View style={style.verticalDivider} />
+          <View style={styles.singleHeight} />
         </TouchableOpacity>
-        <View style={styles.smallHeight} />
-        <View style={style.verticalDivider} />
-        <View style={styles.singleHeight} />
       </View>
     );
   };
@@ -66,6 +66,7 @@ const CustomDropdown = props => {
         changeEyeIcon={true}
         onPressTextInput={() => onPressRightIcon()}
         value={value}
+        editable={false}
       />
 
       {showDropdowm && (

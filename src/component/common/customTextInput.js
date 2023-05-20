@@ -37,6 +37,7 @@ const CustomTextInput = props => {
     needVerifyText = false,
     onPressVerify,
     errorText,
+    editable
   } = props;
 
   return (
@@ -80,6 +81,7 @@ const CustomTextInput = props => {
                 onChangeText={onChangeText}
                 style={style.textinputStyle}
                 value={value}
+                editable={editable}
               />
               <View>
                 {needVerifyText && (
