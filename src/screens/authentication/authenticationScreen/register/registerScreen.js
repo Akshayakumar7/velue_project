@@ -678,6 +678,7 @@ const Register = ({navigation}) => {
               rightIconWidth={wp(5)}
               customStyle={style.dropDownStyle}
               getBankName={getBankName}
+              value={bankName}
             />
             <View style={styles.doubleHeight} />
             <MandatoryText mandatoryText={IFSC_CODE_TEXT} />

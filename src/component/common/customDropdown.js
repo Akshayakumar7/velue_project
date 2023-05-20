@@ -6,10 +6,16 @@ import {hp} from '../../commonMethod/screenRatio';
 import styles from '../../general/generalStyleSheet';
 
 const CustomDropdown = props => {
-  const {placeholder, rightIcon, rightIconHeight, rightIconWidth, customStyle, getBankName} =
-    props;
+  const {
+    placeholder,
+    rightIcon,
+    rightIconHeight,
+    rightIconWidth,
+    customStyle,
+    getBankName,
+    value,
+  } = props;
   const [showDropdowm, setShowDropdown] = useState(false);
-  const [value, setValue] = useState('');
   const BANK_NAME = [
     {name: 'Bank of Baroda'},
     {name: 'Bank of India'},
@@ -30,12 +36,9 @@ const CustomDropdown = props => {
   };
 
   const onPressBankName = item => {
-    setValue(item?.name ?? '');
     getBankName(item?.name ?? '');
-    setShowDropdown(!showDropdowm)
-  
+    setShowDropdown(!showDropdowm);
   };
-
 
   const renderBankList = item => {
     return (
@@ -63,7 +66,6 @@ const CustomDropdown = props => {
         changeEyeIcon={true}
         onPressTextInput={() => onPressRightIcon()}
         value={value}
-      
       />
 
       {showDropdowm && (
@@ -88,6 +90,5 @@ const style = StyleSheet.create({
     margin: hp(0.3),
   },
   whiteBackground: {backgroundColor: 'white'},
-
 });
 export default CustomDropdown;
