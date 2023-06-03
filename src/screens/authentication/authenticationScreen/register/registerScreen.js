@@ -220,38 +220,39 @@ const Register = ({navigation}) => {
   };
 
   const onPressFinishButton = async () => {
-    var oneMorePayload = {
-      customerName: fullName,
-      contactName: fullName,
-      primaryNumber: primaryContact,
-      whatsAppNumber: whatsAppNumer,
-      contactGmail: email,
-      creditLimitAmount: 10000,
-      creditLimitDays: 30,
-      gstno: 'GST2023202',
-      customerBank: {
-        accountNumber: accountNumber,
-        bankName: bankName,
-        ifscCode: ifscCode,
-        panCard: 'ABCTY1234D',
-      },
-    };
-    apiTest(oneMorePayload)
-      .then(res => {
-        console.log('res', res.status);
-        if (res.status == 200) {
-          setFullName('');
-          setPrimaryContact('');
-          setWhatsAppNumber('');
-          setEmail('');
-          setAccountNumber('');
-          setBankName('');
-          setIfscCode('');
-        }
-      })
-      .catch(err => {
-        console.log('err', err);
-      });
+    // var oneMorePayload = {
+    //   customerName: fullName,
+    //   contactName: fullName,
+    //   primaryNumber: primaryContact,
+    //   whatsAppNumber: whatsAppNumer,
+    //   contactGmail: email,
+    //   creditLimitAmount: 10000,
+    //   creditLimitDays: 30,
+    //   gstno: 'GST2023202',
+    //   customerBank: {
+    //     accountNumber: accountNumber,
+    //     bankName: bankName,
+    //     ifscCode: ifscCode,
+    //     panCard: 'ABCTY1234D',
+    //   },
+    // };
+    // apiTest(oneMorePayload)
+    //   .then(res => {
+    //     console.log('res', res.status);
+    //     if (res.status == 200) {
+    //       setFullName('');
+    //       setPrimaryContact('');
+    //       setWhatsAppNumber('');
+    //       setEmail('');
+    //       setAccountNumber('');
+    //       setBankName('');
+    //       setIfscCode('');
+    //     }
+    //   })
+    //   .catch(err => {
+    //     console.log('err', err);
+    //   });
+    navigation.navigate(SCREEN_NAME.OnboardingCompleted)
   };
 
   const onPressVerifyText = () => {
