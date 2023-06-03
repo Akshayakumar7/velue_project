@@ -13,6 +13,7 @@ import {COMPLETE_SOLUTION_TEXT, HEADING_TEXT} from './loginUtility';
 import AppButton from '../../../../component/common/appButton';
 import {BATH_TUB_IMAGE} from '../../../../imagePath/imagePath';
 import {LOGO} from '../../../../assets/imagepath/imagepath';
+import styles from '../../../../general/generalStyleSheet';
 
 const GetStarted = ({navigation}) => {
   const onPressGetStartedScreen = () => {
@@ -46,7 +47,8 @@ const GetStarted = ({navigation}) => {
               />
             </View>
             <View style={style.contentDivider} />
-            <View style={style.contentDivider} />
+            
+            <View style={styles.singleHeight} />
           </View>
         </ImageBackground>
       </ScrollView>
@@ -56,6 +58,7 @@ const GetStarted = ({navigation}) => {
 
 const style = StyleSheet.create({
   parentView: {
+    flex:1,
     paddingHorizontal: '5%',
   },
   bathTubImageStyle: {

@@ -9,6 +9,7 @@ import {
   SafeAreaView,
   FlatList,
   Pressable,
+  TouchableOpacity,
 } from 'react-native';
 import {hp, wp} from '../../../../../commonMethod/screenRatio';
 import styles from '../../../../../general/generalStyleSheet';
@@ -22,7 +23,7 @@ import {
 } from '../../../../../assets/imagepath/imagepath';
 import {INDIAN_RUPEE_SYMBOL} from '../../../../../component/common/componentUtility';
 
-const ProductDescription = () => {
+const ProductDescription = ({navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(-1);
   const data = [
     {
@@ -75,7 +76,9 @@ const ProductDescription = () => {
           />
         </Pressable>
         <View style={styles.doubleHeight} />
-        {index == currentIndex && <Text style={style.contextStyle}>{item?.content ?? ''}</Text>}
+        {index == currentIndex && (
+          <Text style={style.contextStyle}>{item?.content ?? ''}</Text>
+        )}
         <View style={styles.doubleHeight} />
         <View style={style.verticalLine} />
         <View style={styles.doubleHeight} />
@@ -92,12 +95,14 @@ const ProductDescription = () => {
             }}
             style={style.productImage}
             resizeMode={'cover'}>
-            <View style={[style.flexView, {width: '85%', alignSelf: 'center'}]}>
-              <SvgImage
-                Source={ROUND_BACK_HANDLER}
-                height={hp(8)}
-                width={wp(8)}
-              />
+            <View style={[style.flexView, {width: '93%', alignSelf: 'center'}]}>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <SvgImage
+                  Source={ROUND_BACK_HANDLER}
+                  height={hp(8)}
+                  width={wp(8)}
+                />
+              </TouchableOpacity>
               <SvgImage Source={LOGO} height={hp(8)} width={wp(15)} />
             </View>
           </ImageBackground>
@@ -195,10 +200,10 @@ const style = StyleSheet.create({
     fontSize: 18,
     color: color.darkblue,
   },
-  contextStyle:{
-    fontSize:14,
-    color:color.grey1,
-    width:'95%'
-  }
+  contextStyle: {
+    fontSize: 14,
+    color: color.grey1,
+    width: '95%',
+  },
 });
 export default ProductDescription;

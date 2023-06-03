@@ -55,8 +55,8 @@ const PasswordReset = ({navigation}) => {
                                 <View style={styles.doubleContentDivider} />
 
                                 <AppButton title={RESET_TEXT} onPress={()=>onPressSendOtp()}/>
-                                  <View style={styles.doubleContentDivider} />
-                                  <View style={styles.doubleContentDivider} />
+                                  <View style={styles.contentDivider} />
+                                  {/* <View style={styles.doubleContentDivider} /> */}
                             </View>
                         </View>
                     </ScrollView>

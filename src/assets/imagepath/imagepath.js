@@ -26,6 +26,8 @@ import PLUS_ICON from '../../assets/images/plus-icon.svg';
 import MINUS_ICON from '../../assets/images/minus-icon.svg';
 import ROUND_BACK_HANDLER from '../../assets/images/round-back-handler';
 import UP_ARROW from '../../assets/images/new-up-arrow.svg';
+import BLUE_RIGHT_ARROW from '../../assets/images/blue-right-arrow.svg';
+import CROSS_ICON from '../../assets/images/cross-icon.png'
 
 export {
   BATH_TUB_IMAGE,
@@ -55,5 +57,7 @@ export {
   PLUS_ICON,
   MINUS_ICON,
   ROUND_BACK_HANDLER,
-  UP_ARROW
+  UP_ARROW,
+  BLUE_RIGHT_ARROW,
+  CROSS_ICON
 };

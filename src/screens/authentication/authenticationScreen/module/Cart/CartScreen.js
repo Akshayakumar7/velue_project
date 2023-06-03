@@ -7,7 +7,7 @@ import CartCard from '../../../../../component/common/cartCard';
 import {color} from '../../../../../assets/colors/color';
 import {hp} from '../../../../../commonMethod/screenRatio';
 
-const Cart = () => {
+const Cart = ({navigation}) => {
   const [cartData, setCartData] = useState([
     {
       image:
@@ -102,13 +102,16 @@ const Cart = () => {
   return (
     <View>
       <View style={{backgroundColor: color.lightGreen}}>
-        <Header headerTitle={CART_TEXT} />
-        <View style={styles.doubleHeight} />
+        <Header headerTitle={CART_TEXT} onPressBackButton={()=>navigation.goBack()}/>
+        <View style={styles.singleHeight} />
+        <View style={styles.smallHeight} />
         <View style={style.mainView}>
           <FlatList
             data={cartData}
             renderItem={({item, index}) => renderCartItem(item, index)}
             ItemSeparatorComponent={() => cartSeperator()}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
           />
           <View>
             

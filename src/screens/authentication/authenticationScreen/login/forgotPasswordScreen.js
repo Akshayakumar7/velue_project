@@ -60,8 +60,8 @@ const ForgotPassword = ({navigation}) => {
                                 <View style={styles.doubleHeight} />
 
                                 <AppButton title={SENT_OTP_TEXT} onPress={()=>onPressSendOtp()}/>
-                                  <View style={styles.doubleContentDivider} />
-                                  <View style={styles.doubleContentDivider} />
+                                  <View style={styles.contentDivider} />
+                                  {/* <View style={styles.doubleContentDivider} /> */}
                             </View>
                         </View>
                     </ScrollView>

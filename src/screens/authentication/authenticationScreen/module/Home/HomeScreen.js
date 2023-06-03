@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {
   Text,
   View,
@@ -7,6 +7,7 @@ import {
   FlatList,
   ScrollView,
   LogBox,
+  TouchableOpacity,
 } from 'react-native';
 import SvgImage from '../../../../../component/common/svgImage';
 import {
@@ -24,6 +25,9 @@ import ProductCard from '../../../../../component/common/productCard';
 import ImageSliderV2 from '../../../../../component/common/ImageSliderV2';
 import FilterButton from '../../../../../component/common/filterButton';
 import {SCREEN_NAME} from '../../../../../general/screenName';
+import ListProductCard from '../../../../../component/common/listProductCard';
+import Toast from 'react-native-toast-message';
+import {ShowToastMessage} from '../../../../../commonMethod/toastMessage';
 
 const Home = ({navigation}) => {
   const productData = [
@@ -45,6 +49,7 @@ const Home = ({navigation}) => {
       company: 'Bluish - Water gun Stainless Steellll',
       mrp: '900',
       discount: '350',
+      velue: 'Velue',
     },
     {
       id: 3,
@@ -54,6 +59,7 @@ const Home = ({navigation}) => {
       company: 'Bluish - Water gun Stainless Steellll',
       mrp: '900',
       discount: '350',
+      velue: 'Velue',
     },
     {
       id: 4,
@@ -63,6 +69,7 @@ const Home = ({navigation}) => {
       company: 'Bluish - Water gun Stainless Steellll',
       mrp: '900',
       discount: '350',
+      velue: 'Velue',
     },
     {
       id: 5,
@@ -82,23 +89,28 @@ const Home = ({navigation}) => {
       company: 'Bluish - Water gun Stainless Steellll',
       mrp: '900',
       discount: '350',
+      velue: 'Velue',
     },
     {
       id: 7,
       image:
         'https://media.istockphoto.com/id/140806786/photo/water-pouring-out-of-modern-bathroom-faucet.jpg?s=612x612&w=0&k=20&c=5MejdFXtgyypJTGe-UeDavjSUWlmml834LSslarCgss=',
-      productName: 'Bluish - Water gun Stainless Steellll',
+      productName: 'Bluish - Water gun Stainless Steellll ',
       company: 'Bluish - Water gun Stainless Steellll',
       mrp: '900',
       discount: '350',
+      velue: 'Velue',
     },
     {
+      id: 8,
       image:
         'https://media.istockphoto.com/id/140806786/photo/water-pouring-out-of-modern-bathroom-faucet.jpg?s=612x612&w=0&k=20&c=5MejdFXtgyypJTGe-UeDavjSUWlmml834LSslarCgss=',
-      productName: 'Bluish - Water gun Stainless Steellll',
+      productName:
+        'Bluish - Water gun Stainless Steellll Bluish - Water gun Stainless Steellll ',
       company: 'Bluish - Water gun Stainless Steellll',
       mrp: '900',
       discount: '350',
+      velue: 'Velue',
     },
   ];
 
@@ -106,9 +118,9 @@ const Home = ({navigation}) => {
     {type: 'Sort by'},
     {type: 'Filters'},
     {type: 'Brand'},
-    {type: 'Health Faucets'},
-    {type: 'Sort by'},
-    {type: 'Sort by'},
+    // {type: 'Health Faucets'},
+    // {type: 'Sort by'},
+    // {type: 'Sort by'},
   ];
 
   const onPressCard = () => {
@@ -118,7 +130,7 @@ const Home = ({navigation}) => {
   const renderProductList = item => {
     return (
       <View style={style.productWidth}>
-        <ProductCard data={item} onPressCard={() => onPressCard()} />
+        <ListProductCard data={item} onPressCard={() => onPressCard()} />
       </View>
     );
   };
@@ -132,6 +144,10 @@ const Home = ({navigation}) => {
     );
   };
 
+  const showToast = () => {
+    ShowToastMessage('success', 'Hello', 'This is some something 👋');
+  };
+
   const renderFilterButtonList = item => {
     return (
       <View style={{marginLeft: wp(2)}}>
@@ -141,23 +157,26 @@ const Home = ({navigation}) => {
   };
   return (
     <View style={style.mainView}>
-      <ScrollView>
-        <View style={styles.doubleHeight} />
-        <View style={style.searchbarFlex}>
-          <View style={style.searchbarView}>
-            <CustomTextInput
-              placeholder={SEARCH_PRODUCTS_TEXT}
-              rightIcon={SEARCH_ICON}
-              rightIconHeight={hp(5)}
-              rightIconWidth={wp(6)}
-              needIconDivider={false}
-              customStyle={style.searchStyle}
-              customTextInputBorder={style.customTextInputBorder}
-            />
-          </View>
-          <SvgImage Source={BELL_ICON} height={hp(5)} width={wp(6)} />
+      <View style={styles.doubleHeight} />
+      <View style={style.searchbarFlex}>
+        <View style={style.searchbarView}>
+          <CustomTextInput
+            placeholder={SEARCH_PRODUCTS_TEXT}
+            rightIcon={SEARCH_ICON}
+            rightIconHeight={hp(5)}
+            rightIconWidth={wp(6)}
+            needIconDivider={false}
+            customStyle={style.searchStyle}
+            customTextInputBorder={style.customTextInputBorder}
+          />
         </View>
-        <View style={styles.doubleHeight} />
+        <View style={{marginRight: wp(2)}} />
+        <TouchableOpacity onPress={() => showToast()}>
+          <SvgImage Source={BELL_ICON} height={hp(5)} width={wp(6)} />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.doubleHeight} />
+      <ScrollView showsVerticalScrollIndicator={false}>
         <ImageSliderV2 />
         <View style={styles.doubleHeight} />
         <View>
@@ -173,12 +192,13 @@ const Home = ({navigation}) => {
           <FlatList
             data={productData}
             renderItem={({item}) => renderProductList(item)}
-            numColumns={2}
             ItemSeparatorComponent={itemSeperator()}
             showsVerticalScrollIndicator={false}
+            style={{marginBottom: hp(10)}}
           />
         </View>
       </ScrollView>
+      <Toast />
     </View>
   );
 };
@@ -188,7 +208,7 @@ const style = StyleSheet.create({
     backgroundColor: color.lightGreen,
   },
   searchbarView: {
-    paddingHorizontal: '4%',
+    paddingHorizontal: '2%',
   },
   customTextInputBorder: {
     borderRadius: 0,
@@ -198,7 +218,7 @@ const style = StyleSheet.create({
     marginLeft: wp(3),
   },
   searchbarFlex: {flexDirection: 'row', alignItems: 'center'},
-  productView: {alignItems: 'center', width: '100%', marginLeft: wp(2.5)},
-  productWidth: {alignSelf: 'center', width: '50%'},
+  productView: {alignItems: 'center', width: '100%', alignSelf: 'center'},
+  productWidth: {alignSelf: 'center'},
 });
 export default Home;

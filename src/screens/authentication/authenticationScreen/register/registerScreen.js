@@ -10,6 +10,7 @@ import {
   Alert,
   Modal,
   SafeAreaView,
+  Image,
 } from 'react-native';
 import Header from '../../../../component/common/appHeader';
 import {
@@ -55,6 +56,8 @@ import {
   DOWN_ICON,
   CLOSED_EYE_ICON,
   PERSON_ICON,
+  SEARCH_ICON,
+  CROSS_ICON,
 } from '../../../../assets/imagepath/imagepath';
 import {hp, wp} from '../../../../commonMethod/screenRatio';
 import styles from '../../../../general/generalStyleSheet';
@@ -70,7 +73,10 @@ import {
 } from '../login/loginUtility';
 import CustomDropdown from '../../../../component/common/customDropdown';
 import ImagePicker from 'react-native-image-crop-picker';
-import {androidCameraPermission} from '../../../../commonMethod/permission';
+import {
+  androidCameraPermission,
+  galleryPermission,
+} from '../../../../commonMethod/permission';
 import {galleryReadPermisson} from '../../../../commonMethod/permission';
 import {galleryWritePermission} from '../../../../commonMethod/permission';
 import {KEYBOARD_TYPE} from '../../../../general/generalConst';
@@ -95,6 +101,7 @@ import {
   getJoke,
   storeUserDataToDB,
 } from './registerNetworkCall';
+import {requestCameraPermission} from '../../../../commonMethod/permission';
 
 const Register = ({navigation}) => {
   const CELL_COUNT = 4;
@@ -125,6 +132,7 @@ const Register = ({navigation}) => {
   const [ifscCodeError, setIfscCodeError] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [value, setValue] = useState('');
+  const [uploadCertificateModal, setUploadcertificateModal] = useState(false);
   const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
@@ -202,7 +210,13 @@ const Register = ({navigation}) => {
   };
 
   const onPressBankHandlear = () => {
-    navigation.goBack();
+    if (currentButton == 2) {
+      setCurrent(1);
+    } else if (currentButton == 1) {
+      setCurrent(0);
+    } else {
+      navigation.goBack();
+    }
   };
 
   const onPressFinishButton = async () => {
@@ -271,6 +285,16 @@ const Register = ({navigation}) => {
   const getBankName = val => {
     console.log('Bank Name', val);
     setBankName(val ?? '');
+  };
+
+  const onPressUploadFromCamera = () => {
+    var ans = requestCameraPermission();
+    ans.then(res => console.log(res));
+  };
+
+  const onPressUploadFromGallery = async () => {
+    var ans = await galleryPermission();
+    ans.then(res => console.log(res));
   };
 
   return (
@@ -461,7 +485,10 @@ const Register = ({navigation}) => {
                 needMandatoryIcon={false}
               />
               <View style={styles.singleHeight} />
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  setUploadcertificateModal(!uploadCertificateModal)
+                }>
                 <View style={style.uploadGstBox}>
                   <Text style={style.uploadAadharText}>
                     {UPLOAD_GST_CERTIFICATE_TEXT}
@@ -530,6 +557,7 @@ const Register = ({navigation}) => {
             <View style={styles.singleHeight} />
             <View style={style.simpleFlex}>
               <View style={style.plusBorder}>
+                <View style={styles.singleHeight} />
                 <Text style={style.plusText}>{PLUS_91}</Text>
               </View>
               <View style={styles.verticalDivider} />
@@ -567,10 +595,11 @@ const Register = ({navigation}) => {
             <View style={styles.singleHeight} />
             <View style={style.simpleFlex}>
               <View style={style.plusBorder}>
+                <View style={styles.singleHeight} />
                 <Text style={style.plusText}>{PLUS_91}</Text>
               </View>
               <View style={styles.verticalDivider} />
-              <View style={{width: '86%'}}>
+              <View style={{width: '89%'}}>
                 <CustomTextInput
                   placeholder={'          '}
                   needIconDivider={false}
@@ -714,45 +743,77 @@ const Register = ({navigation}) => {
           animationType={'slide'}
           transparent={showModal}
           visible={showModal}>
-          <View style={styles.doubleContentDivider} />
-          <View style={styles.doubleContentDivider} />
-          <View style={styles.doubleContentDivider} />
-          <View style={style.modalStyle}>
-            <Text style={style.forgotpasswordText}>
-              {OTP_VERIFICATION_TEXT}
-            </Text>
-            <View style={styles.doubleHeight} />
-            <Text style={style.otpSentText}>{OPT_SENT_TEXT}</Text>
-            <View style={style.doubleHeight} />
-            <SafeAreaView>
-              <CodeField
-                ref={ref}
-                {...props}
-                value={value}
-                onChangeText={setValue}
-                cellCount={CELL_COUNT}
-                keyboardType="number-pad"
-                textContentType="oneTimeCode"
-                renderCell={({index, symbol, isFocused}) => (
-                  <Text
-                    key={index}
-                    style={[style.cell, isFocused && style.focusCell]}
-                    onLayout={getCellOnLayoutHandler(index)}>
-                    {symbol || (isFocused ? <Cursor /> : null)}
-                  </Text>
-                )}
+          <ScrollView>
+            <View style={styles.doubleContentDivider} />
+            <View style={styles.doubleContentDivider} />
+            <View style={styles.doubleContentDivider} />
+            <View style={style.modalStyle}>
+              <Text style={style.forgotpasswordText}>
+                {OTP_VERIFICATION_TEXT}
+              </Text>
+              <View style={styles.doubleHeight} />
+              <Text style={style.otpSentText}>{OPT_SENT_TEXT}</Text>
+              <View style={style.doubleHeight} />
+              <SafeAreaView>
+                <CodeField
+                  ref={ref}
+                  {...props}
+                  value={value}
+                  onChangeText={setValue}
+                  cellCount={CELL_COUNT}
+                  keyboardType="number-pad"
+                  textContentType="oneTimeCode"
+                  renderCell={({index, symbol, isFocused}) => (
+                    <Text
+                      key={index}
+                      style={[style.cell, isFocused && style.focusCell]}
+                      onLayout={getCellOnLayoutHandler(index)}>
+                      {symbol || (isFocused ? <Cursor /> : null)}
+                    </Text>
+                  )}
+                />
+              </SafeAreaView>
+              <View style={styles.contentDivider} />
+              <ApplyCancelButton
+                cancelButtonText={CANCEL_TEXT}
+                applyButtonText={VERIFY_TEXT}
+                cancelButtonStyle={style.cancelButtonStyle}
+                cancelTextStyel={styles.alignText}
+                customApplyButtonStyle={style.customApplyButtonStyle}
+                onPressCancelButton={() => setShowModal(!showModal)}
+                onPressApplyButton={() => setShowModal(!showModal)}
               />
-            </SafeAreaView>
-            <View style={styles.contentDivider} />
-            <ApplyCancelButton
-              cancelButtonText={CANCEL_TEXT}
-              applyButtonText={VERIFY_TEXT}
-              cancelButtonStyle={style.cancelButtonStyle}
-              cancelTextStyel={styles.alignText}
-              customApplyButtonStyle={style.customApplyButtonStyle}
-              onPressCancelButton={() => setShowModal(!showModal)}
-              onPressApplyButton={() => setShowModal(!showModal)}
-            />
+            </View>
+          </ScrollView>
+        </Modal>
+      </View>
+      <View>
+        <Modal transparent={true} visible={uploadCertificateModal}>
+          <View style={styles.doubleContentDivider} />
+          <View style={styles.doubleContentDivider} />
+          <View style={styles.doubleContentDivider} />
+          <View style={style.uploadImageModal}>
+            <View style={{alignSelf: 'flex-end', width: '10%'}}>
+              <TouchableOpacity
+                onPress={() =>
+                  setUploadcertificateModal(!uploadCertificateModal)
+                }>
+                <Image
+                  source={CROSS_ICON}
+                  style={{width: wp(5), height: hp(4)}}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.singleHeight} />
+            <View style={styles.verticalLine} />
+            <View style={styles.doubleHeight} />
+            <TouchableOpacity onPress={() => onPressUploadFromCamera()}>
+              <Text style={style.uploadText}>Upload from camera</Text>
+            </TouchableOpacity>
+            <View style={styles.thirpleHeight} />
+            <TouchableOpacity onPress={() => onPressUploadFromGallery()}>
+              <Text style={style.uploadText}>Upload from gallery</Text>
+            </TouchableOpacity>
           </View>
         </Modal>
       </View>
@@ -859,7 +920,6 @@ const style = StyleSheet.create({
     borderWidth: hp(0.1),
     borderColor: color.borderBlueColor,
     borderRadius: hp(0.5),
-    // paddingVertical: '0.5%',
     width: '13%',
   },
   aadharCardBorder: {
@@ -947,21 +1007,37 @@ const style = StyleSheet.create({
     width: '100%',
   },
   cell: {
-    width: wp(13),
+    width: wp(14),
     height: hp(6),
     lineHeight: hp(6),
     fontSize: hp(3.5),
-    borderColor: 'white',
+    borderColor: '#000',
     textAlign: 'center',
     backgroundColor: 'white',
     borderRadius: hp(1),
     borderWidth: hp(0.1),
+    margin: hp(0.5),
   },
   focusCell: {
-    borderColor: '#000',
+    borderColor: color.darkblue,
   },
   simpleFlex: {
     flexDirection: 'row',
+  },
+  uploadImageModal: {
+    backgroundColor: color.white,
+    height: hp(23),
+    width: '70%',
+    alignSelf: 'center',
+    borderColor: color.grey,
+    borderWidth: hp(0.1),
+    borderRadius: hp(2),
+    padding: hp(1),
+  },
+  uploadText: {
+    textAlign: 'center',
+    fontSize: 20,
+    color: color.grey1,
   },
 });
 export default Register;

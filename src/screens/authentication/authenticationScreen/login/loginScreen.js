@@ -123,10 +123,10 @@ const Login = ({navigation}) => {
                     navigation.navigate(SCREEN_NAME.BottomTab)
                   }
                 />
-                <View style={styles.doubleContentDivider} />
-                <View style={styles.thirpleHeight} />
-                <View style={styles.thirpleHeight} />
-                <View style={styles.thirpleHeight} />
+                {/* <View style={styles.doubleContentDivider} /> */}
+                {/* <View style={styles.doubleHeight} /> */}
+                {/* <View style={styles.thirpleHeight} /> */}
+                {/* <View style={styles.thirpleHeight} /> */}
               </View>
             </View>
           </ScrollView>

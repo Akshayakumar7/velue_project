@@ -16,6 +16,7 @@ export const color = {
     shadowColor:'#52006A',
     boxGrey:'#8D8D8D20',
     grey1:'#868686',
-    darkCyan:'#008A92'
+    darkCyan:'#008A92',
+    codeGrey:'#A6A6A6'
 
 }

@@ -12,7 +12,7 @@ const Header = (props) => {
         <View style={{backgroundColor:color.white}}>
             <View style={style.flexView}>
                 <TouchableOpacity onPress={onPressBackButton}>
-                    <SvgImage Source={BACK_ARROW} height={hp(5)} width={wp(7)} />
+                    <SvgImage Source={BACK_ARROW} height={hp(4)} width={wp(5)} />
                 </TouchableOpacity>
                 <View style={style.itemDivider} />
                 <Text style={style.headerTitleText}>{headerTitle}</Text>
@@ -33,7 +33,7 @@ const style = StyleSheet.create({
         width: wp(5)
     },
     headerTitleText: {
-        fontSize: hp(3.2),
+        fontSize: 22,
         fontWeight: '600',
         color: color.darkblue,
         marginBottom: hp(0.5)
