@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {
   Text,
   View,
@@ -28,6 +28,8 @@ import {SCREEN_NAME} from '../../../../../general/screenName';
 import ListProductCard from '../../../../../component/common/listProductCard';
 import Toast from 'react-native-toast-message';
 import {ShowToastMessage} from '../../../../../commonMethod/toastMessage';
+import {TOAST_MESSAGE_TYPE} from '../../../../../general/generalConst';
+import { PracticeContext } from '../../../../../useContext/PracticeContext';
 
 const Home = ({navigation}) => {
   const productData = [
@@ -114,18 +116,12 @@ const Home = ({navigation}) => {
     },
   ];
 
-  const filterOption = [
-    {type: 'Sort by'},
-    {type: 'Filters'},
-    {type: 'Brand'},
-    // {type: 'Health Faucets'},
-    // {type: 'Sort by'},
-    // {type: 'Sort by'},
-  ];
+  const filterOption = [{type: 'Sort by'}, {type: 'Filters'}, {type: 'Brand'}];
 
   const onPressCard = () => {
     navigation.navigate(SCREEN_NAME.ProductDescription);
   };
+
 
   const renderProductList = item => {
     return (
@@ -145,7 +141,11 @@ const Home = ({navigation}) => {
   };
 
   const showToast = () => {
-    ShowToastMessage('success', 'Hello', 'This is some something 👋');
+    ShowToastMessage(
+      TOAST_MESSAGE_TYPE.success,
+      'Hello',
+      'This is some something 👋',
+    );
   };
 
   const renderFilterButtonList = item => {
@@ -218,7 +218,42 @@ const style = StyleSheet.create({
     marginLeft: wp(3),
   },
   searchbarFlex: {flexDirection: 'row', alignItems: 'center'},
-  productView: {alignItems: 'center', width: '100%', alignSelf: 'center'},
-  productWidth: {alignSelf: 'center'},
+  productView: {
+    alignItems: 'center',
+    width: '100%',
+    alignSelf: 'center',
+  },
+  productWidth: {
+    alignSelf: 'center',
+  },
 });
 export default Home;
+
+// import React from 'react';
+// import {View, Text, Button} from 'react-native';
+// import AsynStorage from '@react-native-async-storage/async-storage';
+// const Home = () => {
+//   const setData = async () => {
+//     await AsynStorage.setItem('Name', 'Akshay');
+//   };
+
+//   const getItem = async () => {
+//     const res = await AsynStorage.getItem('Name');
+//     console.log(res);
+//   };
+
+//   return (
+//     <View
+//       style={{
+//         flex: 1,
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//       }}>
+//       <Text>Heelo Home</Text>
+//       <Button title="Set Data" onPress={() => setData()} />
+//       <Button title="Get Data" onPress={() => getItem()} />
+//     </View>
+//   );
+// };
+
+// export default Home;

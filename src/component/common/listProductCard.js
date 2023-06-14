@@ -14,7 +14,7 @@ const ListProductCard = props => {
       <TouchableOpacity onPress={onPressCard}>
         <View style={style.cardView}>
           <View style={style.flexView}>
-            <View>
+            <View style={{width:'32%'}}>
               <Image
                 source={{uri: data?.image ?? ''}}
                 style={{
@@ -25,7 +25,7 @@ const ListProductCard = props => {
                 }}
               />
             </View>
-            <View style={{width: '68%'}}>
+            <View style={{width: '67%'}}>
               <Text style={style.productCodeTextStyle}>
                 {data?.velue} | {'Product code'}
               </Text>

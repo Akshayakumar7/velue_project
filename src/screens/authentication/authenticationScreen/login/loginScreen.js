@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   Text,
   View,
@@ -7,6 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
   KeyboardAvoidingView,
+  ActivityIndicator,
 } from 'react-native';
 import {hp, wp} from '../../../../commonMethod/screenRatio';
 import {color} from '../../../../assets/colors/color';
@@ -16,6 +17,8 @@ import {
   HEADING_TEXT,
   INVALID_EMAIL_ADDRESS_ERROR_TEXT,
   LOGIN_TEXT,
+  MOBILE_NUMBER_TEXT,
+  PASSWORD_TEXT,
   REGISTER_HERE_TEXT,
 } from './loginUtility';
 import AppButton from '../../../../component/common/appButton';
@@ -28,26 +31,32 @@ import {
   PERSON_ICON,
 } from '../../../../assets/imagepath/imagepath';
 import CustomTextInput from '../../../../component/common/customTextInput';
-import {KEYBOARD_TYPE} from '../../../../general/generalConst';
+import {KEYBOARD_TYPE, TOAST_MESSAGE_TYPE} from '../../../../general/generalConst';
 import styles from '../../../../general/generalStyleSheet';
 import ApplyCancelButton from '../../../../component/common/applyCancelButton';
 import {SCREEN_NAME} from '../../../../general/screenName';
+import AsynStorage from '@react-native-async-storage/async-storage';
+import {PracticeContext} from '../../../../useContext/PracticeContext';
+import { ShowToastMessage } from '../../../../commonMethod/toastMessage';
 
 const Login = ({navigation}) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
+  const [errorText, setErrorText] = useState('');
+  const [buttonLoader,setButtonLoader] = useState(false)
+  const tempMobileNumber = '8088187007';
+  const tempPassword = 'devi@123456';
+  const {setUserLOggedIn} = useContext(PracticeContext);
 
   const onChanePhoneNumber = e => {
     setPhoneNumber(e);
+    setErrorText('');
   };
 
   const onChanePassword = e => {
     setPassword(e);
-  };
-
-  const onPressEyeIcon = () => {
-    setShowPassword(!showPassword);
+    setErrorText('');
   };
 
   const onPressForgotPassword = () => {
@@ -56,6 +65,17 @@ const Login = ({navigation}) => {
 
   const onPressRegisterHere = () => {
     navigation.navigate(SCREEN_NAME.Register);
+  };
+
+  const onPressLogin = async () => {
+    setButtonLoader(true)
+    if (phoneNumber == tempMobileNumber && password == tempPassword) {
+      await setUserLOggedIn(true);
+      ShowToastMessage(TOAST_MESSAGE_TYPE.success,"Hello","Successfully logged In")
+    } else {
+      setErrorText('Please enter valid Mobile number and Password');
+    }
+    setButtonLoader(false)
   };
   return (
     <View>
@@ -71,17 +91,23 @@ const Login = ({navigation}) => {
               <View style={style.verticalDivider}>
                 <View style={style.itemDivider} />
                 <Text style={style.loginText}>{LOGIN_TEXT}</Text>
-                <View style={styles.doubleHeight} />
                 <View style={style.itemDivider} />
-                <View style={styles.doubleHeight} />
-                <Text style={style.errorText}>
-                  {INVALID_EMAIL_ADDRESS_ERROR_TEXT}
-                </Text>
+                <Text style={style.errorText}>{errorText}</Text>
+               
+                {/* <View style={styles.doubleHeight} /> */}
+                {
+                  buttonLoader && (
+                    <View
+                    >
+                      <ActivityIndicator size={'large'} color={color.darkblue}/>
+                    </View>
+                  )
+                }
+                {/* <View style={styles.doubleHeight} /> */}
                 <View style={style.itemDivider} />
-                <View style={styles.doubleHeight} />
                 <View>
                   <CustomTextInput
-                    placeholder={'Mobile Number'}
+                    placeholder={MOBILE_NUMBER_TEXT}
                     leftIcon={PERSON_ICON}
                     leftIconHeight={hp(5)}
                     leftIconWidth={wp(6)}
@@ -93,7 +119,7 @@ const Login = ({navigation}) => {
                 <View style={styles.doubleHeight} />
                 <View>
                   <CustomTextInput
-                    placeholder={'Password'}
+                    placeholder={PASSWORD_TEXT}
                     leftIcon={LOCK_ICON}
                     leftIconHeight={hp(5)}
                     leftIconWidth={wp(6)}
@@ -119,14 +145,9 @@ const Login = ({navigation}) => {
                   cancelButtonText={REGISTER_HERE_TEXT}
                   applyButtonText={LOGIN_TEXT}
                   onPressCancelButton={() => onPressRegisterHere()}
-                  onPressApplyButton={() =>
-                    navigation.navigate(SCREEN_NAME.BottomTab)
-                  }
+                  onPressApplyButton={() => onPressLogin()}
+                 
                 />
-                {/* <View style={styles.doubleContentDivider} /> */}
-                {/* <View style={styles.doubleHeight} /> */}
-                {/* <View style={styles.thirpleHeight} /> */}
-                {/* <View style={styles.thirpleHeight} /> */}
               </View>
             </View>
           </ScrollView>
@@ -162,7 +183,7 @@ const style = StyleSheet.create({
     height: hp(0.5),
   },
   headingText: {
-    fontSize: hp(2.4),
+    fontSize: 18,
     color: color.white,
     textAlign: 'center',
   },
@@ -179,10 +200,11 @@ const style = StyleSheet.create({
     backgroundColor: color.white,
     borderTopLeftRadius: hp(4),
     borderTopRightRadius: hp(4),
+    minHeight: hp(57),
     opacity: 0.8,
   },
   loginText: {
-    fontSize: hp(3.5),
+    fontSize: 26,
     color: color.darkblue,
     textAlign: 'center',
   },
@@ -194,8 +216,9 @@ const style = StyleSheet.create({
   },
   errorText: {
     textAlign: 'center',
-    fontSize: hp(2),
+    fontSize: 16,
     color: color.red,
+    fontWeight: '600',
   },
 });
 export default Login;

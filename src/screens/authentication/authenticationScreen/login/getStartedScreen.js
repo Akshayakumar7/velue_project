@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Text,
   View,
@@ -9,11 +9,16 @@ import {
 } from 'react-native';
 import {hp, wp} from '../../../../commonMethod/screenRatio';
 import {color} from '../../../../assets/colors/color';
-import {COMPLETE_SOLUTION_TEXT, HEADING_TEXT} from './loginUtility';
+import {
+  COMPLETE_SOLUTION_TEXT,
+  GET_STARTED_TEXT,
+  HEADING_TEXT,
+} from './loginUtility';
 import AppButton from '../../../../component/common/appButton';
 import {BATH_TUB_IMAGE} from '../../../../imagePath/imagePath';
 import {LOGO} from '../../../../assets/imagepath/imagepath';
 import styles from '../../../../general/generalStyleSheet';
+import { PracticeContext } from '../../../../useContext/PracticeContext';
 
 const GetStarted = ({navigation}) => {
   const onPressGetStartedScreen = () => {
@@ -42,13 +47,13 @@ const GetStarted = ({navigation}) => {
 
             <View style={style.parentView}>
               <AppButton
-                title={'Get Started'}
+                title={GET_STARTED_TEXT}
                 onPress={() => onPressGetStartedScreen()}
               />
             </View>
             <View style={style.contentDivider} />
-            
-            <View style={styles.singleHeight} />
+
+            <View style={styles.doubleHeight} />
           </View>
         </ImageBackground>
       </ScrollView>
@@ -58,7 +63,7 @@ const GetStarted = ({navigation}) => {
 
 const style = StyleSheet.create({
   parentView: {
-    flex:1,
+    flex: 1,
     paddingHorizontal: '5%',
   },
   bathTubImageStyle: {
@@ -83,12 +88,12 @@ const style = StyleSheet.create({
     height: hp(0.5),
   },
   headingText: {
-    fontSize: hp(2.4),
+    fontSize: 18,
     color: color.white,
     textAlign: 'center',
   },
   completeSolutionText: {
-    fontSize: hp(4.5),
+    fontSize: 34,
     textAlign: 'center',
     color: color.white,
   },

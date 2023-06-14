@@ -82,7 +82,9 @@ const OtpVerfication = ({navigation}) => {
                                 <View style={styles.contentDivider} />
                                 <View style={styles.doubleHeight} />
                                 <AppButton title={VERIFY_TEXT} onPress={()=>onPressVerifyButton()} customButtonTextStyle={style.buttonTextStyle}/>
-                                <View style={styles.contentDivider} />
+                                <View style={styles.doubleHeight} />
+                                <View style={{height:hp(0.3)}}/>
+                                {/* <View style={styles.smallHeight} /> */}
                                 {/* <View style={styles.doubleContentDivider} /> */}
 
                             </View>

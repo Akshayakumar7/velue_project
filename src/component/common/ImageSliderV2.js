@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React,{useEffect} from 'react';
+import {View, Text, Dimensions} from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
 import {color} from '../../assets/colors/color';
 const ImageSliderV2 = () => {
@@ -10,15 +10,19 @@ const ImageSliderV2 = () => {
     'https://cdn.pixabay.com/photo/2016/12/28/21/38/tap-1937219_640.jpg',
     'https://cdn.pixabay.com/photo/2014/05/01/20/38/granite-335746_640.jpg',
   ];
+  let screenWidth = Dimensions.get('window').width;
+
+  useEffect(() => {}, [screenWidth]);
   return (
-    <View style={{alignSelf:'center',width:'100%'}}>
+    <View style={{alignSelf: 'center', width: '100%'}}>
       <SliderBox
         images={images}
-        autoPlay={true}
+        autoPlay={false}
         dotColor={color.darkblue}
         inactiveDotColor={color.grey}
         circleLoop={true}
         autoplayInterval={1000}
+        // parentWidth={300}
       />
     </View>
   );

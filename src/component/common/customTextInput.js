@@ -139,7 +139,7 @@ const style = StyleSheet.create({
     width: '100%',
   },
   textinputStyle: {
-    fontSize: hp(2.5),
+    fontSize: 20,
     color: color.grey,
   },
   textInputView: {width: '80%'},

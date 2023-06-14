@@ -41,11 +41,11 @@ const style = StyleSheet.create({
   flexView: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop:hp(-0.3)
+    marginTop: hp(-0.3),
   },
   filterText: {
     color: color.darkblue,
-    fontSize: hp(2.5),
+    fontSize: 16,
   },
   alignMargin: {
     marginTop: hp(0.5),

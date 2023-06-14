@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View,ScrollView} from 'react-native';
 import Header from '../../../../../component/common/appHeader';
 import {color} from '../../../../../assets/colors/color';
 import {
@@ -28,77 +28,81 @@ const Profile = ({navigation}) => {
           onPressBackButton={() => navigation.goBack()}
         />
         <View style={styles.doubleHeight} />
-        <View>
-          <View style={style.subView}>
-            <View style={style.whiteCard}>
-              <Text style={style.textStyle}>Mittal Hardwares</Text>
-              <View style={styles.singleHeight} />
-              <Text style={style.gstTextStyle}>GST29CURP9879ZN</Text>
-            </View>
-          </View>
-          <View style={styles.midDivider} />
-          <View style={styles.verticalLine} />
-          <View style={styles.midDivider} />
-          <View style={style.subView}>
-            <View style={style.flexView}>
-              <View style={[style.whiteCard, style.subCardWidth, style.shadow]}>
-                <Text style={style.gstTextStyle}>{CREDIT_AMOUNT_TEXT}</Text>
+        <ScrollView>
+          <View>
+            <View style={style.subView}>
+              <View style={style.whiteCard}>
+                <Text style={style.textStyle}>Mittal Hardwares</Text>
                 <View style={styles.singleHeight} />
-                <Text style={style.textStyle}>10,00,000</Text>
-              </View>
-              <View style={{marginHorizontal: hp(1)}} />
-              <View style={[style.whiteCard, style.subCardWidth, style.shadow]}>
-                <Text style={style.gstTextStyle}>{CREDIT_DAYS}</Text>
-                <View style={styles.singleHeight} />
-                <Text style={style.textStyle}>30 Days</Text>
-              </View>
-            </View>
-            <View style={styles.midDivider} />
-
-            <View style={style.whiteCard}>
-              <View style={style.fullFlex}>
-                <View style={{width: '60%'}}>
-                  <Text style={style.gstTextStyle}>{CREDIT_DAYS}</Text>
-                  <View style={styles.singleHeight} />
-                  <Text style={style.textStyle}>30 Days</Text>
-                </View>
-                <View style={{width: '30%'}}>
-                  <AppButton
-                    customButtonStyle={style.paynowButtonTextStyle}
-                    title={PAY_NOW_TEXT}
-                  />
-                </View>
+                <Text style={style.gstTextStyle}>GST29CURP9879ZN</Text>
               </View>
             </View>
             <View style={styles.midDivider} />
             <View style={styles.verticalLine} />
             <View style={styles.midDivider} />
-            <View style={style.whiteCard}>
-              <View style={styles.midDivider} />
+            <View style={style.subView}>
               <View style={style.flexView}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <SvgImage
-                    Source={GREY_CONTACT_ICON}
-                    height={hp(3.5)}
-                    width={wp(5.5)}
-                    style={style.greyContactIconStyle}
-                  />
-                  <Text style={style.textStyle}>{EDIT_PROFILE_TEXT}</Text>
+                <View
+                  style={[style.whiteCard, style.subCardWidth, style.shadow]}>
+                  <Text style={style.gstTextStyle}>{CREDIT_AMOUNT_TEXT}</Text>
+                  <View style={styles.singleHeight} />
+                  <Text style={style.textStyle}>10,00,000</Text>
                 </View>
-
-                <View>
-                  <SvgImage
-                    Source={BLUE_RIGHT_ARROW}
-                    height={hp(3)}
-                    width={wp(5.5)}
-                    style={style.blueRightIconStyle}
-                  />
+                <View style={{marginHorizontal: hp(1)}} />
+                <View
+                  style={[style.whiteCard, style.subCardWidth, style.shadow]}>
+                  <Text style={style.gstTextStyle}>{CREDIT_DAYS}</Text>
+                  <View style={styles.singleHeight} />
+                  <Text style={style.textStyle}>30 Days</Text>
                 </View>
               </View>
               <View style={styles.midDivider} />
+
+              <View style={[style.whiteCard, style.shadow]}>
+                <View style={style.fullFlex}>
+                  <View style={{width: '60%'}}>
+                    <Text style={style.gstTextStyle}>{CREDIT_DAYS}</Text>
+                    <View style={styles.singleHeight} />
+                    <Text style={style.textStyle}>30 Days</Text>
+                  </View>
+                  <View style={{width: '30%'}}>
+                    <AppButton
+                      customButtonStyle={style.paynowButtonTextStyle}
+                      title={PAY_NOW_TEXT}
+                    />
+                  </View>
+                </View>
+              </View>
+              <View style={styles.midDivider} />
+              <View style={styles.verticalLine} />
+              <View style={styles.midDivider} />
+              <View style={style.whiteCard}>
+                <View style={styles.midDivider} />
+                <View style={style.flexView}>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <SvgImage
+                      Source={GREY_CONTACT_ICON}
+                      height={hp(3.5)}
+                      width={wp(5.5)}
+                      style={style.greyContactIconStyle}
+                    />
+                    <Text style={style.textStyle}>{EDIT_PROFILE_TEXT}</Text>
+                  </View>
+
+                  <View>
+                    <SvgImage
+                      Source={BLUE_RIGHT_ARROW}
+                      height={hp(3)}
+                      width={wp(5.5)}
+                      style={style.blueRightIconStyle}
+                    />
+                  </View>
+                </View>
+                <View style={styles.midDivider} />
+              </View>
             </View>
           </View>
-        </View>
+        </ScrollView>
         <View style={styles.doubleContentDivider} />
         <View style={styles.doubleContentDivider} />
         <View style={styles.doubleContentDivider} />

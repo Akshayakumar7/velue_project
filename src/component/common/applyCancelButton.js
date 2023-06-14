@@ -13,7 +13,8 @@ const ApplyCancelButton = props => {
     onPressCancelButton,
     customApplyButtonStyle,
     cancelButtonStyle,
-    cancelTextStyel
+    cancelTextStyel,
+    applyButtonLoader
   } = props;
   return (
     <View style={style.alignItems}>
@@ -28,6 +29,7 @@ const ApplyCancelButton = props => {
             title={applyButtonText}
             onPress={onPressApplyButton}
             customButtonStyle={customApplyButtonStyle}
+            buttonLoader={applyButtonLoader}
           />
         </View>
       </View>

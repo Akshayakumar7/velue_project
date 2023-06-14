@@ -734,8 +734,7 @@ const Register = ({navigation}) => {
               onPress={() => onPressFinishButton()}
             />
             <View style={styles.maxContentDivider} />
-            <View style={styles.maxContentDivider} />
-            <View style={styles.maxContentDivider} />
+           
           </View>
         </ScrollView>
       )}

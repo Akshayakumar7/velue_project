@@ -62,7 +62,7 @@ const BottomTab = () => {
         />
         <Tab.Screen
           name={SCREEN_NAME.Orders}
-          component={Order} // Replaced Screen 2
+          component={Order}
           options={{
             tabBarLabel: () => (
               <Text style={{color: color.white}}>{SCREEN_NAME.Orders}</Text>
@@ -87,7 +87,7 @@ const BottomTab = () => {
         />
         <Tab.Screen
           name={SCREEN_NAME.Account}
-          component={Account} // Replaced Screen 2
+          component={Account}
           options={{
             tabBarLabel: () => (
               <Text style={{color: color.white}}>{SCREEN_NAME.Account}</Text>
@@ -114,7 +114,7 @@ const BottomTab = () => {
             },
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name={SCREEN_NAME.Cart}
           component={Cart} // Replaced Screen 2
           options={{
@@ -138,7 +138,7 @@ const BottomTab = () => {
               );
             },
           }}
-        />
+        /> */}
       </Tab.Navigator>
     </NavigationContainer>
   );

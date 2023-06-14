@@ -62,18 +62,26 @@ const ProductDescription = ({navigation}) => {
     },
   ];
 
+  const onPressUpArrow = index => {
+    if (index == currentIndex) {
+      setCurrentIndex(-1);
+    } else {
+      setCurrentIndex(index);
+    }
+  };
+
   const renderProductDescription = (item, index) => {
     return (
       <View>
-        <Pressable
-          style={style.flexView}
-          onPress={() => setCurrentIndex(index)}>
+        <Pressable style={style.flexView} onPress={() => onPressUpArrow(index)}>
           <Text style={style.titleStyle}>{item?.title ?? ''}</Text>
-          <SvgImage
-            Source={index == currentIndex ? DOWN_ICON : UP_ARROW}
-            height={hp(3)}
-            width={wp(4.5)}
-          />
+          <View style={style.arrowPadding}>
+            <SvgImage
+              Source={index == currentIndex ? DOWN_ICON : UP_ARROW}
+              height={hp(3)}
+              width={wp(4.5)}
+            />
+          </View>
         </Pressable>
         <View style={styles.doubleHeight} />
         {index == currentIndex && (
@@ -95,7 +103,7 @@ const ProductDescription = ({navigation}) => {
             }}
             style={style.productImage}
             resizeMode={'cover'}>
-            <View style={[style.flexView, {width: '93%', alignSelf: 'center'}]}>
+            <View style={[style.flexView, style.backHanderWidth]}>
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <SvgImage
                   Source={ROUND_BACK_HANDLER}
@@ -205,5 +213,7 @@ const style = StyleSheet.create({
     color: color.grey1,
     width: '95%',
   },
+  backHanderWidth: {width: '93%', alignSelf: 'center'},
+  arrowPadding: {padding: hp(1)},
 });
 export default ProductDescription;

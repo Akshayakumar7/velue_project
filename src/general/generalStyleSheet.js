@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     height: hp(10),
   },
   commonBlueText: {
-    fontSize: hp(2.8),
+    fontSize: 24,
     color: color.darkblue,
   },
   alignText: {
