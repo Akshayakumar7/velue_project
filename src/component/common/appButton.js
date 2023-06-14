@@ -21,7 +21,7 @@ const AppButton = props => {
     rightIcon,
     rightIconHeight,
     rightIconWidth,
-    buttonLoader
+    buttonLoader,
   } = props;
   return (
     <View>
@@ -30,30 +30,30 @@ const AppButton = props => {
           onPress={onPress}
           style={[style.buttonView, customButtonStyle]}>
           <View style={style.alignIcon}>
-            {buttonLoader ? (
-              <View>
-                <ActivityIndicator size={'large'} color={color.white} />
-              </View>
-            ) : (
-              <View>
+            <View>
+              {buttonLoader ? (
+                <View>
+                  <ActivityIndicator size={'large'} color={color.darkblue} />
+                </View>
+              ) : (
                 <Text style={[style.buttonText, customButtonTextStyle]}>
                   {title}
                 </Text>
-                {isStringNotEmpty(rightIcon) && (
-                  <View>
-                    <View style={styles.doubleVerticalDivider} />
-                    <View style={styles.verticalDivider} />
-                  </View>
-                )}
-                {isStringNotEmpty(rightIcon) && (
-                  <View>
-                    <SvgImage
-                      Source={rightIcon}
-                      height={rightIconHeight}
-                      width={rightIconWidth}
-                    />
-                  </View>
-                )}
+              )}
+            </View>
+            {isStringNotEmpty(rightIcon) && (
+              <View>
+                <View style={styles.doubleVerticalDivider} />
+                <View style={styles.verticalDivider} />
+              </View>
+            )}
+            {isStringNotEmpty(rightIcon) && (
+              <View>
+                <SvgImage
+                  Source={rightIcon}
+                  height={rightIconHeight}
+                  width={rightIconWidth}
+                />
               </View>
             )}
           </View>
