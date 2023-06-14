@@ -1,5 +1,11 @@
-import React from 'react';
-import {StyleSheet, Text, View,ScrollView} from 'react-native';
+import React, { useContext } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import Header from '../../../../../component/common/appHeader';
 import {color} from '../../../../../assets/colors/color';
 import {
@@ -7,6 +13,7 @@ import {
   CREDIT_AMOUNT_TEXT,
   CREDIT_DAYS,
   EDIT_PROFILE_TEXT,
+  LOG_OUT_TEXT,
   PAY_NOW_TEXT,
   PROFILE_TITLE,
 } from './AccountUtility';
@@ -16,10 +23,13 @@ import AppButton from '../../../../../component/common/appButton';
 import {
   BLUE_RIGHT_ARROW,
   GREY_CONTACT_ICON,
+  LOG_OUT_ICON,
 } from '../../../../../assets/imagepath/imagepath';
 import SvgImage from '../../../../../component/common/svgImage';
+import { PracticeContext } from '../../../../../useContext/PracticeContext';
 
 const Profile = ({navigation}) => {
+  const {setUserLOggedIn} = useContext(PracticeContext)
   return (
     <View>
       <View style={style.mainView}>
@@ -105,8 +115,33 @@ const Profile = ({navigation}) => {
         </ScrollView>
         <View style={styles.doubleContentDivider} />
         <View style={styles.doubleContentDivider} />
-        <View style={styles.doubleContentDivider} />
-        <View style={styles.doubleContentDivider} />
+        <View style={styles.thirpleHeight} />
+        <View style={style.whiteCard}>
+          <View style={styles.midDivider} />
+          <View style={style.flexView}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <SvgImage
+                Source={GREY_CONTACT_ICON}
+                height={hp(3)}
+                width={wp(5.5)}
+                style={style.greyContactIconStyle}
+              />
+              <Text style={style.textStyle}>{LOG_OUT_TEXT}</Text>
+            </View>
+
+            <View>
+              <TouchableOpacity onPress={()=>setUserLOggedIn(false)}>
+                <SvgImage
+                  Source={LOG_OUT_ICON}
+                  height={hp(3.5)}
+                  width={wp(6)}
+                  style={style.blueRightIconStyle}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.midDivider} />
+        </View>
         <View style={styles.doubleContentDivider} />
       </View>
     </View>

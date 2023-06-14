@@ -177,7 +177,9 @@ const Home = ({navigation}) => {
       </View>
       <View style={styles.doubleHeight} />
       <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={{alignSelf:'center'}}>
         <ImageSliderV2 />
+        </View>
         <View style={styles.doubleHeight} />
         <View>
           <FlatList
@@ -195,6 +197,7 @@ const Home = ({navigation}) => {
             ItemSeparatorComponent={itemSeperator()}
             showsVerticalScrollIndicator={false}
             style={{marginBottom: hp(10)}}
+
           />
         </View>
       </ScrollView>

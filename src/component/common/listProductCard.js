@@ -6,6 +6,8 @@ import Fastphoto from './FastImageScreen';
 import styles from '../../general/generalStyleSheet';
 import {INDIAN_RUPEE_SYMBOL} from './componentUtility';
 import AppButton from './appButton';
+import { AADHAR_CARD_TEXT } from '../../screens/authentication/authenticationScreen/register/registerUtility';
+import { ADD_TO_CART } from './componentConst';
 
 const ListProductCard = props => {
   const {data, onPressCard} = props;
@@ -52,8 +54,9 @@ const ListProductCard = props => {
           </View>
           <View style={styles.midDivider} />
           <AppButton
-            title={'ADD TO CART'}
+            title={ADD_TO_CART}
             customButtonStyle={{height: hp(5.5), borderRadius: hp(1)}}
+            customButtonTextStyle={{fontSize:14}}
           />
         </View>
       </TouchableOpacity>
