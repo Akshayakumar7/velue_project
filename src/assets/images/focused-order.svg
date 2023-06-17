@@ -1,0 +1,24 @@
+<svg width="56" height="48" viewBox="0 0 56 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_di_869_6401)">
+<circle cx="28" cy="10" r="6" fill="#66C3D0"/>
+</g>
+<path d="M35 31H21M35 31C35.5304 31 36.0391 31.2107 36.4142 31.5858C36.7893 31.9609 37 32.4696 37 33V39C37 39.5304 36.7893 40.0391 36.4142 40.4142C36.0391 40.7893 35.5304 41 35 41H21C20.4696 41 19.9609 40.7893 19.5858 40.4142C19.2107 40.0391 19 39.5304 19 39V33C19 32.4696 19.2107 31.9609 19.5858 31.5858C19.9609 31.2107 20.4696 31 21 31M35 31V29C35 28.4696 34.7893 27.9609 34.4142 27.5858C34.0391 27.2107 33.5304 27 33 27M21 31V29C21 28.4696 21.2107 27.9609 21.5858 27.5858C21.9609 27.2107 22.4696 27 23 27M33 27V25C33 24.4696 32.7893 23.9609 32.4142 23.5858C32.0391 23.2107 31.5304 23 31 23H25C24.4696 23 23.9609 23.2107 23.5858 23.5858C23.2107 23.9609 23 24.4696 23 25V27M33 27H23" stroke="#FEFEFE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<defs>
+<filter id="filter0_di_869_6401" x="18" y="4" width="20" height="20" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_869_6401"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_869_6401" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="shape" result="effect2_innerShadow_869_6401"/>
+</filter>
+</defs>
+</svg>

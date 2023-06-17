@@ -22,7 +22,7 @@ const AllScreen = () => {
   var ans = userLoggedIn;
   console.log(ans);
 
-  return ans ? (
+  return true ? (
     <BottomTab />
   ) : (
     <NavigationContainer>

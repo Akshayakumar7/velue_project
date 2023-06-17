@@ -7,7 +7,7 @@ export  const SCREEN_NAME = {
     PasswordReset:'PasswordReset',
     Register:'Register',
     BottomTab:'BottomTab',
-    Home:'Home',
+    Home:'HomeScreen',
     Orders:'Orders',
     Account:'Account',
     Cart:'Cart',

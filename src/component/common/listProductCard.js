@@ -6,8 +6,7 @@ import Fastphoto from './FastImageScreen';
 import styles from '../../general/generalStyleSheet';
 import {INDIAN_RUPEE_SYMBOL} from './componentUtility';
 import AppButton from './appButton';
-import { AADHAR_CARD_TEXT } from '../../screens/authentication/authenticationScreen/register/registerUtility';
-import { ADD_TO_CART } from './componentConst';
+import { SELECT_ORDER} from './componentConst';
 
 const ListProductCard = props => {
   const {data, onPressCard} = props;
@@ -16,7 +15,7 @@ const ListProductCard = props => {
       <TouchableOpacity onPress={onPressCard}>
         <View style={style.cardView}>
           <View style={style.flexView}>
-            <View style={{width:'32%'}}>
+            <View style={{width: '32%'}}>
               <Image
                 source={{uri: data?.image ?? ''}}
                 style={{
@@ -33,16 +32,18 @@ const ListProductCard = props => {
               </Text>
               <View style={styles.midDivider} />
 
-              <Text style={style.productTextStyle}>
+              <Text style={style.productTextStyle} numberOfLines={2}>
                 {data?.productName ?? ''}
+               
               </Text>
               <View style={styles.midDivider} />
-              <View style={{alignSelf: 'flex-end', marginRight: wp(2)}}>
+              <View style={style.flexEndView}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Text style={style.mrpTextStyle}>
                     {INDIAN_RUPEE_SYMBOL}
                     {data?.mrp ?? ''}
                   </Text>
+                  <View style={{width: wp(2)}} />
 
                   <Text style={style.actualPriceText}>
                     {INDIAN_RUPEE_SYMBOL}
@@ -54,9 +55,9 @@ const ListProductCard = props => {
           </View>
           <View style={styles.midDivider} />
           <AppButton
-            title={ADD_TO_CART}
-            customButtonStyle={{height: hp(5.5), borderRadius: hp(1)}}
-            customButtonTextStyle={{fontSize:14}}
+            title={SELECT_ORDER}
+            customButtonStyle={style.buttonStyle}
+            customButtonTextStyle={style.buttonTextStyle}
           />
         </View>
       </TouchableOpacity>
@@ -97,34 +98,9 @@ const style = StyleSheet.create({
     fontSize: 20,
     color: color.darkCyan,
   },
+  flexEndView:{alignSelf: 'flex-end', marginRight: wp(2)},
+  buttonStyle:{height: hp(5.5), borderRadius: hp(1)},
+  buttonTextStyle:{fontSize: 14}
 });
 export default ListProductCard;
 
-{
-  /* <View style={style.flexView}>
-<View style={style.imageView}>
-  <Image
-    source={{uri: data?.image ?? ''}}
-    style={{
-      height: hp(15),
-      width: wp(30),
-      borderRadius: hp(1),
-    }}
-  />
-</View>
-<View style={{width: wp(1)}} />
-<View style={{flexDirection: 'row', alignItems: 'center'}}>
-  <Text
-    style={{color: '#A6A6A6', fontSize: 14, fontFamily: 'Roboto'}}>
-    {data?.velue ?? ''} | 'Prodoct Code'
-  </Text>
-</View>
-<View style={styles.doubleHeight} />
-<View>
-  <Text>{data?.productName ?? ''}</Text>
-  <Text>|</Text>
-  <Text></Text>
-  <Text></Text>
-</View>
-</View> */
-}

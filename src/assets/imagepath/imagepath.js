@@ -28,7 +28,13 @@ import ROUND_BACK_HANDLER from '../../assets/images/round-back-handler';
 import UP_ARROW from '../../assets/images/new-up-arrow.svg';
 import BLUE_RIGHT_ARROW from '../../assets/images/blue-right-arrow.svg';
 import CROSS_ICON from '../../assets/images/cross-icon.png';
-import LOG_OUT_ICON from '../../assets/images/logout.svg'
+import LOG_OUT_ICON from '../../assets/images/logout.svg';
+import FOCUSED_HOME_ICON from '../../assets/images/focused-home.svg';
+import FOCUSED_ACCOUNT_ICON from '../../assets/images/focused-account.svg';
+import FOCUSED_ORDER_ICON from '../../assets/images/focused-order.svg';
+import CLOSE_ICON from '../../assets/images/ic_round-close.svg';
+import EMPTY_CIRCLE from '../../assets/images/filled-circle.svg';
+import BLUE_RIGHT_MARK from '../../assets/images/blue-circle.svg';
 
 export {
   BATH_TUB_IMAGE,
@@ -61,5 +67,11 @@ export {
   UP_ARROW,
   BLUE_RIGHT_ARROW,
   CROSS_ICON,
-  LOG_OUT_ICON
+  LOG_OUT_ICON,
+  FOCUSED_HOME_ICON,
+  FOCUSED_ACCOUNT_ICON,
+  FOCUSED_ORDER_ICON,
+  CLOSE_ICON,
+  EMPTY_CIRCLE,
+  BLUE_RIGHT_MARK,
 };

@@ -1,37 +1,35 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
-  Text,
-  View,
-  StyleSheet,
-  TextInput,
   FlatList,
+  Modal,
   ScrollView,
-  LogBox,
+  StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import SvgImage from '../../../../../component/common/svgImage';
+import Toast from 'react-native-toast-message';
+import {color} from '../../../../../assets/colors/color';
 import {
-  ACCOUNT_ICON,
   BELL_ICON,
-  LOCK_ICON,
+  CLOSE_ICON,
   SEARCH_ICON,
 } from '../../../../../assets/imagepath/imagepath';
 import {hp, wp} from '../../../../../commonMethod/screenRatio';
-import {color} from '../../../../../assets/colors/color';
-import styles from '../../../../../general/generalStyleSheet';
-import CustomTextInput from '../../../../../component/common/customTextInput';
-import {SEARCH_PRODUCTS_TEXT} from './HomeScreenUtility';
-import ProductCard from '../../../../../component/common/productCard';
-import ImageSliderV2 from '../../../../../component/common/ImageSliderV2';
-import FilterButton from '../../../../../component/common/filterButton';
-import {SCREEN_NAME} from '../../../../../general/screenName';
-import ListProductCard from '../../../../../component/common/listProductCard';
-import Toast from 'react-native-toast-message';
 import {ShowToastMessage} from '../../../../../commonMethod/toastMessage';
+import ImageSliderV2 from '../../../../../component/common/ImageSliderV2';
+import CustomTextInput from '../../../../../component/common/customTextInput';
+import FilterButton from '../../../../../component/common/filterButton';
+import ListProductCard from '../../../../../component/common/listProductCard';
+import SvgImage from '../../../../../component/common/svgImage';
 import {TOAST_MESSAGE_TYPE} from '../../../../../general/generalConst';
-import { PracticeContext } from '../../../../../useContext/PracticeContext';
+import styles from '../../../../../general/generalStyleSheet';
+import {SCREEN_NAME} from '../../../../../general/screenName';
+import {SEARCH_PRODUCTS_TEXT} from './HomeScreenUtility';
+import CheckBox from '../../../../../component/common/checkBox';
 
 const Home = ({navigation}) => {
+  const [showModal, setShowModal] = useState(false);
   const productData = [
     {
       id: 1,
@@ -122,7 +120,6 @@ const Home = ({navigation}) => {
     navigation.navigate(SCREEN_NAME.ProductDescription);
   };
 
-
   const renderProductList = item => {
     return (
       <View style={style.productWidth}>
@@ -150,7 +147,7 @@ const Home = ({navigation}) => {
 
   const renderFilterButtonList = item => {
     return (
-      <View style={{marginLeft: wp(2)}}>
+      <View style={style.filterButtonMargin}>
         <FilterButton data={item} />
       </View>
     );
@@ -170,15 +167,15 @@ const Home = ({navigation}) => {
             customTextInputBorder={style.customTextInputBorder}
           />
         </View>
-        <View style={{marginRight: wp(2)}} />
+        <View style={style.filterButtonMargin} />
         <TouchableOpacity onPress={() => showToast()}>
           <SvgImage Source={BELL_ICON} height={hp(5)} width={wp(6)} />
         </TouchableOpacity>
       </View>
       <View style={styles.doubleHeight} />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{alignSelf:'center'}}>
-        <ImageSliderV2 />
+        <View style={{alignSelf: 'center'}}>
+          <ImageSliderV2 />
         </View>
         <View style={styles.doubleHeight} />
         <View>
@@ -196,12 +193,45 @@ const Home = ({navigation}) => {
             renderItem={({item}) => renderProductList(item)}
             ItemSeparatorComponent={itemSeperator()}
             showsVerticalScrollIndicator={false}
-            style={{marginBottom: hp(10)}}
-
+            style={style.flatListMargin}
           />
         </View>
+        <Toast />
       </ScrollView>
-      <Toast />
+      <View>
+        <Modal animationType="slide" transparent={true} visible={true}>
+          <View
+            style={{
+              height: '40%',
+              marginTop: 'auto',
+              backgroundColor: color.white,
+              borderTopLeftRadius: hp(3),
+              borderTopRightRadius: hp(3),
+            }}>
+            <View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingHorizontal: hp(3),
+                  marginLeft: hp(1),
+                  marginRight: hp(1),
+                  paddingTop: hp(2),
+                }}>
+                <Text style={{fontSize: 20, color: color.darkblue}}>
+                  {SEARCH_PRODUCTS_TEXT}
+                </Text>
+                <SvgImage Source={CLOSE_ICON} height={hp(5)} width={wp(8.5)} />
+              </View>
+              <View style={styles.singleHeight} />
+              <View style={styles.verticalLine} />
+              <View style={styles.singleHeight} />
+              <CheckBox/>
+            </View>
+          </View>
+        </Modal>
+      </View>
     </View>
   );
 };
@@ -229,34 +259,7 @@ const style = StyleSheet.create({
   productWidth: {
     alignSelf: 'center',
   },
+  filterButtonMargin: {marginLeft: wp(2)},
+  flatListMargin: {marginBottom: hp(10)},
 });
 export default Home;
-
-// import React from 'react';
-// import {View, Text, Button} from 'react-native';
-// import AsynStorage from '@react-native-async-storage/async-storage';
-// const Home = () => {
-//   const setData = async () => {
-//     await AsynStorage.setItem('Name', 'Akshay');
-//   };
-
-//   const getItem = async () => {
-//     const res = await AsynStorage.getItem('Name');
-//     console.log(res);
-//   };
-
-//   return (
-//     <View
-//       style={{
-//         flex: 1,
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//       }}>
-//       <Text>Heelo Home</Text>
-//       <Button title="Set Data" onPress={() => setData()} />
-//       <Button title="Get Data" onPress={() => getItem()} />
-//     </View>
-//   );
-// };
-
-// export default Home;

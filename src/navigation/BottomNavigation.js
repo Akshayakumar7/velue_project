@@ -9,13 +9,15 @@ import {
   ACCOUNT_ICON,
   BLUE_BALL_ICON,
   CART_ICON,
+  FOCUSED_ACCOUNT_ICON,
+  FOCUSED_HOME_ICON,
+  FOCUSED_ORDER_ICON,
   HOME_ICON,
   ORDER_ICON,
 } from '../assets/imagepath/imagepath';
 import {hp, wp} from '../commonMethod/screenRatio';
 import SvgImage from '../component/common/svgImage';
 import {color} from '../assets/colors/color';
-import {BOTTOM_TAB_SCREEN_NAMES, SCREEN_NAME} from '../general/screenName';
 import NestedHomeScreenNavigation from './NestedNavigation';
 
 const Tab = createBottomTabNavigator();
@@ -25,93 +27,62 @@ const BottomTab = () => {
     <NavigationContainer
       screenOptions={{
         headerShown: false,
-      }}>
+      }}
+      >
       <Tab.Navigator
         screenOptions={({route}) => ({
           headerShown: false,
           tabBarHideOnKeyboard: true,
+          tabBarActiveTintColor: color.white,
+          tabBarInactiveTintColor: color.white,
           tabBarStyle: {
-            height: hp(10),
+            height: hp(9),
             backgroundColor: color.darkblue,
+          },
+          tabBarLabelStyle: {
+            fontSize: 16,
           },
         })}>
         <Tab.Screen
-          name={BOTTOM_TAB_SCREEN_NAMES.NestedHomeScreenNavigation}
+          name="Home"
           component={NestedHomeScreenNavigation}
           options={{
-            tabBarLabel: () => (
-              <Text style={{color: color.white}}>{SCREEN_NAME.Home}</Text>
-            ),
             tabBarIcon: ({focused}) => {
               return (
-                <View>
-                  {focused && (
-                    <View style={style.commonMargin}>
-                      <SvgImage
-                        Source={BLUE_BALL_ICON}
-                        height={hp(3)}
-                        width={wp(6.5)}
-                      />
-                    </View>
-                  )}
-                  <SvgImage Source={HOME_ICON} height={hp(4)} width={wp(7)} />
-                </View>
+                <SvgImage
+                  Source={focused ? FOCUSED_HOME_ICON : HOME_ICON}
+                  height={focused ? hp(12) : hp(3)}
+                  width={focused ? wp(16) : wp(6.5)}
+                />
               );
             },
           }}
         />
         <Tab.Screen
-          name={SCREEN_NAME.Orders}
+          name="Orders"
           component={Order}
           options={{
-            tabBarLabel: () => (
-              <Text style={{color: color.white}}>{SCREEN_NAME.Orders}</Text>
+            tabBarIcon: ({focused}) => (
+              <SvgImage
+                Source={focused ? FOCUSED_ORDER_ICON : ORDER_ICON}
+                height={focused ? hp(12) : hp(3)}
+                width={focused ? wp(16) : wp(6.5)}
+              />
             ),
-            tabBarIcon: ({focused}) => {
-              return (
-                <View>
-                  {focused && (
-                    <View>
-                      <SvgImage
-                        Source={BLUE_BALL_ICON}
-                        height={hp(3)}
-                        width={wp(6.5)}
-                      />
-                    </View>
-                  )}
-                  <SvgImage Source={ORDER_ICON} height={hp(4)} width={wp(7)} />
-                </View>
-              );
-            },
           }}
         />
         <Tab.Screen
-          name={SCREEN_NAME.Account}
+          name="Account"
           component={Account}
+          
           options={{
-            tabBarLabel: () => (
-              <Text style={{color: color.white}}>{SCREEN_NAME.Account}</Text>
+            tabBarIcon: ({focused}) => (
+              <SvgImage
+                Source={focused ? FOCUSED_ACCOUNT_ICON : ACCOUNT_ICON}
+                height={focused ? hp(12) : hp(3)}
+                width={focused ? wp(16) : wp(6.5)}
+              />
             ),
-            tabBarIcon: ({focused}) => {
-              return (
-                <View>
-                  {focused && (
-                    <View>
-                      <SvgImage
-                        Source={BLUE_BALL_ICON}
-                        height={hp(3)}
-                        width={wp(6.5)}
-                      />
-                    </View>
-                  )}
-                  <SvgImage
-                    Source={ACCOUNT_ICON}
-                    height={hp(4)}
-                    width={wp(7)}
-                  />
-                </View>
-              );
-            },
           }}
         />
         {/* <Tab.Screen
