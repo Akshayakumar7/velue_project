@@ -6,10 +6,10 @@ import Fastphoto from './FastImageScreen';
 import styles from '../../general/generalStyleSheet';
 import {INDIAN_RUPEE_SYMBOL} from './componentUtility';
 import AppButton from './appButton';
-import { SELECT_ORDER} from './componentConst';
+import {SELECT_ORDER} from './componentConst';
 
 const ListProductCard = props => {
-  const {data, onPressCard} = props;
+  const {data, onPressCard, onPressSelectOrder} = props;
   return (
     <View key={data?.id}>
       <TouchableOpacity onPress={onPressCard}>
@@ -34,7 +34,6 @@ const ListProductCard = props => {
 
               <Text style={style.productTextStyle} numberOfLines={2}>
                 {data?.productName ?? ''}
-               
               </Text>
               <View style={styles.midDivider} />
               <View style={style.flexEndView}>
@@ -58,6 +57,7 @@ const ListProductCard = props => {
             title={SELECT_ORDER}
             customButtonStyle={style.buttonStyle}
             customButtonTextStyle={style.buttonTextStyle}
+            onPress={onPressSelectOrder}
           />
         </View>
       </TouchableOpacity>
@@ -98,9 +98,8 @@ const style = StyleSheet.create({
     fontSize: 20,
     color: color.darkCyan,
   },
-  flexEndView:{alignSelf: 'flex-end', marginRight: wp(2)},
-  buttonStyle:{height: hp(5.5), borderRadius: hp(1)},
-  buttonTextStyle:{fontSize: 14}
+  flexEndView: {alignSelf: 'flex-end', marginRight: wp(2)},
+  buttonStyle: {height: hp(5.5), borderRadius: hp(1)},
+  buttonTextStyle: {fontSize: 14},
 });
 export default ListProductCard;
-

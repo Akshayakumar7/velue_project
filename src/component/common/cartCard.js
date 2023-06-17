@@ -134,7 +134,7 @@ const style = StyleSheet.create({
   },
   actualPriceText: {
     textDecorationLine: 'line-through',
-    fontSize: hp(2.5),
+    fontSize: 14,
     color: color.grey1,
     textAlign: 'right',
   },

@@ -25,8 +25,9 @@ import SvgImage from '../../../../../component/common/svgImage';
 import {TOAST_MESSAGE_TYPE} from '../../../../../general/generalConst';
 import styles from '../../../../../general/generalStyleSheet';
 import {SCREEN_NAME} from '../../../../../general/screenName';
-import {SEARCH_PRODUCTS_TEXT} from './HomeScreenUtility';
+import {CREATE_NEW_ORDER, SEARCH_PRODUCTS_TEXT} from './HomeScreenUtility';
 import CheckBox from '../../../../../component/common/checkBox';
+import AppButton from '../../../../../component/common/appButton';
 
 const Home = ({navigation}) => {
   const [showModal, setShowModal] = useState(false);
@@ -116,14 +117,137 @@ const Home = ({navigation}) => {
 
   const filterOption = [{type: 'Sort by'}, {type: 'Filters'}, {type: 'Brand'}];
 
-  const onPressCard = () => {
-    navigation.navigate(SCREEN_NAME.ProductDescription);
-  };
+  const orderIdData = [
+    {
+      id: 'OID012210',
+      items: '16 Items',
+      actualcost: '₹ 52000',
+      finalcost: '₹ 35000',
+      isChecked: false,
+    },
+    {
+      id: 'OID012211',
+      items: '16 Items',
+      actualcost: '₹ 52000',
+      finalcost: '₹ 35000',
+      isChecked: false,
+    },
+    {
+      id: 'OID012212',
+      items: '16 Items',
+      actualcost: '₹ 52000',
+      finalcost: '₹ 35000',
+      isChecked: false,
+    },
+    {
+      id: 'OID012213',
+      items: '16 Items',
+      actualcost: '₹ 52000',
+      finalcost: '₹ 35000',
+      isChecked: false,
+    },
+    {
+      id: 'OID012214',
+      items: '16 Items',
+      actualcost: '₹ 52000',
+      finalcost: '₹ 35000',
+      isChecked: false,
+    },
+    {
+      id: 'OID012215',
+      items: '16 Items',
+      actualcost: '₹ 52000',
+      finalcost: '₹ 35000',
+      isChecked: false,
+    },
+    {
+      id: 'OID012216',
+      items: '16 Items',
+      actualcost: '₹ 52000',
+      finalcost: '₹ 35000',
+      isChecked: false,
+    },
+    {
+      id: 'OID012217',
+      items: '16 Items',
+      actualcost: '₹ 52000',
+      finalcost: '₹ 35000',
+      isChecked: false,
+    },
+    {
+      id: 'OID012218',
+      items: '16 Items',
+      actualcost: '₹ 52000',
+      finalcost: '₹ 35000',
+      isChecked: false,
+    },
+  ];
 
   const renderProductList = item => {
     return (
       <View style={style.productWidth}>
-        <ListProductCard data={item} onPressCard={() => onPressCard()} />
+        <ListProductCard
+          data={item}
+          onPressCard={() => onPressCard()}
+          onPressSelectOrder={() => handleModal()}
+        />
+      </View>
+    );
+  };
+
+  const renderFilterButtonList = item => {
+    return (
+      <View style={style.filterButtonMargin}>
+        <FilterButton data={item} />
+      </View>
+    );
+  };
+
+  const renderIdList = item => {
+    return (
+      <View style={{paddingHorizontal: hp(4)}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
+          <View style={{width: '55%'}}>
+            <View
+              style={{
+                flexDirection: 'row',
+              }}>
+              <View>
+                <CheckBox isTrue={item?.isChecked ?? false} />
+              </View>
+              <View style={{width: '6%'}} />
+              <View>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    color: color.darkblue,
+                    fontWeight: '600',
+                  }}
+                  numberOfLines={1}>
+                  {item?.id ?? ''}
+                </Text>
+                <View style={styles.smallHeight} />
+                <Text style={{fontSize: 15, color: color.grey1}}>
+                  {item?.items ?? ''}
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View style={{width: '43%'}}>
+            <Text style={style.actualcostTextStyle}>
+              {item?.actualcost ?? ''}
+            </Text>
+            <Text style={style.finalCostTextStyle}>
+              {item?.finalcost ?? ''}
+            </Text>
+          </View>
+        </View>
+        <View style={styles.doubleHeight} />
       </View>
     );
   };
@@ -145,13 +269,14 @@ const Home = ({navigation}) => {
     );
   };
 
-  const renderFilterButtonList = item => {
-    return (
-      <View style={style.filterButtonMargin}>
-        <FilterButton data={item} />
-      </View>
-    );
+  const onPressCard = () => {
+    navigation.navigate(SCREEN_NAME.ProductDescription);
   };
+
+  const handleModal = () => {
+    setShowModal(!showModal);
+  };
+
   return (
     <View style={style.mainView}>
       <View style={styles.doubleHeight} />
@@ -194,12 +319,17 @@ const Home = ({navigation}) => {
             ItemSeparatorComponent={itemSeperator()}
             showsVerticalScrollIndicator={false}
             style={style.flatListMargin}
+            keyExtractor={item => item?.id}
           />
         </View>
         <Toast />
       </ScrollView>
       <View>
-        <Modal animationType="slide" transparent={true} visible={true}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={showModal}
+          onDismiss={() => setShowModal(!showModal)}>
           <View
             style={{
               height: '40%',
@@ -222,12 +352,39 @@ const Home = ({navigation}) => {
                 <Text style={{fontSize: 20, color: color.darkblue}}>
                   {SEARCH_PRODUCTS_TEXT}
                 </Text>
-                <SvgImage Source={CLOSE_ICON} height={hp(5)} width={wp(8.5)} />
+                <TouchableOpacity onPress={()=>handleModal()}>
+                  <SvgImage
+                    Source={CLOSE_ICON}
+                    height={hp(5)}
+                    width={wp(8.5)}
+                  />
+                </TouchableOpacity>
               </View>
               <View style={styles.singleHeight} />
               <View style={styles.verticalLine} />
               <View style={styles.singleHeight} />
-              <CheckBox/>
+              <View>
+                <FlatList
+                  data={orderIdData}
+                  renderItem={({item}) => renderIdList(item)}
+                  keyExtractor={item => item?.id}
+                  style={{marginBottom: hp(25)}}
+                />
+              </View>
+            </View>
+            <View style={styles.singleHeight} />
+            <View
+              style={{
+                height: '20%',
+                marginTop: 'auto',
+                paddingHorizontal: hp(1),
+              }}>
+              <AppButton
+                title={CREATE_NEW_ORDER}
+                customButtonStyle={{borderRadius: hp(1), height: hp(6)}}
+                customButtonTextStyle={{fontSize: 16}}
+                onPress={() => handleModal()}
+              />
             </View>
           </View>
         </Modal>
@@ -261,5 +418,16 @@ const style = StyleSheet.create({
   },
   filterButtonMargin: {marginLeft: wp(2)},
   flatListMargin: {marginBottom: hp(10)},
+  actualcostTextStyle: {
+    textDecorationLine: 'line-through',
+    fontSize: 14,
+    color: color.grey1,
+    textAlign: 'right',
+  },
+  finalCostTextStyle: {
+    fontSize: 20,
+    color: color.darkCyan,
+    textAlign: 'right',
+  },
 });
 export default Home;

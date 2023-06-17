@@ -8,7 +8,6 @@ import {DOWN_ICON} from '../../assets/imagepath/imagepath';
 
 const FilterButton = props => {
   const {data, onPress} = props;
-  console.log(data);
   return (
     <View>
       <TouchableOpacity onPress={onPress}>

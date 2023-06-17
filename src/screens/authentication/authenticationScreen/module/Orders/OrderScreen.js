@@ -6,7 +6,6 @@ const Order = () => {
   const [name, setName] = useState('');
   const getItem = async () => {
     const res = await AsynStorage.getItem('Name');
-    console.log(res);
     setName(res);
   };
   return (

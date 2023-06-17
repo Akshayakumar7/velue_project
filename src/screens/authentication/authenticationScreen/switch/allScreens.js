@@ -20,7 +20,6 @@ const Stack = createNativeStackNavigator();
 const AllScreen = () => {
   const {userLoggedIn} = useContext(PracticeContext);
   var ans = userLoggedIn;
-  console.log(ans);
 
   return true ? (
     <BottomTab />
