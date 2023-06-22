@@ -45,7 +45,7 @@ const BottomTab = () => {
         })}>
         <Tab.Screen
           name="Home"
-          component={NestedHomeScreenNavigation}
+          component={Home}
           options={{
             tabBarIcon: ({focused}) => {
               return (

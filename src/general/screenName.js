@@ -12,7 +12,9 @@ export  const SCREEN_NAME = {
     Account:'Account',
     Cart:'Cart',
     OnboardingCompleted:'OnboardingCompleted',
-    ProductDescription:'ProductDescription'
+    ProductDescription:'ProductDescription',
+    OrderIdProductScreen:"OrderIdProduct"
+
 }
 
 export const BOTTOM_TAB_SCREEN_NAMES = {
