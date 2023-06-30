@@ -8,12 +8,13 @@ import SvgImage from './svgImage';
 import {
   DELETE_ICON,
   MINUS_ICON,
+  PENCIL_ICON,
   PLUS_ICON,
 } from '../../assets/imagepath/imagepath';
 import {INDIAN_RUPEE_SYMBOL} from './componentUtility';
 
 const CartCard = props => {
-  const {data,onPressMinusIcon,onPressPlusIcon} = props;
+  const {data, onPressMinusIcon, onPressPlusIcon} = props;
   return (
     <View>
       <View style={[style.mainView, style.shadow]}>
@@ -46,17 +47,23 @@ const CartCard = props => {
                   <SvgImage Source={DELETE_ICON} height={hp(5)} width={wp(6)} />
                 </TouchableOpacity>
               </View>
+              <View style={{width:'20%'}}/>
+              <View>
+                <TouchableOpacity>
+                  <SvgImage Source={PENCIL_ICON} height={hp(5)} width={wp(6)} />
+                </TouchableOpacity>
+              </View>
               <View style={styles.extraVerticalDivider} />
               <View style={style.addRemoveBorder}>
                 <View style={style.commonFlex}>
                   <View style={style.commonFlex}>
-                    <TouchableOpacity onPress={onPressMinusIcon}>
+                    {/* <TouchableOpacity onPress={onPressMinusIcon}>
                       <SvgImage
                         Source={MINUS_ICON}
                         height={hp(7)}
                         width={wp(8)}
                       />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <View style={styles.verticalDivider} />
                     <View>
                       <Text style={style.cartCount}>{data?.count}</Text>
@@ -64,13 +71,13 @@ const CartCard = props => {
                       <Text style={style.productType}>{data?.type}</Text>
                     </View>
                     <View style={styles.verticalDivider} />
-                    <TouchableOpacity onPress={onPressPlusIcon}>
+                    {/* <TouchableOpacity onPress={onPressPlusIcon}>
                       <SvgImage
                         Source={PLUS_ICON}
                         height={hp(7)}
                         width={wp(8)}
                       />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                   </View>
                 </View>
               </View>
@@ -130,7 +137,7 @@ const style = StyleSheet.create({
     alignContent: 'center',
     padding: hp(1),
     width: '100%',
-    height: hp(9),
+    height: hp(8),
   },
   actualPriceText: {
     textDecorationLine: 'line-through',
@@ -142,9 +149,9 @@ const style = StyleSheet.create({
     fontSize: hp(3),
     color: color.darkCyan,
   },
-  productType: {fontSize: hp(2.5), color: color.grey1},
+  productType: {fontSize: 18, color: color.grey1, textAlign: 'center'},
   cartCount: {
-    fontSize: hp(3),
+    fontSize: 20,
     color: color.darkblue,
     fontWeight: '700',
   },
@@ -156,7 +163,7 @@ const style = StyleSheet.create({
   halfFlex: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '50%',
+    width: '40%',
     alignItems: 'center',
   },
   mainFlex: {

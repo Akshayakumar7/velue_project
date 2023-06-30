@@ -35,6 +35,7 @@ import FOCUSED_ORDER_ICON from '../../assets/images/focused-order.svg';
 import CLOSE_ICON from '../../assets/images/ic_round-close.svg';
 import EMPTY_CIRCLE from '../../assets/images/filled-circle.svg';
 import BLUE_RIGHT_MARK from '../../assets/images/blue-circle.svg';
+import PENCIL_ICON from '../../assets/images/pencil.svg'
 
 export {
   BATH_TUB_IMAGE,
@@ -74,4 +75,5 @@ export {
   CLOSE_ICON,
   EMPTY_CIRCLE,
   BLUE_RIGHT_MARK,
+  PENCIL_ICON
 };

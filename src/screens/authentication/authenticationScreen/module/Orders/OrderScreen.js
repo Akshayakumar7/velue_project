@@ -228,7 +228,7 @@ const style = StyleSheet.create({
   unFocusedTextStyle: {
     color: color.darkblue,
   },
-  backgroundColorView: {backgroundColor: color.lightGreen},
+  backgroundColorView: {backgroundColor: color.red},
 });
 
 export default Orders;

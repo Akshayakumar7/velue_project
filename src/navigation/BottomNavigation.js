@@ -18,74 +18,68 @@ import {
 import {hp, wp} from '../commonMethod/screenRatio';
 import SvgImage from '../component/common/svgImage';
 import {color} from '../assets/colors/color';
-import NestedHomeScreenNavigation from './NestedNavigation';
+import {NestedHomeScreenNavigation} from './NestedNavigation';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTab = () => {
   return (
-    <NavigationContainer
-      screenOptions={{
+    <Tab.Navigator
+      screenOptions={({route}) => ({
         headerShown: false,
-      }}
-      >
-      <Tab.Navigator
-        screenOptions={({route}) => ({
-          headerShown: false,
-          tabBarHideOnKeyboard: true,
-          tabBarActiveTintColor: color.white,
-          tabBarInactiveTintColor: color.white,
-          tabBarStyle: {
-            height: hp(9),
-            backgroundColor: color.darkblue,
-          },
-          tabBarLabelStyle: {
-            fontSize: 16,
-          },
-        })}>
-        <Tab.Screen
-          name="Home"
-          component={Home}
-          options={{
-            tabBarIcon: ({focused}) => {
-              return (
-                <SvgImage
-                  Source={focused ? FOCUSED_HOME_ICON : HOME_ICON}
-                  height={focused ? hp(12) : hp(3)}
-                  width={focused ? wp(16) : wp(6.5)}
-                />
-              );
-            },
-          }}
-        />
-        <Tab.Screen
-          name="Orders"
-          component={Order}
-          options={{
-            tabBarIcon: ({focused}) => (
+        tabBarHideOnKeyboard: true,
+        tabBarActiveTintColor: color.white,
+        tabBarInactiveTintColor: color.white,
+        tabBarStyle: {
+          height: hp(9),
+          backgroundColor: color.darkblue,
+        },
+        tabBarLabelStyle: {
+          fontSize: 16,
+        },
+      })}>
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
               <SvgImage
-                Source={focused ? FOCUSED_ORDER_ICON : ORDER_ICON}
+                Source={focused ? FOCUSED_HOME_ICON : HOME_ICON}
                 height={focused ? hp(12) : hp(3)}
                 width={focused ? wp(16) : wp(6.5)}
               />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Account"
-          component={Account}
-          
-          options={{
-            tabBarIcon: ({focused}) => (
-              <SvgImage
-                Source={focused ? FOCUSED_ACCOUNT_ICON : ACCOUNT_ICON}
-                height={focused ? hp(12) : hp(3)}
-                width={focused ? wp(16) : wp(6.5)}
-              />
-            ),
-          }}
-        />
-        {/* <Tab.Screen
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Orders"
+        component={Order}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <SvgImage
+              Source={focused ? FOCUSED_ORDER_ICON : ORDER_ICON}
+              height={focused ? hp(12) : hp(3)}
+              width={focused ? wp(16) : wp(6.5)}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Account"
+        component={Account}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <SvgImage
+              Source={focused ? FOCUSED_ACCOUNT_ICON : ACCOUNT_ICON}
+              height={focused ? hp(12) : hp(3)}
+              width={focused ? wp(16) : wp(6.5)}
+            />
+          ),
+        }}
+      />
+      {/* <Tab.Screen
           name={SCREEN_NAME.Cart}
           component={Cart} // Replaced Screen 2
           options={{
@@ -110,8 +104,7 @@ const BottomTab = () => {
             },
           }}
         /> */}
-      </Tab.Navigator>
-    </NavigationContainer>
+    </Tab.Navigator>
   );
 };
 

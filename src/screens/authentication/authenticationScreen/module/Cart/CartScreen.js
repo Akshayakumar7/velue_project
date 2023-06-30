@@ -112,6 +112,7 @@ const Cart = ({navigation}) => {
             ItemSeparatorComponent={() => cartSeperator()}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
+           
           />
           <View>
             

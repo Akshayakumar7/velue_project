@@ -23,7 +23,7 @@ const NestedHomeScreenNavigation = () => {
         name={SCREEN_NAME.ProductDescription}
         component={ProductDescription}
         options={{
-          headerShown: false,
+          headerShown:false
         }}
       />
     </Stack.Navigator>

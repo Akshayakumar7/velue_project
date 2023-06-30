@@ -19,17 +19,30 @@ import Home from '../module/Home/HomeScreen';
 import ProductDescription from '../module/Home/ProductDescriptionScreen';
 import Orders from '../module/Orders/OrderScreen';
 import OrderIdProduct from '../module/Orders/OrderIdProductScreen';
+import OrderSummary from '../module/Orders/OrderSummary';
 const Stack = createNativeStackNavigator();
 
 const AllScreen = () => {
   const {userLoggedIn} = useContext(PracticeContext);
   var ans = userLoggedIn;
 
-  return ans ? (
-    <BottomTab />
-  ) : (
+  return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          name={'BottomTab'}
+          component={BottomTab}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.ProductDescription}
+          component={ProductDescription}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name={SCREEN_NAME.GetStarted}
           component={GetStarted}
@@ -93,28 +106,28 @@ const AllScreen = () => {
             headerShown: false,
           }}
         />
-         <Stack.Screen
-          name={SCREEN_NAME.ProductDescription}
-          component={ProductDescription}
-          options={{
-            headerShown: false,
-          }}
-        />
-          <Stack.Screen
+
+        <Stack.Screen
           name={SCREEN_NAME.Orders}
           component={Orders}
           options={{
             headerShown: false,
           }}
         />
-          <Stack.Screen
+        <Stack.Screen
           name={SCREEN_NAME.OrderIdProductScreen}
           component={OrderIdProduct}
           options={{
             headerShown: false,
           }}
         />
-        
+        <Stack.Screen
+          name={SCREEN_NAME.OrderSummary}
+          component={OrderSummary}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

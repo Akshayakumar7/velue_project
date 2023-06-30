@@ -13,7 +13,8 @@ export  const SCREEN_NAME = {
     Cart:'Cart',
     OnboardingCompleted:'OnboardingCompleted',
     ProductDescription:'ProductDescription',
-    OrderIdProductScreen:"OrderIdProduct"
+    OrderIdProductScreen:"OrderIdProduct",
+    OrderSummary:"OrderSummary"
 
 }
 

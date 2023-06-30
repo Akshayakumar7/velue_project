@@ -22,6 +22,7 @@ const DraftCard = props => {
             <Text style={style.orderIdTextStyle}>{data.orderId}</Text>
             <View style={styles.smallHeight} />
             <Text style={style.dateTextStyle}>{data.date}</Text>
+            <View style={styles.singleHeight}/>
             <Text style={style.costTextStyle}>
               {INDIAN_RUPEE_SYMBOL} {data.cost}
             </Text>
@@ -36,6 +37,7 @@ const DraftCard = props => {
                   padding: hp(1.6),
                   color: color.greyTextColor,
                   fontSize: 16,
+                  marginRight:'20%'
                 }}>
                 Discard
               </Text>
@@ -44,13 +46,13 @@ const DraftCard = props => {
               style={{
                 borderLeftWidth: hp(0.05),
                 color: color.underLineColor,
-                height: hp(5.5),
+                height: hp(7),
               }}
             />
-            <Pressable style={{width: '50%'}}>
+            <Pressable style={{width: '50%',alignItems:'flex-end'}}>
               <Text
                 style={{
-                  textAlign: 'center',
+                  // textAlign: 'center',
                   padding: hp(1.6),
                   color: color.greyTextColor,
                   fontSize: 16,
