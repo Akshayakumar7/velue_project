@@ -14,7 +14,8 @@ export  const SCREEN_NAME = {
     OnboardingCompleted:'OnboardingCompleted',
     ProductDescription:'ProductDescription',
     OrderIdProductScreen:"OrderIdProduct",
-    OrderSummary:"OrderSummary"
+    OrderSummary:"OrderSummary",
+    OrderPlaced:"OrderPlaced"
 
 }
 

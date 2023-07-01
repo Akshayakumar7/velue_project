@@ -17,7 +17,7 @@ const CartCard = props => {
   const {data, onPressMinusIcon, onPressPlusIcon} = props;
   return (
     <View>
-      <View style={[style.mainView, style.shadow]}>
+      <View style={[style.mainView]}>
         <View style={style.flexView}>
           <View>
             <Fastphoto
@@ -47,7 +47,7 @@ const CartCard = props => {
                   <SvgImage Source={DELETE_ICON} height={hp(5)} width={wp(6)} />
                 </TouchableOpacity>
               </View>
-              <View style={{width:'20%'}}/>
+              <View style={{width: '20%'}} />
               <View>
                 <TouchableOpacity>
                   <SvgImage Source={PENCIL_ICON} height={hp(5)} width={wp(6)} />
@@ -57,27 +57,18 @@ const CartCard = props => {
               <View style={style.addRemoveBorder}>
                 <View style={style.commonFlex}>
                   <View style={style.commonFlex}>
-                    {/* <TouchableOpacity onPress={onPressMinusIcon}>
-                      <SvgImage
-                        Source={MINUS_ICON}
-                        height={hp(7)}
-                        width={wp(8)}
-                      />
-                    </TouchableOpacity> */}
-                    <View style={styles.verticalDivider} />
-                    <View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                      }}>
+                      <View style={styles.verticalDivider} />
+                      <View style={styles.verticalDivider} />
                       <Text style={style.cartCount}>{data?.count}</Text>
-
+                      <View style={styles.verticalDivider} />
                       <Text style={style.productType}>{data?.type}</Text>
                     </View>
-                    <View style={styles.verticalDivider} />
-                    {/* <TouchableOpacity onPress={onPressPlusIcon}>
-                      <SvgImage
-                        Source={PLUS_ICON}
-                        height={hp(7)}
-                        width={wp(8)}
-                      />
-                    </TouchableOpacity> */}
                   </View>
                 </View>
               </View>
@@ -128,7 +119,7 @@ const style = StyleSheet.create({
   verticalLine: {
     borderBottomWidth: hp(0.1),
     color: color.grey,
-    width: '110%',
+    width: '100%',
     alignSelf: 'center',
   },
   addRemoveBorder: {
@@ -137,7 +128,8 @@ const style = StyleSheet.create({
     alignContent: 'center',
     padding: hp(1),
     width: '100%',
-    height: hp(8),
+    height: hp(6),
+    justifyContent: 'center',
   },
   actualPriceText: {
     textDecorationLine: 'line-through',

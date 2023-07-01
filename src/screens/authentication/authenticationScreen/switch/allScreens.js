@@ -20,6 +20,7 @@ import ProductDescription from '../module/Home/ProductDescriptionScreen';
 import Orders from '../module/Orders/OrderScreen';
 import OrderIdProduct from '../module/Orders/OrderIdProductScreen';
 import OrderSummary from '../module/Orders/OrderSummary';
+import OrderPlaced from '../module/Orders/OrderPlacedScreen';
 const Stack = createNativeStackNavigator();
 
 const AllScreen = () => {
@@ -124,6 +125,13 @@ const AllScreen = () => {
         <Stack.Screen
           name={SCREEN_NAME.OrderSummary}
           component={OrderSummary}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.OrderPlaced}
+          component={OrderPlaced}
           options={{
             headerShown: false,
           }}
