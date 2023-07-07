@@ -17,6 +17,7 @@ import OrderIdCard from '../../../../../component/common/orderIdCard';
 import styles from '../../../../../general/generalStyleSheet';
 import DraftCard from '../../../../../component/common/draftCard';
 import {SCREEN_NAME} from '../../../../../general/screenName';
+import SearchHeader from '../../../../../component/common/appSearchHeader';
 
 const Orders = ({navigation}) => {
   const [activeTab, setActiveTab] = useState(true);
@@ -180,7 +181,7 @@ const Orders = ({navigation}) => {
   };
   return (
     <View>
-      <Header headerTitle={ORDER_TEXT} />
+      <SearchHeader headerTitle={ORDER_TEXT} onPressBackButton={()=>navigation.goBack()} />
       <TabButton
         isActive={activeTab}
         onPressDraft={() => setActiveTab(true)}

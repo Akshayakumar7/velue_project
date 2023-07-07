@@ -31,20 +31,23 @@ import {
   PERSON_ICON,
 } from '../../../../assets/imagepath/imagepath';
 import CustomTextInput from '../../../../component/common/customTextInput';
-import {KEYBOARD_TYPE, TOAST_MESSAGE_TYPE} from '../../../../general/generalConst';
+import {
+  KEYBOARD_TYPE,
+  TOAST_MESSAGE_TYPE,
+} from '../../../../general/generalConst';
 import styles from '../../../../general/generalStyleSheet';
 import ApplyCancelButton from '../../../../component/common/applyCancelButton';
 import {SCREEN_NAME} from '../../../../general/screenName';
 import AsynStorage from '@react-native-async-storage/async-storage';
 import {PracticeContext} from '../../../../useContext/PracticeContext';
-import { ShowToastMessage } from '../../../../commonMethod/toastMessage';
+import {ShowToastMessage} from '../../../../commonMethod/toastMessage';
 
 const Login = ({navigation}) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(true);
   const [errorText, setErrorText] = useState('');
-  const [buttonLoader,setButtonLoader] = useState(false)
+  const [buttonLoader, setButtonLoader] = useState(false);
   const tempMobileNumber = '8088187007';
   const tempPassword = 'devi@123456';
   const {setUserLOggedIn} = useContext(PracticeContext);
@@ -68,14 +71,20 @@ const Login = ({navigation}) => {
   };
 
   const onPressLogin = async () => {
-    setButtonLoader(true)
+    var temp = true
+    setButtonLoader(temp)
+    console.log(buttonLoader);
     if (phoneNumber == tempMobileNumber && password == tempPassword) {
       await setUserLOggedIn(true);
-      ShowToastMessage(TOAST_MESSAGE_TYPE.success,"Hello","Successfully logged In")
+      ShowToastMessage(
+        TOAST_MESSAGE_TYPE.success,
+        'Hello',
+        'Successfully logged In',
+      );
     } else {
       setErrorText('Please enter valid Mobile number and Password');
     }
-    setButtonLoader(false)
+    setButtonLoader(false);
   };
   return (
     <View>
@@ -93,17 +102,9 @@ const Login = ({navigation}) => {
                 <Text style={style.loginText}>{LOGIN_TEXT}</Text>
                 <View style={style.itemDivider} />
                 <Text style={style.errorText}>{errorText}</Text>
-               
-                {/* <View style={styles.doubleHeight} /> */}
-                {
-                  buttonLoader && (
-                    <View
-                    >
-                      <ActivityIndicator size={'large'} color={color.darkblue}/>
-                    </View>
-                  )
-                }
-                {/* <View style={styles.doubleHeight} /> */}
+
+                {buttonLoader && <ActivityIndicator size="large" />}
+
                 <View style={style.itemDivider} />
                 <View>
                   <CustomTextInput
@@ -146,7 +147,6 @@ const Login = ({navigation}) => {
                   applyButtonText={LOGIN_TEXT}
                   onPressCancelButton={() => onPressRegisterHere()}
                   onPressApplyButton={() => onPressLogin()}
-                 
                 />
               </View>
             </View>

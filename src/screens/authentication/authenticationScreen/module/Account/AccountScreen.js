@@ -84,6 +84,7 @@ const Profile = ({navigation}) => {
               <View style={styles.midDivider} />
               <View style={styles.verticalLine} />
               <View style={styles.midDivider} />
+
               <View style={style.whiteCard}>
                 <View style={styles.midDivider} />
                 <View style={style.flexView}>
@@ -108,12 +109,12 @@ const Profile = ({navigation}) => {
                 </View>
                 <View style={styles.midDivider} />
               </View>
+
+              <View style={{marginBottom: hp(5)}} />
             </View>
           </View>
 
-          <View style={styles.doubleContentDivider} />
-          <View style={styles.contentDivider} />
-          <View style={styles.thirpleHeight} />
+          <View style={{height: '20%'}} />
           <View style={style.whiteCard}>
             <View style={styles.midDivider} />
             <View style={style.flexView}>
@@ -140,6 +141,7 @@ const Profile = ({navigation}) => {
             </View>
             <View style={styles.midDivider} />
           </View>
+          <View style={styles.doubleContentDivider} />
           <View style={styles.doubleContentDivider} />
         </View>
       </ScrollView>
@@ -192,9 +194,9 @@ const style = StyleSheet.create({
   },
   blueRightIconStyle: {marginRight: wp(5), marginLeft: wp(3)},
   greyContactIconStyle: {marginRight: wp(5), marginLeft: wp(3)},
-  smallHorizonatalMargin:{marginHorizontal: hp(1)},
-  creditDaysWidth:{width: '60%'},
-  payNowButtonWidth:{width: '30%'},
-  editProfileFlex:{flexDirection: 'row', alignItems: 'center'}
+  smallHorizonatalMargin: {marginHorizontal: hp(1)},
+  creditDaysWidth: {width: '60%'},
+  payNowButtonWidth: {width: '30%'},
+  editProfileFlex: {flexDirection: 'row', alignItems: 'center'},
 });
 export default Profile;

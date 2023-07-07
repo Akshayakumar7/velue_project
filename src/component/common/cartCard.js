@@ -14,7 +14,7 @@ import {
 import {INDIAN_RUPEE_SYMBOL} from './componentUtility';
 
 const CartCard = props => {
-  const {data, onPressMinusIcon, onPressPlusIcon} = props;
+  const {data, onPressEditIcon,onPressDeleteIcon} = props;
   return (
     <View>
       <View style={[style.mainView]}>
@@ -43,13 +43,13 @@ const CartCard = props => {
           <View style={style.mainFlex}>
             <View style={style.halfFlex}>
               <View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={onPressDeleteIcon}>
                   <SvgImage Source={DELETE_ICON} height={hp(5)} width={wp(6)} />
                 </TouchableOpacity>
               </View>
               <View style={{width: '20%'}} />
               <View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={onPressEditIcon}>
                   <SvgImage Source={PENCIL_ICON} height={hp(5)} width={wp(6)} />
                 </TouchableOpacity>
               </View>

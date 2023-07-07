@@ -21,22 +21,47 @@ import Orders from '../module/Orders/OrderScreen';
 import OrderIdProduct from '../module/Orders/OrderIdProductScreen';
 import OrderSummary from '../module/Orders/OrderSummary';
 import OrderPlaced from '../module/Orders/OrderPlacedScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Stack = createNativeStackNavigator();
 
 const AllScreen = () => {
   const {userLoggedIn} = useContext(PracticeContext);
   var ans = userLoggedIn;
 
+  const getData = async () => {
+    const aksh = await AsyncStorage.getItem('user')
+      .then(res => {
+        console.log(res, 'res');
+      })
+      .catch(e => {
+        console.log('e', e);
+      });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name={'BottomTab'}
-          component={BottomTab}
-          options={{
-            headerShown: false,
-          }}
-        />
+        {ans ? (
+          <Stack.Screen
+            name={'BottomTab'}
+            component={BottomTab}
+            options={{
+              headerShown: false,
+            }}
+          />
+        ) : (
+          <Stack.Screen
+            name={SCREEN_NAME.Login}
+            component={Login}
+            options={{
+              headerShown: false,
+            }}
+          />
+        )}
         <Stack.Screen
           name={SCREEN_NAME.ProductDescription}
           component={ProductDescription}
@@ -51,13 +76,7 @@ const AllScreen = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen
-          name={SCREEN_NAME.Login}
-          component={Login}
-          options={{
-            headerShown: false,
-          }}
-        />
+
         <Stack.Screen
           name={SCREEN_NAME.RegisterScreen}
           component={RegisterScreen}

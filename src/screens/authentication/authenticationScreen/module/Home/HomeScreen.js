@@ -322,14 +322,15 @@ const Home = ({navigation}) => {
             keyExtractor={item => item?.id}
           />
         </View>
-        <Toast />
+       
       </ScrollView>
       <View>
         <Modal
           animationType="slide"
           transparent={true}
           visible={showModal}
-          onDismiss={() => setShowModal(!showModal)}>
+          onDismiss={() => setShowModal(!showModal)}
+          onRequestClose={()=> setShowModal(!showModal)}>
           <View
             style={{
               height: '40%',
@@ -389,6 +390,7 @@ const Home = ({navigation}) => {
           </View>
         </Modal>
       </View>
+      <Toast />
     </View>
   );
 };

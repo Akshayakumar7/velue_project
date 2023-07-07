@@ -39,7 +39,7 @@ const OrderSummary = ({navigation}) => {
   };
   return (
     <View style={style.mainView}>
-      <Header headerTitle={ORDER_SUMMARY} />
+      <Header headerTitle={ORDER_SUMMARY} onPressBackButton={()=>navigation.goBack()}/>
       <View style={styles.doubleHeight} />
       <ScrollView>
         <View style={style.mainHorizonatalPadding}>
@@ -212,6 +212,7 @@ const OrderSummary = ({navigation}) => {
           </View>
         </View>
       </View>
+     
     </View>
   );
 };
@@ -276,5 +277,6 @@ const style = StyleSheet.create({
     borderColor: color.underLineColor,
     width: '50%',
   },
+ 
 });
 export default OrderSummary;

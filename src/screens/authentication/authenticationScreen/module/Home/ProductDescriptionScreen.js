@@ -22,16 +22,19 @@ import {
   UP_ARROW,
 } from '../../../../../assets/imagepath/imagepath';
 import {INDIAN_RUPEE_SYMBOL} from '../../../../../component/common/componentUtility';
+import AppButton from '../../../../../component/common/appButton';
 
 const ProductDescription = ({navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(-1);
   const data = [
     {
+      id: 1,
       title: 'Description',
       content:
         'The single-handle design allows for easy control of the water flow and temperature, while the durable construction ensures long-lasting performance. Our shower faucet also includes water-saving features, such as a flow restrictor and aerator, that help to conserve water without sacrificing performance.',
     },
     {
+      id: 2,
       title: 'Specifications',
       content: 'Fixed Mount Shower Head',
       content: 'Finish: Chrome',
@@ -40,15 +43,18 @@ const ProductDescription = ({navigation}) => {
       content: 'Made of Brass',
     },
     {
+      id: 3,
       title: 'Inclusions',
       content: '4 Shower handles with 2M Steel Hose',
     },
     {
+      id: 4,
       title: 'Description',
       content:
         'The single-handle design allows for easy control of the water flow and temperature, while the durable construction ensures long-lasting performance. Our shower faucet also includes water-saving features, such as a flow restrictor and aerator, that help to conserve water without sacrificing performance.',
     },
     {
+      id: 5,
       title: 'Specifications',
       content: 'Fixed Mount Shower Head',
       content: 'Finish: Chrome',
@@ -57,6 +63,7 @@ const ProductDescription = ({navigation}) => {
       content: 'Made of Brass',
     },
     {
+      id: 6,
       title: 'Inclusions',
       content: '4 Shower handles with 2M Steel Hose',
     },
@@ -149,9 +156,17 @@ const ProductDescription = ({navigation}) => {
               renderItem={({item, index}) =>
                 renderProductDescription(item, index)
               }
+              keyExtractor={item => item?.id}
+              style={{marginBottom:hp(10)}}
             />
           </View>
         </ScrollView>
+        <View style={style.touchableStyle}>
+          <AppButton
+            title={'SELECT ORDER'}
+            customButtonStyle={style.selectOrderButtonStyle}
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -215,5 +230,22 @@ const style = StyleSheet.create({
   },
   backHanderWidth: {width: '93%', alignSelf: 'center'},
   arrowPadding: {padding: hp(1)},
+  touchableStyle: {
+    position: 'absolute',
+    width: '100%',
+    height: '10%',
+    bottom: 0,
+    padding: hp(2),
+  },
+  whiteBackground: {
+    backgroundColor: color.white,
+    width: '100%',
+    alignSelf: 'center',
+    padding: hp(2),
+  },
+  selectOrderButtonStyle: {
+    borderRadius: hp(2),
+    height:hp(6)
+  },
 });
 export default ProductDescription;
