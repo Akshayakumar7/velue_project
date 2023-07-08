@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: color.red,
-    fontSize: hp(2),
+    fontSize: hp(2.3),
   },
   thripleVerticleDivider: {
     width: wp(4),

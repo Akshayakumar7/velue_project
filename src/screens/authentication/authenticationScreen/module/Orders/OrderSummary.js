@@ -39,7 +39,10 @@ const OrderSummary = ({navigation}) => {
   };
   return (
     <View style={style.mainView}>
-      <Header headerTitle={ORDER_SUMMARY} onPressBackButton={()=>navigation.goBack()}/>
+      <Header
+        headerTitle={ORDER_SUMMARY}
+        onPressBackButton={() => navigation.goBack()}
+      />
       <View style={styles.doubleHeight} />
       <ScrollView>
         <View style={style.mainHorizonatalPadding}>
@@ -200,7 +203,9 @@ const OrderSummary = ({navigation}) => {
       <View style={style.TouchableOpacity}>
         <View style={style.whiteBackground}>
           <View style={[style.flexView, {paddingHorizontal: '1%'}]}>
-            <TouchableOpacity style={style.greyborderStyle}>
+            <TouchableOpacity
+              style={style.greyborderStyle}
+              onPress={() => navigation.navigate(SCREEN_NAME.SaveDraft)}>
               <Text style={style.saveDraftTexStyle}>{SAVE_DRAFR}</Text>
             </TouchableOpacity>
             <View style={{width: '2%'}} />
@@ -212,7 +217,6 @@ const OrderSummary = ({navigation}) => {
           </View>
         </View>
       </View>
-     
     </View>
   );
 };
@@ -277,6 +281,5 @@ const style = StyleSheet.create({
     borderColor: color.underLineColor,
     width: '50%',
   },
- 
 });
 export default OrderSummary;

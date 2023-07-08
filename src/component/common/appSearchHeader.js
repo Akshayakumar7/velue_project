@@ -6,24 +6,29 @@ import {
   TouchableOpacity,
   TextInput,
   Pressable,
-  Keyboard
+  Keyboard,
 } from 'react-native';
 import SvgImage from './svgImage';
 import {
   BACK_ARROW,
   FILTER_ICON,
+  GREY_CROSS_ICON,
   SEARCH_ICON,
 } from '../../assets/imagepath/imagepath';
 import {hp, wp} from '../../commonMethod/screenRatio';
 import {color} from '../../assets/colors/color';
 
 const SearchHeader = props => {
-    const inputRef = React.useRef();
-  const {headerTitle = 'title', onPressBackButton} = props;
-
-  const onPressSerchIcon = () =>{
-    inputRef.current.focus();
-  }
+  const inputRef = React.useRef();
+  const {headerTitle = 'title', onPressBackButton,updateSearchInput, onChangeText, value,icon} = props;
+  const onPressSerchIcon = () => {
+    if (value == '') {
+      inputRef.current.focus();
+    }
+    if(value !== ''){
+      updateSearchInput();
+    }
+  };
   return (
     <View style={{backgroundColor: color.white}}>
       <View style={style.flexView}>
@@ -43,6 +48,8 @@ const SearchHeader = props => {
               style={style.headerTitleText}
               placeholder={headerTitle}
               ref={inputRef}
+              onChangeText={onChangeText}
+              value={value}
             />
           </View>
           <View
@@ -52,14 +59,16 @@ const SearchHeader = props => {
               justifyContent: 'space-between',
             }}>
             <Pressable
-              onPress={()=>onPressSerchIcon()}
+              onPress={() => onPressSerchIcon()}
               style={{marginBottom: hp(-0.7)}}>
-              <SvgImage Source={SEARCH_ICON} height={hp(6)} width={wp(7)} />
+              <SvgImage
+                Source={icon}
+                height={hp(6)}
+                width={wp(7)}
+              />
             </Pressable>
             <View style={{width: '8%'}} />
-            <Pressable
-              onPress={onPressSerchIcon}
-              style={{marginBottom: hp(-0.7)}}>
+            <Pressable style={{marginBottom: hp(-0.7)}}>
               <SvgImage Source={FILTER_ICON} height={hp(6)} width={wp(7)} />
             </Pressable>
           </View>

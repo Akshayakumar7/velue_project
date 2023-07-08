@@ -147,6 +147,7 @@ const Login = ({navigation}) => {
                   applyButtonText={LOGIN_TEXT}
                   onPressCancelButton={() => onPressRegisterHere()}
                   onPressApplyButton={() => onPressLogin()}
+              
                 />
               </View>
             </View>

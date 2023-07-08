@@ -119,7 +119,7 @@ const OrderIdProduct = ({navigation}) => {
           ItemSeparatorComponent={() => cartSeperator()}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          style={{marginBottom: '40%'}}
+          style={{marginBottom: hp(20)}}
         />
       </View>
       <View style={style.touchableStyle}>
@@ -146,7 +146,7 @@ const OrderIdProduct = ({navigation}) => {
           onDismiss={() => setShowModal(!showModal)}>
           <View
             style={{
-              height: '35%',
+              height: '37%',
               marginTop: 'auto',
               backgroundColor: color.white,
               borderTopLeftRadius: hp(3),
@@ -248,7 +248,7 @@ const style = StyleSheet.create({
   touchableStyle: {
     position: 'absolute',
     width: '100%',
-    height: '10%',
+    height: hp(10),
     bottom: 10,
   },
   whiteBackground: {

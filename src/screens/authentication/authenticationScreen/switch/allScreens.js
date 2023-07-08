@@ -22,6 +22,7 @@ import OrderIdProduct from '../module/Orders/OrderIdProductScreen';
 import OrderSummary from '../module/Orders/OrderSummary';
 import OrderPlaced from '../module/Orders/OrderPlacedScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SaveDraft from '../module/Orders/saveDraftScreen';
 const Stack = createNativeStackNavigator();
 
 const AllScreen = () => {
@@ -45,7 +46,7 @@ const AllScreen = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {ans ? (
+        {false ? (
           <Stack.Screen
             name={'BottomTab'}
             component={BottomTab}
@@ -151,6 +152,13 @@ const AllScreen = () => {
         <Stack.Screen
           name={SCREEN_NAME.OrderPlaced}
           component={OrderPlaced}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.SaveDraft}
+          component={SaveDraft}
           options={{
             headerShown: false,
           }}

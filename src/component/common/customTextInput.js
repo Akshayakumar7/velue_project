@@ -37,7 +37,7 @@ const CustomTextInput = props => {
     needVerifyText = false,
     onPressVerify,
     errorText,
-    editable
+    editable,
   } = props;
 
   return (

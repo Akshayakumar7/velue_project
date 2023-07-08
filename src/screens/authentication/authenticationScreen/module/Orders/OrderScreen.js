@@ -18,9 +18,11 @@ import styles from '../../../../../general/generalStyleSheet';
 import DraftCard from '../../../../../component/common/draftCard';
 import {SCREEN_NAME} from '../../../../../general/screenName';
 import SearchHeader from '../../../../../component/common/appSearchHeader';
+import { GREY_CROSS_ICON, SEARCH_ICON } from '../../../../../assets/imagepath/imagepath';
 
 const Orders = ({navigation}) => {
   const [activeTab, setActiveTab] = useState(true);
+  const [searchText,setSearchText] = useState('');
 
   const data = [
     {
@@ -179,9 +181,20 @@ const Orders = ({navigation}) => {
       </View>
     );
   };
+  const updateSearchInput = () => {
+    setSearchText('');
+  }
+  
   return (
     <View>
-      <SearchHeader headerTitle={ORDER_TEXT} onPressBackButton={()=>navigation.goBack()} />
+      <SearchHeader
+        headerTitle={ORDER_TEXT}
+        onPressBackButton={() => navigation.goBack()}
+        icon={searchText !== '' ? GREY_CROSS_ICON : SEARCH_ICON }
+        onChangeText={(e) => setSearchText(e)}
+        value={searchText}
+        updateSearchInput={updateSearchInput}
+      />
       <TabButton
         isActive={activeTab}
         onPressDraft={() => setActiveTab(true)}

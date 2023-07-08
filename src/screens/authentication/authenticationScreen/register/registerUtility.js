@@ -24,7 +24,7 @@ export const BANK_NAME_TEXT = 'Bank Name';
 export const IFSC_CODE_TEXT ='IFSC Code';
 export const GREAT_TEXT = 'Great !';
 export const YOUR_ARE_SUCCESSFULLY_REGISTRED_WITH_US_TEXT = 'You are successfully registered with us.';
-export const OPT_SENT_TEXT = 'Enter the OTP Sent to 98598658496.';
+export const OPT_SENT_TEXT = 'Enter the OTP Sent to';
 export const CANCEL_TEXT = 'Cancel'
 export const REGISTER_SCREEN_INDEX = {
   first: 0,

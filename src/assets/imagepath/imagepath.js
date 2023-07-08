@@ -37,6 +37,11 @@ import EMPTY_CIRCLE from '../../assets/images/filled-circle.svg';
 import BLUE_RIGHT_MARK from '../../assets/images/blue-circle.svg';
 import PENCIL_ICON from '../../assets/images/pencil.svg';
 import FILTER_ICON from '../../assets/images/filter.svg';
+import GREY_CROSS_ICON from '../../assets/images/background-cross.svg';
+import CHECK_ICON from '../../assets/images/perfect-check.svg';
+import DRAFR_ICON from '../../assets/images/save-draft.svg';
+import SORT_ICON from '../../assets/images/sort-icon.svg';
+import GREEN_CHECK from '../../assets/images/green-check.svg';
 
 export {
   BATH_TUB_IMAGE,
@@ -78,4 +83,9 @@ export {
   BLUE_RIGHT_MARK,
   PENCIL_ICON,
   FILTER_ICON,
+  GREY_CROSS_ICON,
+  CHECK_ICON,
+  DRAFR_ICON,
+  SORT_ICON,
+  GREEN_CHECK,
 };

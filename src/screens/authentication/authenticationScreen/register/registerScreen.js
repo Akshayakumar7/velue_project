@@ -11,6 +11,7 @@ import {
   Modal,
   SafeAreaView,
   Image,
+  KeyboardAvoidingView,
 } from 'react-native';
 import Header from '../../../../component/common/appHeader';
 import {
@@ -58,6 +59,7 @@ import {
   PERSON_ICON,
   SEARCH_ICON,
   CROSS_ICON,
+  GREEN_CHECK,
 } from '../../../../assets/imagepath/imagepath';
 import {hp, wp} from '../../../../commonMethod/screenRatio';
 import styles from '../../../../general/generalStyleSheet';
@@ -133,6 +135,8 @@ const Register = ({navigation}) => {
   const [showModal, setShowModal] = useState(false);
   const [value, setValue] = useState('');
   const [uploadCertificateModal, setUploadcertificateModal] = useState(false);
+  const [verified, setVerified] = useState(false);
+  const [wrongOtp, setWrongOtp] = useState('');
   const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
@@ -252,11 +256,15 @@ const Register = ({navigation}) => {
     //   .catch(err => {
     //     console.log('err', err);
     //   });
-    navigation.navigate(SCREEN_NAME.OnboardingCompleted)
+    navigation.navigate(SCREEN_NAME.OnboardingCompleted);
   };
 
   const onPressVerifyText = () => {
-    setShowModal(!showModal);
+    if (primaryContact.length == 10) {
+      setShowModal(!showModal);
+    } else {
+      setPhoneNumberError('Invalid OTP');
+    }
   };
 
   const verifyAllFields = () => {
@@ -298,12 +306,24 @@ const Register = ({navigation}) => {
     ans.then(res => console.log(res));
   };
 
+  const onPressVerifyButton = () => {
+    console.log(typeof value);
+    if (value == '6789') {
+      setVerified(true);
+      setShowModal(!showModal);
+    } else {
+      console.log('Goind here');
+      setWrongOtp('Invalid OTP');
+    }
+  };
+
   return (
     <View>
       <Header
         headerTitle={REGISTRATION_TEXT}
         onPressBackButton={() => onPressBankHandlear()}
       />
+      <KeyboardAvoidingView></KeyboardAvoidingView>
       <View style={[style.mainView]}>
         <View style={styles.doubleHeight} />
         <View style={style.flexView}>
@@ -392,6 +412,7 @@ const Register = ({navigation}) => {
         <View style={styles.doubleHeight} />
         {REGISTER_SCREEN_INDEX.first == currentButton && (
           <ScrollView style={style.fieldView}>
+            <KeyboardAvoidingView></KeyboardAvoidingView>
             <View style={styles.doubleHeight} />
             <MandatoryText mandatoryText={GST_NUMBER_TEXT} />
             <View style={styles.singleHeight} />
@@ -399,7 +420,7 @@ const Register = ({navigation}) => {
             <View style={style.gstPlaceHolderFlex}>
               <View style={{width: '67%'}}>
                 <CustomTextInput
-                  // placeholder={'AAVVCC22DC'}
+                  placeholder={'                                             '}
                   needIconDivider={false}
                   customStyle={style.gstTextInput}
                   multiLine={true}
@@ -529,7 +550,7 @@ const Register = ({navigation}) => {
             <View style={styles.singleHeight} />
             <View>
               <CustomTextInput
-                placeholder={'           '}
+                placeholder={'                                             '}
                 needIconDivider={false}
                 customStyle={style.gstTextInput}
                 multiLine={true}
@@ -544,7 +565,7 @@ const Register = ({navigation}) => {
             <View style={styles.singleHeight} />
             <View>
               <CustomTextInput
-                placeholder={'       '}
+                placeholder={'                                             '}
                 needIconDivider={false}
                 customStyle={style.gstTextInput}
                 multiLine={true}
@@ -556,24 +577,27 @@ const Register = ({navigation}) => {
             <View style={styles.doubleHeight} />
             <MandatoryText mandatoryText={PRIMARY_CONTACT_TEXT} />
             <View style={styles.singleHeight} />
-            <View style={style.simpleFlex}>
+            <View style={[style.simpleFlex]}>
               <View style={style.plusBorder}>
                 <View style={styles.singleHeight} />
                 <Text style={style.plusText}>{PLUS_91}</Text>
               </View>
               <View style={styles.verticalDivider} />
-              <View style={{width: '86%'}}>
+              <View style={{width: '80%'}}>
                 <CustomTextInput
-                  placeholder={'       '}
+                  placeholder={'                                             '}
                   needIconDivider={false}
                   customStyle={style.gstTextInput}
                   multiLine={true}
                   keyboardType={KEYBOARD_TYPE.numeric}
                   onChangeText={e => onChangePrimaryContact(e)}
                   value={primaryContact}
-                  needVerifyText={true}
-                  onPressVerify={() => onPressVerifyText()}
+                  needVerifyText={!verified}
+                  onPressVerify={() => setShowModal(true)}
                   errorText={phoneNumberError}
+                  rightIcon={GREEN_CHECK}
+                  rightIconHeight={hp(5)}
+                  rightIconWidth={wp(6)}
                 />
               </View>
             </View>
@@ -602,7 +626,7 @@ const Register = ({navigation}) => {
               <View style={styles.verticalDivider} />
               <View style={{width: '89%'}}>
                 <CustomTextInput
-                  placeholder={'          '}
+                  placeholder={'                                             '}
                   needIconDivider={false}
                   customStyle={style.gstTextInput}
                   multiLine={true}
@@ -617,7 +641,7 @@ const Register = ({navigation}) => {
             <View style={styles.singleHeight} />
             <View>
               <CustomTextInput
-                placeholder={'          '}
+                placeholder={'                                             '}
                 needIconDivider={false}
                 needIndianCode={true}
                 rightIcon={showPassword ? CLOSED_EYE_ICON : OPENED_EYE_ICON}
@@ -636,7 +660,7 @@ const Register = ({navigation}) => {
             <View style={styles.singleHeight} />
             <View>
               <CustomTextInput
-                placeholder={'         '}
+                placeholder={'                                             '}
                 needIconDivider={false}
                 multiLine={true}
                 needIndianCode={true}
@@ -689,7 +713,7 @@ const Register = ({navigation}) => {
             <View style={styles.singleHeight} />
             <View>
               <CustomTextInput
-                // placeholder={'Mithunlal'}
+                placeholder={'                                             '}
                 needIconDivider={false}
                 customStyle={style.gstTextInput}
                 multiLine={true}
@@ -715,7 +739,7 @@ const Register = ({navigation}) => {
             <View style={styles.singleHeight} />
             <View>
               <CustomTextInput
-                // placeholder={'Mithunlal'}
+                placeholder={'                                             '}
                 needIconDivider={false}
                 customStyle={style.gstTextInput}
                 multiLine={true}
@@ -734,7 +758,6 @@ const Register = ({navigation}) => {
               onPress={() => onPressFinishButton()}
             />
             <View style={styles.maxContentDivider} />
-           
           </View>
         </ScrollView>
       )}
@@ -752,8 +775,15 @@ const Register = ({navigation}) => {
                 {OTP_VERIFICATION_TEXT}
               </Text>
               <View style={styles.doubleHeight} />
-              <Text style={style.otpSentText}>{OPT_SENT_TEXT}</Text>
-              <View style={style.doubleHeight} />
+              <Text style={style.otpSentText}>
+                {OPT_SENT_TEXT} {'\n'}
+                {primaryContact}
+              </Text>
+              <View style={styles.singleHeight} />
+
+              <Text style={styles.errorText}>{wrongOtp}</Text>
+              <View style={styles.singleHeight} />
+
               <SafeAreaView>
                 <CodeField
                   ref={ref}
@@ -781,7 +811,7 @@ const Register = ({navigation}) => {
                 cancelTextStyel={styles.alignText}
                 customApplyButtonStyle={style.customApplyButtonStyle}
                 onPressCancelButton={() => setShowModal(!showModal)}
-                onPressApplyButton={() => setShowModal(!showModal)}
+                onPressApplyButton={() => onPressVerifyButton()}
               />
             </View>
           </ScrollView>
@@ -921,6 +951,7 @@ const style = StyleSheet.create({
     borderColor: color.borderBlueColor,
     borderRadius: hp(0.5),
     width: '13%',
+    height: hp(6.5),
   },
   aadharCardBorder: {
     borderWidth: hp(0.1),
