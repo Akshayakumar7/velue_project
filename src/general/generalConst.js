@@ -9,3 +9,6 @@ export const TOAST_MESSAGE_TYPE = {
   info: 'info',
 };
 export const AADHAR_REGEX = /^\d{12}$/;
+
+export const DRAFT_TEXT = 'Draft';
+export const IN_PROGRESS_TEXT = 'In Progress';

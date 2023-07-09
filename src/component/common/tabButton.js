@@ -4,47 +4,33 @@ import AppButton from './appButton';
 import {color} from '../../assets/colors/color';
 import {hp} from '../../commonMethod/screenRatio';
 import styles from '../../general/generalStyleSheet';
+import {DRAFT_TEXT, IN_PROGRESS_TEXT} from '../../general/generalConst';
 
 const TabButton = props => {
   const {isActive, onPressDraft, onPressInProgress} = props;
   return (
-    <View style={{alignItems: 'center',backgroundColor:'white'}}>
+    <View style={style.mainView}>
       <View style={styles.singleHeight} />
       <View style={style.flexView}>
         <TouchableOpacity
-          style={[
-            isActive ? style.borderView : {alignSelf: 'center', width: '49%'},
-          ]}
+          style={[isActive ? style.borderView : style.alignSelfView]}
           onPress={onPressDraft}>
           <Text
             style={[
               isActive ? style.activeTextStyle : style.inActiveTextStyle,
             ]}>
-            Draft
+            {DRAFT_TEXT}
           </Text>
         </TouchableOpacity>
-        <View
-          style={{
-            height: hp(4.5),
-            borderLeftWidth: hp(0.1),
-            borderColor: color.mandatoryTextColor,
-            marginRight: hp(0.2),
-            marginLeft: hp(0.2),
-            backgroundColor:'red'
-          }}
-        />
+        <View style={style.inProgressView} />
         <TouchableOpacity
-          style={[
-            !isActive
-              ? style.borderView
-              : {alignItems: 'center', justifyContent: 'center', width: '49%'},
-          ]}
+          style={[!isActive ? style.borderView : style.inActiveView]}
           onPress={onPressInProgress}>
           <Text
             style={[
               !isActive ? style.activeTextStyle : style.inActiveTextStyle,
             ]}>
-            In Progress
+            {IN_PROGRESS_TEXT}
           </Text>
         </TouchableOpacity>
       </View>
@@ -74,6 +60,17 @@ const style = StyleSheet.create({
     alignItems: 'center',
     width: '97%',
   },
+  mainView: {alignItems: 'center', backgroundColor: color.white},
+  inActiveView: {alignItems: 'center', justifyContent: 'center', width: '49%'},
+  inProgressView: {
+    height: hp(4.5),
+    borderLeftWidth: hp(0.1),
+    borderColor: color.mandatoryTextColor,
+    marginRight: hp(0.2),
+    marginLeft: hp(0.2),
+    backgroundColor: color.red,
+  },
+  alignSelfView: {alignSelf: 'center', width: '49%'},
 });
 
 export default TabButton;

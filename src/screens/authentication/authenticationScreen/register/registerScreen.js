@@ -104,6 +104,7 @@ import {
   storeUserDataToDB,
 } from './registerNetworkCall';
 import {requestCameraPermission} from '../../../../commonMethod/permission';
+import PhoneNumerTextInput from '../../../../component/common/phoneNumberTextInput';
 
 const Register = ({navigation}) => {
   const CELL_COUNT = 4;
@@ -210,7 +211,12 @@ const Register = ({navigation}) => {
   };
 
   const onPressVerify = () => {
-    setIsVerified(!isVerfied);
+    var validate = validatePhoneNumber(primaryContact);
+    if (validate) {
+      setShowModal(!showModal);
+    } else {
+      setPhoneNumberError('Please enter valid mobile number');
+    }
   };
 
   const onPressBankHandlear = () => {
@@ -307,7 +313,6 @@ const Register = ({navigation}) => {
   };
 
   const onPressVerifyButton = () => {
-    console.log(typeof value);
     if (value == '6789') {
       setVerified(true);
       setShowModal(!showModal);
@@ -315,6 +320,10 @@ const Register = ({navigation}) => {
       console.log('Goind here');
       setWrongOtp('Invalid OTP');
     }
+  };
+
+  const gstVerifyButton = () => {
+    setIsVerified(!verified);
   };
 
   return (
@@ -436,7 +445,7 @@ const Register = ({navigation}) => {
                       customButtonStyle={style.blueVerifyButton}
                       rightIconHeight={hp(4)}
                       rightIconWidth={wp(5)}
-                      onPress={() => onPressVerify()}
+                      onPress={() => gstVerifyButton()}
                     />
                   </View>
                 ) : (
@@ -447,7 +456,7 @@ const Register = ({navigation}) => {
                       rightIcon={RIGHT_MARK}
                       rightIconHeight={hp(4)}
                       rightIconWidth={wp(5)}
-                      onPress={() => onPressVerify()}
+                      onPress={() => gstVerifyButton()}
                     />
                   </View>
                 )}
@@ -577,29 +586,18 @@ const Register = ({navigation}) => {
             <View style={styles.doubleHeight} />
             <MandatoryText mandatoryText={PRIMARY_CONTACT_TEXT} />
             <View style={styles.singleHeight} />
-            <View style={[style.simpleFlex]}>
-              <View style={style.plusBorder}>
-                <View style={styles.singleHeight} />
-                <Text style={style.plusText}>{PLUS_91}</Text>
-              </View>
-              <View style={styles.verticalDivider} />
-              <View style={{width: '80%'}}>
-                <CustomTextInput
-                  placeholder={'                                             '}
-                  needIconDivider={false}
-                  customStyle={style.gstTextInput}
-                  multiLine={true}
-                  keyboardType={KEYBOARD_TYPE.numeric}
-                  onChangeText={e => onChangePrimaryContact(e)}
-                  value={primaryContact}
-                  needVerifyText={!verified}
-                  onPressVerify={() => setShowModal(true)}
-                  errorText={phoneNumberError}
-                  rightIcon={GREEN_CHECK}
-                  rightIconHeight={hp(5)}
-                  rightIconWidth={wp(6)}
-                />
-              </View>
+            <View>
+              <PhoneNumerTextInput
+                needVerifyText={!verified && primaryContact.length == 10}
+                rightIcon={verified ? GREEN_CHECK : null}
+                rightIconHeight={hp(5)}
+                rightIconWidth={wp(6)}
+                keyboardType={KEYBOARD_TYPE.numeric}
+                onChangeText={e => onChangePrimaryContact(e)}
+                onPressVerify={() => onPressVerify()}
+                errorText={phoneNumberError}
+                value={primaryContact}
+              />
             </View>
             <View style={styles.doubleHeight} />
             <View style={style.commonFlex}>
@@ -618,23 +616,13 @@ const Register = ({navigation}) => {
               </View>
             </View>
             <View style={styles.singleHeight} />
-            <View style={style.simpleFlex}>
-              <View style={style.plusBorder}>
-                <View style={styles.singleHeight} />
-                <Text style={style.plusText}>{PLUS_91}</Text>
-              </View>
-              <View style={styles.verticalDivider} />
-              <View style={{width: '89%'}}>
-                <CustomTextInput
-                  placeholder={'                                             '}
-                  needIconDivider={false}
-                  customStyle={style.gstTextInput}
-                  multiLine={true}
-                  onChangeText={e => onChangeWhatsappNumber(e)}
-                  value={whatsAppNumer}
-                  errorText={whatsAppNumberError}
-                />
-              </View>
+            <View>
+              <PhoneNumerTextInput
+                value={whatsAppNumer}
+                keyboardType={KEYBOARD_TYPE.numeric}
+                onChangeText={e => onChangeWhatsappNumber(e)}
+                errorText={whatsAppNumberError}
+              />
             </View>
             <View style={styles.doubleHeight} />
             <MandatoryText mandatoryText={PASSWORD_TEXT} />

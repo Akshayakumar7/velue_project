@@ -141,6 +141,7 @@ const style = StyleSheet.create({
   textinputStyle: {
     fontSize: 20,
     color: color.grey,
+    marginLeft: wp(2),
   },
   textInputView: {width: '80%'},
   commonFlex: {
