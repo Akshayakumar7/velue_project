@@ -34,9 +34,6 @@ import {
 } from './OrderSceenUtility';
 
 const OrderSummary = ({navigation}) => {
-  const onPressLoginScreen = () => {
-    navigation.navigate('LoginScreen');
-  };
   return (
     <View style={style.mainView}>
       <Header
@@ -53,146 +50,68 @@ const OrderSummary = ({navigation}) => {
           <View style={styles.doubleHeight} />
           <View style={style.commonWhiteCard}>
             <View style={styles.doubleHeight} />
-            <Text
-              style={{fontWeight: '600', color: color.darkblue, fontSize: 20}}>
-              Venaram Choudary
-            </Text>
+            <Text style={style.nameTextStykle}>Venaram Choudary</Text>
             <View style={styles.doubleHeight} />
-            <Text style={{fontSize: 15, color: color.grey1}}>
+            <Text style={style.addressTextStyle}>
               Devi Enterprises, Mega Warehouse, KEB Road, Bommanhalli, Bengaluru
               560068
             </Text>
             <View style={styles.doubleHeight} />
-            <Text style={{fontSize: 15, color: color.darkblue}}>
+            <Text style={style.mobileNumberTextStyle}>
               968565985685, 85854558222
             </Text>
             <View style={styles.doubleHeight} />
           </View>
           <View style={styles.thirpleHeight} />
-          <Text style={{color: color.mandatoryTextColor, fontSize: 15}}>
-            {DELIVERY_DETAILS}
-          </Text>
+          <Text style={style.deliveryTextStyle}>{DELIVERY_DETAILS}</Text>
           <View style={styles.doubleHeight} />
           <View style={style.commonWhiteCard}>
             <View style={styles.doubleHeight} />
-            <Text
-              style={{fontWeight: '600', color: color.darkblue, fontSize: 20}}>
-              {DELIVERY_IN_TEXT}
-            </Text>
+            <Text style={style.nameTextStykle}>{DELIVERY_IN_TEXT}</Text>
             <View style={styles.doubleHeight} />
-            <Text style={{fontSize: 15, color: color.grey1}}>
-              {DELIVERY_HOURS}
-            </Text>
-
+            <Text style={style.deliveryHoursTextStyle}>{DELIVERY_HOURS}</Text>
             <View style={styles.doubleHeight} />
           </View>
           <View style={styles.thirpleHeight} />
-          <Text style={{color: color.mandatoryTextColor, fontSize: 15}}>
-            {PRICE_DETAILS}
-          </Text>
+          <Text style={style.deliveryTextStyle}>{PRICE_DETAILS}</Text>
           <View style={styles.doubleHeight} />
           <View style={style.commonWhiteCard}>
             <View style={styles.doubleHeight} />
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}>
+            <View style={style.flexView}>
               <View>
-                <Text
-                  style={{
-                    fontWeight: '600',
-                    color: color.darkblue,
-                    fontSize: 20,
-                  }}>
-                  {TOTAL_PRICE}
-                </Text>
+                <Text style={style.commonBlueTextStyle}>{TOTAL_PRICE}</Text>
               </View>
               <View>
-                <Text
-                  style={{fontSize: 18, color: color.grey1, fontWeight: '600'}}>
-                  ₹ 25000
-                </Text>
+                <Text style={style.priceTextStyle}>₹ 25000</Text>
               </View>
             </View>
             <View style={styles.doubleHeight} />
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}>
+            <View style={style.flexView}>
               <View>
-                <Text
-                  style={{
-                    fontWeight: '600',
-                    color: color.darkblue,
-                    fontSize: 20,
-                  }}>
-                  {OUTPUT_CGST}
-                </Text>
+                <Text style={style.commonBlueTextStyle}>{OUTPUT_CGST}</Text>
               </View>
               <View>
-                <Text
-                  style={{fontSize: 18, color: color.grey1, fontWeight: '600'}}>
-                  ₹ 2500
-                </Text>
+                <Text style={style.priceTextStyle}>₹ 2500</Text>
               </View>
             </View>
-
             <View style={styles.doubleHeight} />
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}>
+            <View style={style.flexView}>
               <View>
-                <Text
-                  style={{
-                    fontWeight: '600',
-                    color: color.darkblue,
-                    fontSize: 20,
-                  }}>
-                  {OUTPUT_SGST}
-                </Text>
+                <Text style={style.commonBlueTextStyle}>{OUTPUT_SGST}</Text>
               </View>
               <View>
-                <Text
-                  style={{fontSize: 18, color: color.grey1, fontWeight: '600'}}>
-                  ₹ 2500
-                </Text>
+                <Text style={style.priceTextStyle}>₹ 2500</Text>
               </View>
             </View>
             <View style={styles.singleHeight} />
             <View style={styles.verticalLine} />
             <View style={styles.singleHeight} />
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}>
+            <View style={style.flexView}>
               <View>
-                <Text
-                  style={{
-                    fontWeight: '600',
-                    color: color.darkblue,
-                    fontSize: 20,
-                  }}>
-                  {TOTAL}
-                </Text>
+                <Text style={style.commonBlueTextStyle}>{TOTAL}</Text>
               </View>
               <View>
-                <Text
-                  style={{
-                    fontSize: 18,
-                    color: color.darkCyan,
-                    fontWeight: '600',
-                  }}>
-                  ₹ 30000
-                </Text>
+                <Text style={style.totalPriceTextStyle}>₹ 30000</Text>
               </View>
             </View>
             <View style={styles.doubleHeight} />
@@ -202,13 +121,13 @@ const OrderSummary = ({navigation}) => {
       <View style={styles.doubleHeight} />
       <View style={style.TouchableOpacity}>
         <View style={style.whiteBackground}>
-          <View style={[style.flexView, {paddingHorizontal: '1%'}]}>
+          <View style={[style.flexView, style.smallPaddingHorizontal]}>
             <TouchableOpacity
               style={style.greyborderStyle}
               onPress={() => navigation.navigate(SCREEN_NAME.SaveDraft)}>
               <Text style={style.saveDraftTexStyle}>{SAVE_DRAFR}</Text>
             </TouchableOpacity>
-            <View style={{width: '2%'}} />
+            <View style={style.itemDivider} />
             <TouchableOpacity
               style={style.blueBlackgroundTextStyle}
               onPress={() => navigation.navigate(SCREEN_NAME.OrderPlaced)}>
@@ -281,5 +200,22 @@ const style = StyleSheet.create({
     borderColor: color.underLineColor,
     width: '50%',
   },
+  nameTextStykle: {fontWeight: '600', color: color.darkblue, fontSize: 20},
+  addressTextStyle: {fontSize: 15, color: color.grey1},
+  mobileNumberTextStyle: {fontSize: 15, color: color.darkblue},
+  deliveryHoursTextStyle: {fontSize: 15, color: color.grey1},
+  commonBlueTextStyle: {
+    fontWeight: '600',
+    color: color.darkblue,
+    fontSize: 20,
+  },
+  priceTextStyle: {fontSize: 18, color: color.grey1, fontWeight: '600'},
+  totalPriceTextStyle: {
+    fontSize: 18,
+    color: color.darkCyan,
+    fontWeight: '600',
+  },
+  smallPaddingHorizontal: {paddingHorizontal: '1%'},
+  itemDivider: {width: '2%'},
 });
 export default OrderSummary;

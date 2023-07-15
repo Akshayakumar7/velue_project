@@ -19,6 +19,8 @@ import CartCard from '../../../../../component/common/cartCard';
 import {CLOSE_ICON} from '../../../../../assets/imagepath/imagepath';
 import SvgImage from '../../../../../component/common/svgImage';
 import {INDIAN_RUPEE_SYMBOL} from '../../../../../component/common/componentUtility';
+import {SCREEN_NAME} from '../../../../../general/screenName';
+import { EDIT_QUANTITY, SAVE_TEXT } from './OrderSceenUtility';
 
 const OrderIdProduct = ({navigation}) => {
   const [showModal, setShowModal] = useState(false);
@@ -87,7 +89,7 @@ const OrderIdProduct = ({navigation}) => {
 
   const renderCartItem = (item, index) => {
     return (
-      <View style={{paddingHorizontal: '3%'}}>
+      <View style={style.cardHorizontalPadding}>
         <CartCard
           data={item}
           onPressPlusIcon={() => onPressPlusIcon(item, index)}
@@ -119,7 +121,7 @@ const OrderIdProduct = ({navigation}) => {
           ItemSeparatorComponent={() => cartSeperator()}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          style={{marginBottom: hp(20)}}
+          style={style.flatListBottomMargin}
         />
       </View>
       <View style={style.touchableStyle}>
@@ -131,9 +133,9 @@ const OrderIdProduct = ({navigation}) => {
             </View>
             <View style={style.dividerWidth} />
             <AppButton
-              title={'  PROCEED  '}
+              title={PROCEED_TEXT}
               customButtonStyle={style.buttonStyle}
-              onPress={() => navigation.navigate('OrderSummary')}
+              onPress={() => navigation.navigate(SCREEN_NAME.OrderSummary)}
             />
           </View>
         </View>
@@ -144,27 +146,9 @@ const OrderIdProduct = ({navigation}) => {
           transparent={true}
           visible={showModal}
           onDismiss={() => setShowModal(!showModal)}>
-          <View
-            style={{
-              height: '37%',
-              marginTop: 'auto',
-              backgroundColor: color.white,
-              borderTopLeftRadius: hp(3),
-              borderTopRightRadius: hp(3),
-            }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                paddingHorizontal: hp(3),
-                marginLeft: hp(1),
-                marginRight: hp(1),
-                paddingTop: hp(2),
-              }}>
-              <Text style={{fontSize: 20, color: color.darkblue}}>
-                Edit Quantity
-              </Text>
+          <View style={style.modalViewStyle}>
+            <View style={style.modalHeadingFlexView}>
+              <Text style={style.editTextStyle}>{EDIT_QUANTITY}</Text>
               <TouchableOpacity onPress={() => setShowModal(!showModal)}>
                 <SvgImage Source={CLOSE_ICON} height={hp(5)} width={wp(8.5)} />
               </TouchableOpacity>
@@ -173,47 +157,20 @@ const OrderIdProduct = ({navigation}) => {
             <View style={styles.verticalLine} />
             <View style={styles.doubleHeight} />
             <ScrollView>
-              <View style={{paddingHorizontal: hp(3)}}>
-                <Text style={{fontSize: 16, color: color.grey1}}>
-                  Box of 4 pcs
-                </Text>
+              <View style={style.scrollViewPaddingHorizontal}>
+                <Text style={style.qtyTextStyle}>Box of 4 pcs</Text>
                 <View style={styles.doubleHeight} />
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                  }}>
-                  <View
-                    style={{
-                      borderWidth: hp(0.1),
-                      borderColor: color.borderColor,
-                      width: '50%',
-                      padding: hp(0.2),
-                      height: hp(6),
-                    }}>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                      }}>
-                      <View style={{width: '60%'}}>
-                        <View style={{height: hp(0.3)}} />
+                <View style={style.subFLex}>
+                  <View style={style.editBorder}>
+                    <View style={style.subFLex}>
+                      <View style={style.viewWidth}>
+                        <View style={style.smallHeight} />
                         <TextInput
                           style={style.textinputStyle}
                           placeholder={'15'}
                         />
                       </View>
-                      <Text
-                        style={{
-                          color: color.darkblue,
-                          marginBottom: hp(0.2),
-                          fontSize: 16,
-                          marginRight: wp(1),
-                        }}>
-                        Boxes
-                      </Text>
+                      <Text style={style.productQtyTypeTextStyle}>Boxes</Text>
                     </View>
                   </View>
                   <View>
@@ -227,7 +184,7 @@ const OrderIdProduct = ({navigation}) => {
                 </View>
                 <View style={styles.doubleHeight} />
                 <AppButton
-                  title={'SAVE'}
+                  title={SAVE_TEXT}
                   customButtonStyle={{borderRadius: hp(1), height: hp(6)}}
                   onPress={() => setShowModal(!showModal)}
                 />
@@ -293,6 +250,47 @@ const style = StyleSheet.create({
   originalPriceText: {
     fontSize: hp(3),
     color: color.darkCyan,
+  },
+  cardHorizontalPadding: {paddingHorizontal: '3%'},
+  flatListBottomMargin: {marginBottom: hp(20)},
+  mainView: {
+    height: '37%',
+    marginTop: 'auto',
+    backgroundColor: color.white,
+    borderTopLeftRadius: hp(3),
+    borderTopRightRadius: hp(3),
+  },
+  modalHeadingFlexView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: hp(3),
+    marginLeft: hp(1),
+    marginRight: hp(1),
+    paddingTop: hp(2),
+  },
+  editTextStyle: {fontSize: 20, color: color.darkblue},
+  scrollViewPaddingHorizontal: {paddingHorizontal: hp(3)},
+  qtyTextStyle: {fontSize: 16, color: color.grey1},
+  subFLex: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  editBorder: {
+    borderWidth: hp(0.1),
+    borderColor: color.borderColor,
+    width: '50%',
+    padding: hp(0.2),
+    height: hp(6),
+  },
+  viewWidth: {width: '60%'},
+  smallHeight: {height: hp(0.3)},
+  productQtyTypeTextStyle: {
+    color: color.darkblue,
+    marginBottom: hp(0.2),
+    fontSize: 16,
+    marginRight: wp(1),
   },
 });
 export default OrderIdProduct;

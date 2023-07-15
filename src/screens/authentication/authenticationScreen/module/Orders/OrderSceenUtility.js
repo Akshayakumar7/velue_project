@@ -12,3 +12,9 @@ export const OUTPUT_SGST = 'Output SGST';
 export const TOTAL = 'Total';
 export const SAVE_DRAFR = 'SAVE DRAFT';
 export const PLACE_ORDER = 'PLACE ORDER';
+export const PROCEED_TEXT = '  PROCEED  ';
+export const EDIT_QUANTITY = 'Edit Quantity';
+export const SAVE_TEXT = 'SAVE';
+export const ORDER_PLACED = 'Order Placed';
+export const YOU_CAN_SEE = 'You can see your listings in orders tab'
+

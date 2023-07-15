@@ -181,7 +181,7 @@ const Register = ({navigation}) => {
   };
 
   const onChangePrimaryContact = e => {
-    setPrimaryContact(e);
+    !isNaN(e) && setPrimaryContact(e);
     setPhoneNumberError('');
   };
 

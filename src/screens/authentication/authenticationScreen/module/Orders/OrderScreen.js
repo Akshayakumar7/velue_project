@@ -18,11 +18,14 @@ import styles from '../../../../../general/generalStyleSheet';
 import DraftCard from '../../../../../component/common/draftCard';
 import {SCREEN_NAME} from '../../../../../general/screenName';
 import SearchHeader from '../../../../../component/common/appSearchHeader';
-import { GREY_CROSS_ICON, SEARCH_ICON } from '../../../../../assets/imagepath/imagepath';
+import {
+  GREY_CROSS_ICON,
+  SEARCH_ICON,
+} from '../../../../../assets/imagepath/imagepath';
 
 const Orders = ({navigation}) => {
   const [activeTab, setActiveTab] = useState(true);
-  const [searchText,setSearchText] = useState('');
+  const [searchText, setSearchText] = useState('');
 
   const data = [
     {
@@ -165,7 +168,7 @@ const Orders = ({navigation}) => {
           data={item}
           customBorderStyle={{backgroundColor: item.color}}
         />
-        <View style={{height: hp(1)}} />
+        <View style={styles.singleHeight} />
       </View>
     );
   };
@@ -175,7 +178,7 @@ const Orders = ({navigation}) => {
       <View key={item.id}>
         <DraftCard
           data={item}
-          onPress={() => navigation.navigate('OrderIdProduct')}
+          onPress={() => navigation.navigate(SCREEN_NAME.orderId)}
         />
         <View style={{height: hp(1)}} />
       </View>
@@ -183,15 +186,15 @@ const Orders = ({navigation}) => {
   };
   const updateSearchInput = () => {
     setSearchText('');
-  }
-  
+  };
+
   return (
     <View>
       <SearchHeader
         headerTitle={ORDER_TEXT}
         onPressBackButton={() => navigation.goBack()}
-        icon={searchText !== '' ? GREY_CROSS_ICON : SEARCH_ICON }
-        onChangeText={(e) => setSearchText(e)}
+        icon={searchText !== '' ? GREY_CROSS_ICON : SEARCH_ICON}
+        onChangeText={e => setSearchText(e)}
         value={searchText}
         updateSearchInput={updateSearchInput}
       />
@@ -208,7 +211,7 @@ const Orders = ({navigation}) => {
               data={data}
               renderItem={({item}) => renderDraftItems(item)}
               keyExtractor={item => item?.id}
-              style={{marginBottom: hp(33)}}
+              style={style.flatListBottomMargin}
             />
           </View>
         ) : (
@@ -217,7 +220,7 @@ const Orders = ({navigation}) => {
               data={data}
               renderItem={({item}) => renderProgressItem(item)}
               keyExtractor={item => item?.id}
-              style={{marginBottom: hp(33)}}
+              style={style.flatListBottomMargin}
             />
           </View>
         )}
@@ -243,6 +246,7 @@ const style = StyleSheet.create({
     color: color.darkblue,
   },
   backgroundColorView: {backgroundColor: color.lightGreen},
+  flatListBottomMargin: {marginBottom: hp(33)},
 });
 
 export default Orders;

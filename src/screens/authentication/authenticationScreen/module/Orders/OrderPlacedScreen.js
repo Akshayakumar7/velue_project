@@ -14,6 +14,7 @@ import {SCREEN_NAME} from '../../../../../general/screenName';
 import {ShowToastMessage} from '../../../../../commonMethod/toastMessage';
 import {TOAST_MESSAGE_TYPE} from '../../../../../general/generalConst';
 import Toast from 'react-native-toast-message';
+import { ORDER_PLACED, YOU_CAN_SEE } from './OrderSceenUtility';
 
 const OrderPlaced = ({navigation}) => {
   useEffect(() => {
@@ -31,14 +32,12 @@ const OrderPlaced = ({navigation}) => {
     <View style={style.mainView}>
       <SvgImage Source={RIGHT_MARK_ICON} height={hp(30)} width={wp(60)} />
       <View style={styles.doubleHeight} />
-      <Text style={style.greatTextStyle}>{'Order Placed'}</Text>
+      <Text style={style.greatTextStyle}>{ORDER_PLACED}</Text>
       <View style={styles.singleHeight} />
       <View style={style.successTextWidth}>
-        <Text style={style.successfullyTextStyle}>
-          {'You can see your listings in orders tab'}
-        </Text>
+        <Text style={style.successfullyTextStyle}>{YOU_CAN_SEE}</Text>
       </View>
-      <Toast/>
+      <Toast />
     </View>
   );
 };
