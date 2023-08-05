@@ -302,9 +302,13 @@ const Register = ({navigation}) => {
     setBankName(val ?? '');
   };
 
-  const onPressUploadFromCamera = () => {
-    var ans = requestCameraPermission();
-    ans.then(res => console.log(res));
+  const onPressUploadFromCamera = async () => {
+    try {
+      var ans = await requestCameraPermission();
+      ans.then(res => console.log(res));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const onPressUploadFromGallery = async () => {

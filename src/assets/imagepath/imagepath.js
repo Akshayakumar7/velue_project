@@ -42,6 +42,7 @@ import CHECK_ICON from '../../assets/images/perfect-check.svg';
 import DRAFR_ICON from '../../assets/images/save-draft.svg';
 import SORT_ICON from '../../assets/images/sort-icon.svg';
 import GREEN_CHECK from '../../assets/images/green-check.svg';
+import BLUE_DOWN_ICON from '../../assets/images/blue-down.svg';
 
 export {
   BATH_TUB_IMAGE,
@@ -88,4 +89,5 @@ export {
   DRAFR_ICON,
   SORT_ICON,
   GREEN_CHECK,
+  BLUE_DOWN_ICON,
 };

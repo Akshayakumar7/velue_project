@@ -114,8 +114,11 @@ const Profile = ({navigation}) => {
             </View>
           </View>
 
-          <View style={{height: '20%'}} />
-          <View style={style.whiteCard}>
+          {/* <View style={{height: '15%'}} /> */}
+          <View style={styles.doubleContentDivider} />
+          <View style={styles.doubleContentDivider} />
+         <View>
+           <View style={style.whiteCard}>
             <View style={styles.midDivider} />
             <View style={style.flexView}>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -141,8 +144,10 @@ const Profile = ({navigation}) => {
             </View>
             <View style={styles.midDivider} />
           </View>
-          <View style={styles.doubleContentDivider} />
-          <View style={styles.doubleContentDivider} />
+         </View>
+         <View style={{marginBottom:hp(7)}}/>
+          {/* <View style={styles.doubleContentDivider} /> */}
+          {/* <View style={styles.doubleContentDivider} /> */}
         </View>
       </ScrollView>
     </View>
@@ -198,5 +203,15 @@ const style = StyleSheet.create({
   creditDaysWidth: {width: '60%'},
   payNowButtonWidth: {width: '30%'},
   editProfileFlex: {flexDirection: 'row', alignItems: 'center'},
+  bottomPlacer: {
+    paddingHorizontal: 10,
+    width: '100%',
+    bottom: 55,
+    right: 0,
+    left: 0,
+    position: 'absolute',
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
 });
 export default Profile;

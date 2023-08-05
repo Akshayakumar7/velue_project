@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  StatusBar,
-  Text,
-  FlatList,
-} from 'react-native';
+import {View, StyleSheet, FlatList, Keyboard} from 'react-native';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {color} from '../../../../../assets/colors/color';
 import {hp, wp} from '../../../../../commonMethod/screenRatio';
@@ -178,14 +171,15 @@ const Orders = ({navigation}) => {
       <View key={item.id}>
         <DraftCard
           data={item}
-          onPress={() => navigation.navigate(SCREEN_NAME.orderId)}
+          onPress={() => navigation.navigate(SCREEN_NAME.OrderIdProductScreen)}
         />
-        <View style={{height: hp(1)}} />
+        <View style={styles.singleHeight} />
       </View>
     );
   };
   const updateSearchInput = () => {
     setSearchText('');
+    Keyboard.dismiss();
   };
 
   return (
@@ -246,7 +240,7 @@ const style = StyleSheet.create({
     color: color.darkblue,
   },
   backgroundColorView: {backgroundColor: color.lightGreen},
-  flatListBottomMargin: {marginBottom: hp(33)},
+  flatListBottomMargin: {marginBottom: hp(37)},
 });
 
 export default Orders;

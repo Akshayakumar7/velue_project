@@ -7,7 +7,7 @@ import AppButton from './appButton';
 import {INDIAN_RUPEE_SYMBOL} from './componentUtility';
 
 const OrderIdCard = props => {
-  const {data, customBorderStyle} = props;
+  const {data, customBorderStyle,key} = props;
   return (
     <View>
       <View style={style.whiteBorder}>

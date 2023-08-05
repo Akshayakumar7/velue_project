@@ -12,6 +12,7 @@ import Toast from 'react-native-toast-message';
 import {color} from '../../../../../assets/colors/color';
 import {
   BELL_ICON,
+  BLUE_DOWN_ICON,
   CLOSE_ICON,
   SEARCH_ICON,
   SORT_ICON,
@@ -29,10 +30,11 @@ import {SCREEN_NAME} from '../../../../../general/screenName';
 import {CREATE_NEW_ORDER, SEARCH_PRODUCTS_TEXT} from './HomeScreenUtility';
 import CheckBox from '../../../../../component/common/checkBox';
 import AppButton from '../../../../../component/common/appButton';
+import {INDIAN_RUPEE_SYMBOL} from '../../../../../component/common/componentUtility';
 
 const Home = ({navigation}) => {
   const [showModal, setShowModal] = useState(false);
-  const inputRef = React.useRef();
+  const [showOrderIdbar, setShowOrderIdbar] = useState(false);
   const productData = [
     {
       id: 1,
@@ -190,8 +192,15 @@ const Home = ({navigation}) => {
     // },
   ]);
 
-  const onPressCheckBox = indexVal => {
-    const tempData = orderIdData;
+  const onPressCheckBox = async idVal => {
+    const updatedData = orderIdData?.map(item => {
+      return item?.id === idVal
+        ? {...item, isChecked: true}
+        : {...item, isChecked: false};
+    });
+    setOrderIdData(updatedData);
+    setShowModal(false);
+    setShowOrderIdbar(true);
   };
 
   const renderProductList = item => {
@@ -215,6 +224,7 @@ const Home = ({navigation}) => {
   };
 
   const renderIdList = (item, index) => {
+    console.log('item', item?.isChecked);
     return (
       <View style={{paddingHorizontal: hp(4)}}>
         <View
@@ -231,7 +241,7 @@ const Home = ({navigation}) => {
               <View>
                 <CheckBox
                   isTrue={item?.isChecked ?? false}
-                  onPress={() => onPressCheckBox(index)}
+                  onPress={() => onPressCheckBox(item?.id)}
                 />
               </View>
               <View style={{width: '6%'}} />
@@ -320,17 +330,17 @@ const Home = ({navigation}) => {
         <View style={style.categoryFlex}>
           <View>
             <TouchableOpacity style={style.sortIconView}>
-              <SvgImage Source={SORT_ICON} height={hp(7)} width={wp(10)} />
+              <SvgImage Source={SORT_ICON} height={hp(6)} width={wp(9)} />
             </TouchableOpacity>
           </View>
-          <View style={{width: wp(3)}} />
+          <View style={style.sortIconButtonDivider} />
           <View>
             <FlatList
               data={filterOption}
               renderItem={({item}) => renderFilterButtonList(item)}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
-              style={{marginEnd: wp(18)}}
+              style={style.filterButtonEndMargin}
             />
           </View>
         </View>
@@ -391,6 +401,101 @@ const Home = ({navigation}) => {
           </View>
         </Modal>
       </View>
+      {showOrderIdbar && (
+        <View style={style.touchableStyle}>
+          <View style={style.whiteBackground}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+              <View
+                style={{
+                  backgroundColor: color.boxGrey,
+                  borderRadius: hp(1),
+                  height: hp(8),
+                  padding: hp(1),
+                  width: '60%',
+                  paddingBottom: hp(1),
+                }}>
+                <View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      marginLeft: wp(2),
+                    }}>
+                    <View>
+                      <Text
+                        style={{
+                          fontSize: 18,
+                          fontWeight: '600',
+                          color: color.darkblue,
+                        }}>
+                        OID1245245
+                      </Text>
+                    </View>
+
+                    <View style={{width: '10%'}} />
+                    <TouchableOpacity
+                      style={{margin: hp(-1)}}
+                      onPress={() => setShowModal(true)}>
+                      <SvgImage
+                        Source={BLUE_DOWN_ICON}
+                        height={hp(4)}
+                        width={wp(5.5)}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.smallHeight} />
+                  <View style={{marginLeft: wp(2)}}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        // justifyContent: 'space-around',
+                      }}>
+                      <Text style={{fontSize: 17}}>16 items</Text>
+                      <View
+                        style={{
+                          borderLeftWidth: hp(0.05),
+                          color: color.underLineColor,
+                          height: hp(2),
+                          marginLeft: wp(2),
+                        }}
+                      />
+                      <Text
+                        style={{
+                          marginLeft: wp(2),
+                          color: color.darkCyan,
+                          fontSize: 17,
+                        }}>
+                        {INDIAN_RUPEE_SYMBOL} 25000
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}>
+                <AppButton
+                  title={'    View    '}
+                  customButtonStyle={{borderRadius: hp(1)}}
+                />
+                <View style={{width: '4%'}} />
+                <TouchableOpacity onPress={() => setShowOrderIdbar(false)}>
+                  <SvgImage Source={CLOSE_ICON} height={hp(7)} width={wp(8)} />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </View>
+      )}
       <Toast />
     </View>
   );
@@ -407,8 +512,8 @@ const style = StyleSheet.create({
     borderRadius: 0,
   },
   searchStyle: {
-    width: '80%',
-    marginLeft: wp(3),
+    width: '82%',
+    // marginLeft: wp(2),
   },
   searchbarFlex: {flexDirection: 'row', alignItems: 'center'},
   productView: {
@@ -432,11 +537,25 @@ const style = StyleSheet.create({
     color: color.darkCyan,
     textAlign: 'right',
   },
-  imageSliderAlignment: {alignSelf: 'center'},
-  categoryFlex: {flexDirection: 'row', alignItems: 'center'},
-  sortIconView: {marginLeft: wp(3), margin: hp(-1), marginRight: wp(-1.5)},
-  createOrderButtonStyle: {borderRadius: hp(1), height: hp(6)},
-  createOrderButtonTextStyle: {fontSize: 16},
+  imageSliderAlignment: {
+    alignSelf: 'center',
+  },
+  categoryFlex: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  sortIconView: {
+    marginLeft: wp(3),
+    margin: hp(-1),
+    marginRight: wp(-1.5),
+  },
+  createOrderButtonStyle: {
+    borderRadius: hp(1),
+    height: hp(6),
+  },
+  createOrderButtonTextStyle: {
+    fontSize: 16,
+  },
   createOrderButtonViewStyle: {
     height: '20%',
     marginTop: 'auto',
@@ -459,6 +578,26 @@ const style = StyleSheet.create({
     backgroundColor: color.white,
     borderTopLeftRadius: hp(3),
     borderTopRightRadius: hp(3),
+  },
+  sortIconButtonDivider: {
+    width: '3%',
+  },
+  filterButtonEndMargin: {
+    marginEnd: wp(18),
+  },
+  touchableStyle: {
+    position: 'absolute',
+    width: '100%',
+    height: hp(11),
+    bottom: hp(10),
+    backgroundColor: color.white,
+  },
+  whiteBackground: {
+    backgroundColor: color.white,
+    width: '100%',
+    alignSelf: 'center',
+    padding: hp(2),
+    paddingHorizontal: '4%',
   },
 });
 export default Home;

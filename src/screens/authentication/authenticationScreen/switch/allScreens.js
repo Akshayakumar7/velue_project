@@ -46,7 +46,7 @@ const AllScreen = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {ans ? (
+        {true ? (
           <Stack.Screen
             name={'BottomTab'}
             component={BottomTab}

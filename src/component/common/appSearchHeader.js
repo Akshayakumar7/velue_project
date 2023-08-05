@@ -20,12 +20,19 @@ import {color} from '../../assets/colors/color';
 
 const SearchHeader = props => {
   const inputRef = React.useRef();
-  const {headerTitle = 'title', onPressBackButton,updateSearchInput, onChangeText, value,icon} = props;
+  const {
+    headerTitle = 'title',
+    onPressBackButton,
+    updateSearchInput,
+    onChangeText,
+    value,
+    icon,
+  } = props;
   const onPressSerchIcon = () => {
     if (value == '') {
       inputRef.current.focus();
     }
-    if(value !== ''){
+    if (value !== '') {
       updateSearchInput();
     }
   };
@@ -61,11 +68,7 @@ const SearchHeader = props => {
             <Pressable
               onPress={() => onPressSerchIcon()}
               style={{marginBottom: hp(-0.7)}}>
-              <SvgImage
-                Source={icon}
-                height={hp(6)}
-                width={wp(7)}
-              />
+              <SvgImage Source={icon} height={hp(6)} width={wp(7)} />
             </Pressable>
             <View style={{width: '8%'}} />
             <Pressable style={{marginBottom: hp(-0.7)}}>

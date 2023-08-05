@@ -20,7 +20,7 @@ import {CLOSE_ICON} from '../../../../../assets/imagepath/imagepath';
 import SvgImage from '../../../../../component/common/svgImage';
 import {INDIAN_RUPEE_SYMBOL} from '../../../../../component/common/componentUtility';
 import {SCREEN_NAME} from '../../../../../general/screenName';
-import { EDIT_QUANTITY, SAVE_TEXT } from './OrderSceenUtility';
+import {EDIT_QUANTITY, PROCEED_TEXT, SAVE_TEXT} from './OrderSceenUtility';
 
 const OrderIdProduct = ({navigation}) => {
   const [showModal, setShowModal] = useState(false);
@@ -146,7 +146,7 @@ const OrderIdProduct = ({navigation}) => {
           transparent={true}
           visible={showModal}
           onDismiss={() => setShowModal(!showModal)}>
-          <View style={style.modalViewStyle}>
+          <View style={style.mainViews}>
             <View style={style.modalHeadingFlexView}>
               <Text style={style.editTextStyle}>{EDIT_QUANTITY}</Text>
               <TouchableOpacity onPress={() => setShowModal(!showModal)}>
@@ -185,7 +185,7 @@ const OrderIdProduct = ({navigation}) => {
                 <View style={styles.doubleHeight} />
                 <AppButton
                   title={SAVE_TEXT}
-                  customButtonStyle={{borderRadius: hp(1), height: hp(6)}}
+                  customButtonStyle={style.saveTextButtonStyle}
                   onPress={() => setShowModal(!showModal)}
                 />
               </View>
@@ -213,6 +213,7 @@ const style = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
     padding: hp(2),
+    paddingHorizontal: '4%',
   },
   flexView: {
     flexDirection: 'row',
@@ -253,7 +254,7 @@ const style = StyleSheet.create({
   },
   cardHorizontalPadding: {paddingHorizontal: '3%'},
   flatListBottomMargin: {marginBottom: hp(20)},
-  mainView: {
+  mainViews: {
     height: '37%',
     marginTop: 'auto',
     backgroundColor: color.white,
@@ -285,12 +286,18 @@ const style = StyleSheet.create({
     height: hp(6),
   },
   viewWidth: {width: '60%'},
-  smallHeight: {height: hp(0.3)},
+  smallHeight: {
+    height: hp(0.3),
+  },
   productQtyTypeTextStyle: {
     color: color.darkblue,
     marginBottom: hp(0.2),
     fontSize: 16,
     marginRight: wp(1),
+  },
+  saveTextButtonStyle: {
+    borderRadius: hp(1),
+    height: hp(6),
   },
 });
 export default OrderIdProduct;
