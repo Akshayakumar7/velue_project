@@ -13,11 +13,13 @@ const ProductCard = props => {
     <View key={data?.id}>
       <TouchableOpacity onPress={onPressCard}>
         <View style={{backgroundColor: color.white, width: wp(45)}}>
-          <Image
-            source={{uri: data?.image ?? ''}}
-            style={style.productImage}
-            resizeMode={'contain'}
-          />
+          {data?.image !== undefined && (
+            <Image
+              source={{uri: data?.image ?? ''}}
+              style={style.productImage}
+              resizeMode={'contain'}
+            />
+          )}
           <Text style={{fontSize: hp(2.2), color: color.grey1}}>
             {data?.velue ?? ''}
           </Text>

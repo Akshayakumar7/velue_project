@@ -166,12 +166,13 @@ const Orders = ({navigation}) => {
     );
   };
 
-  const renderDraftItems = item => {
+  const renderDraftItems = (item,index) => {
     return (
-      <View key={item.id}>
+      <View key={index}>
         <DraftCard
           data={item}
           onPress={() => navigation.navigate(SCREEN_NAME.OrderIdProductScreen)}
+          index={index}
         />
         <View style={styles.singleHeight} />
       </View>
@@ -203,8 +204,8 @@ const Orders = ({navigation}) => {
           <View style={{paddingHorizontal: hp(1)}}>
             <FlatList
               data={data}
-              renderItem={({item}) => renderDraftItems(item)}
-              keyExtractor={item => item?.id}
+              renderItem={({item,index}) => renderDraftItems(item,index)}
+              keyExtractor={index => index}
               style={style.flatListBottomMargin}
             />
           </View>

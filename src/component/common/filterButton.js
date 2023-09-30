@@ -8,6 +8,7 @@ import {DOWN_ICON} from '../../assets/imagepath/imagepath';
 
 const FilterButton = props => {
   const {data, onPress} = props;
+ 
   return (
     <View>
       <TouchableOpacity onPress={onPress}>
@@ -15,7 +16,7 @@ const FilterButton = props => {
           <View style={style.flexView}>
             <View style={styles.verticalDivider} />
             <View style={styles.verticalDivider} />
-            <Text style={style.filterText}>{data?.type ?? ''}</Text>
+            <Text style={style.filterText}>{data?.categoryName ?? ''}</Text>
             <View style={styles.verticalDivider} />
             <View style={styles.verticalDivider} />
             <View style={style.alignMargin}>

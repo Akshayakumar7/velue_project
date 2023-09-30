@@ -105,8 +105,11 @@ import {
 } from './registerNetworkCall';
 import {requestCameraPermission} from '../../../../commonMethod/permission';
 import PhoneNumerTextInput from '../../../../component/common/phoneNumberTextInput';
+import { EDIT_PROFILE_TEXT } from '../module/Account/AccountUtility';
 
-const Register = ({navigation}) => {
+const Register = ({navigation, route}) => {
+  const isFromEditProfile = route?.params?.isFromEditProfile;
+  console.log('isFromEditProfile', isFromEditProfile);
   const CELL_COUNT = 4;
   const [currentButton, setCurrent] = useState(0);
   const [isEnabled, setIsEnabled] = useState(false);
@@ -333,7 +336,7 @@ const Register = ({navigation}) => {
   return (
     <View>
       <Header
-        headerTitle={REGISTRATION_TEXT}
+        headerTitle={isFromEditProfile ? EDIT_PROFILE_TEXT : REGISTRATION_TEXT}
         onPressBackButton={() => onPressBankHandlear()}
       />
       <KeyboardAvoidingView></KeyboardAvoidingView>

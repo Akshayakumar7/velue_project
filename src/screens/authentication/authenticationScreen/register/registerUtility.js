@@ -21,11 +21,13 @@ export const UPLOAD_PAN_CARD_TEXT = 'Upload PAN Card .jpg';
 export const FINISH_TEXT = 'Finish';
 export const ACCOUNT_NUMBER_TEXT = 'Account Number';
 export const BANK_NAME_TEXT = 'Bank Name';
-export const IFSC_CODE_TEXT ='IFSC Code';
+export const IFSC_CODE_TEXT = 'IFSC Code';
 export const GREAT_TEXT = 'Great !';
-export const YOUR_ARE_SUCCESSFULLY_REGISTRED_WITH_US_TEXT = 'You are successfully registered with us.';
+export const YOUR_ARE_SUCCESSFULLY_REGISTRED_WITH_US_TEXT =
+  'You are successfully registered with us.';
 export const OPT_SENT_TEXT = 'Enter the OTP Sent to';
-export const CANCEL_TEXT = 'Cancel'
+export const CANCEL_TEXT = 'Cancel';
+export const EDIT_PROFILE = 'Edit ProfileX';
 export const REGISTER_SCREEN_INDEX = {
   first: 0,
   second: 1,

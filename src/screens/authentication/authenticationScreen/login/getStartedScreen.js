@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import {
   Text,
   View,
@@ -18,7 +18,7 @@ import AppButton from '../../../../component/common/appButton';
 import {BATH_TUB_IMAGE} from '../../../../imagePath/imagePath';
 import {LOGO} from '../../../../assets/imagepath/imagepath';
 import styles from '../../../../general/generalStyleSheet';
-import { PracticeContext } from '../../../../useContext/PracticeContext';
+import {PracticeContext} from '../../../../useContext/PracticeContext';
 
 const GetStarted = ({navigation}) => {
   const onPressGetStartedScreen = () => {
@@ -52,7 +52,6 @@ const GetStarted = ({navigation}) => {
               />
             </View>
             <View style={style.contentDivider} />
-
             <View style={styles.doubleHeight} />
           </View>
         </ImageBackground>

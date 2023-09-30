@@ -16,15 +16,17 @@ const ListProductCard = props => {
         <View style={style.cardView}>
           <View style={style.flexView}>
             <View style={{width: '32%'}}>
-              <Image
-                source={{uri: data?.image ?? ''}}
-                style={{
-                  height: hp(14),
-                  width: wp(28),
-                  borderRadius: hp(1),
-                  marginRight: wp(2),
-                }}
-              />
+              {data?.imageUrl != undefined && (
+                <Image
+                  source={{uri: data?.image ?? ''}}
+                  style={{
+                    height: hp(14),
+                    width: wp(28),
+                    borderRadius: hp(1),
+                    marginRight: wp(2),
+                  }}
+                />
+              )}
             </View>
             <View style={{width: '67%'}}>
               <Text style={style.productCodeTextStyle}>
@@ -38,16 +40,21 @@ const ListProductCard = props => {
               <View style={styles.midDivider} />
               <View style={style.flexEndView}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Text style={style.mrpTextStyle}>
-                    {INDIAN_RUPEE_SYMBOL}
-                    {data?.mrp ?? ''}
-                  </Text>
+                  {data?.mrp != undefined && (
+                    <Text style={style.mrpTextStyle}>
+                      {INDIAN_RUPEE_SYMBOL}
+                      {data?.mrp ?? ''}
+                    </Text>
+                  )}
+               
                   <View style={{width: wp(2)}} />
 
-                  <Text style={style.actualPriceText}>
-                    {INDIAN_RUPEE_SYMBOL}
-                    {data?.discount ?? ''}
-                  </Text>
+                  {data?.discount != undefined && (
+                    <Text style={style.actualPriceText}>
+                      {INDIAN_RUPEE_SYMBOL}
+                      {data?.discount ?? ''}
+                    </Text>
+                  )}
                 </View>
               </View>
             </View>

@@ -71,8 +71,8 @@ const Login = ({navigation}) => {
   };
 
   const onPressLogin = async () => {
-    var temp = true
-    setButtonLoader(temp)
+    var temp = true;
+    setButtonLoader(temp);
     console.log(buttonLoader);
     if (phoneNumber == tempMobileNumber && password == tempPassword) {
       await setUserLOggedIn(true);
@@ -147,7 +147,6 @@ const Login = ({navigation}) => {
                   applyButtonText={LOGIN_TEXT}
                   onPressCancelButton={() => onPressRegisterHere()}
                   onPressApplyButton={() => onPressLogin()}
-              
                 />
               </View>
             </View>

@@ -27,9 +27,14 @@ import {
 } from '../../../../../assets/imagepath/imagepath';
 import SvgImage from '../../../../../component/common/svgImage';
 import {PracticeContext} from '../../../../../useContext/PracticeContext';
+import {SCREEN_NAME} from '../../../../../general/screenName';
 
 const Profile = ({navigation}) => {
   const {setUserLOggedIn} = useContext(PracticeContext);
+
+  const onPressEditProfile = () => {
+    navigation.navigate(SCREEN_NAME.Register, {isFromEditProfile: true});
+  };
   return (
     <View style={style.mainView}>
       <Header
@@ -98,14 +103,14 @@ const Profile = ({navigation}) => {
                     <Text style={style.textStyle}>{EDIT_PROFILE_TEXT}</Text>
                   </View>
 
-                  <View>
+                  <TouchableOpacity onPress={() => onPressEditProfile()}>
                     <SvgImage
                       Source={BLUE_RIGHT_ARROW}
                       height={hp(3)}
                       width={wp(5.5)}
                       style={style.blueRightIconStyle}
                     />
-                  </View>
+                  </TouchableOpacity>
                 </View>
                 <View style={styles.midDivider} />
               </View>
@@ -117,37 +122,35 @@ const Profile = ({navigation}) => {
           {/* <View style={{height: '15%'}} /> */}
           <View style={styles.doubleContentDivider} />
           <View style={styles.doubleContentDivider} />
-         <View>
-           <View style={style.whiteCard}>
-            <View style={styles.midDivider} />
-            <View style={style.flexView}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <SvgImage
-                  Source={GREY_CONTACT_ICON}
-                  height={hp(3)}
-                  width={wp(5.5)}
-                  style={style.greyContactIconStyle}
-                />
-                <Text style={style.textStyle}>{LOG_OUT_TEXT}</Text>
-              </View>
-
-              <View>
-                <TouchableOpacity onPress={() => setUserLOggedIn(false)}>
+          <View>
+            <View style={style.whiteCard}>
+              <View style={styles.midDivider} />
+              <View style={style.flexView}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <SvgImage
-                    Source={LOG_OUT_ICON}
-                    height={hp(3.5)}
-                    width={wp(6)}
-                    style={style.blueRightIconStyle}
+                    Source={GREY_CONTACT_ICON}
+                    height={hp(3)}
+                    width={wp(5.5)}
+                    style={style.greyContactIconStyle}
                   />
-                </TouchableOpacity>
+                  <Text style={style.textStyle}>{LOG_OUT_TEXT}</Text>
+                </View>
+
+                <View>
+                  <TouchableOpacity onPress={() => setUserLOggedIn(false)}>
+                    <SvgImage
+                      Source={LOG_OUT_ICON}
+                      height={hp(3.5)}
+                      width={wp(6)}
+                      style={style.blueRightIconStyle}
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
+              <View style={styles.midDivider} />
             </View>
-            <View style={styles.midDivider} />
           </View>
-         </View>
-         <View style={{marginBottom:hp(7)}}/>
-          {/* <View style={styles.doubleContentDivider} /> */}
-          {/* <View style={styles.doubleContentDivider} /> */}
+          <View style={{marginBottom: hp(7)}} />
         </View>
       </ScrollView>
     </View>

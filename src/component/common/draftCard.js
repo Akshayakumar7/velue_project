@@ -13,52 +13,29 @@ import AppButton from './appButton';
 import {INDIAN_RUPEE_SYMBOL} from './componentUtility';
 
 const DraftCard = props => {
-  const {data, onPress} = props;
+  const {data, onPress, index} = props;
   return (
-    <View>
+    <View key={index}>
       <TouchableOpacity onPress={onPress}>
         <View style={style.whiteBorder}>
           <View style={style.commanPadding}>
-            <Text style={style.orderIdTextStyle}>{data.orderId}</Text>
+            <Text style={style.orderIdTextStyle}>{data?.orderId ?? ''}</Text>
             <View style={styles.smallHeight} />
-            <Text style={style.dateTextStyle}>{data.date}</Text>
+            <Text style={style.dateTextStyle}>{data?.date ?? ''}</Text>
             <View style={styles.singleHeight} />
             <Text style={style.costTextStyle}>
-              {INDIAN_RUPEE_SYMBOL} {data.cost}
+              {INDIAN_RUPEE_SYMBOL} {data?.cost ?? ''}
             </Text>
           </View>
           <View style={styles.verticalLine} />
           <View style={styles.verticalLine} />
           <View style={[style.subFlex]}>
-            <Pressable style={{width: '50%'}}>
-              <Text
-                style={{
-                  textAlign: 'center',
-                  padding: hp(1.6),
-                  color: color.greyTextColor,
-                  fontSize: 16,
-                  marginRight: '20%',
-                }}>
-                Discard
-              </Text>
+            <Pressable style={style.discardWidth}>
+              <Text style={style.discardTextStyle}>Discard</Text>
             </Pressable>
-            <View
-              style={{
-                borderLeftWidth: hp(0.05),
-                color: color.underLineColor,
-                height: hp(7),
-              }}
-            />
-            <Pressable style={{width: '50%', alignItems: 'flex-end'}}>
-              <Text
-                style={{
-                  // textAlign: 'center',
-                  padding: hp(1.6),
-                  color: color.greyTextColor,
-                  fontSize: 16,
-                }}>
-                Place Order
-              </Text>
+            <View style={style.placeHolderViewTextStyle} />
+            <Pressable style={style.placeHolderFlexEnd}>
+              <Text style={style.placeOrderTextStyle}>Place Order</Text>
             </Pressable>
           </View>
         </View>
@@ -110,6 +87,28 @@ const style = StyleSheet.create({
     alignItems: 'center',
     width: '80%',
     alignSelf: 'center',
+  },
+  placeOrderTextStyle: {
+    padding: hp(1.6),
+    color: color.greyTextColor,
+    fontSize: 16,
+  },
+  discardTextStyle: {
+    textAlign: 'center',
+    padding: hp(1.6),
+    color: color.greyTextColor,
+    fontSize: 16,
+    marginRight: '20%',
+  },
+  placeHolderViewTextStyle: {
+    borderLeftWidth: hp(0.05),
+    color: color.underLineColor,
+    height: hp(7),
+  },
+  discardWidth: {width: '50%'},
+  placeHolderFlexEnd: {
+    width: '50%',
+    alignItems: 'flex-end',
   },
 });
 export default DraftCard;

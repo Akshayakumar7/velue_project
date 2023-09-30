@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   FlatList,
   Modal,
@@ -31,10 +31,18 @@ import {CREATE_NEW_ORDER, SEARCH_PRODUCTS_TEXT} from './HomeScreenUtility';
 import CheckBox from '../../../../../component/common/checkBox';
 import AppButton from '../../../../../component/common/appButton';
 import {INDIAN_RUPEE_SYMBOL} from '../../../../../component/common/componentUtility';
+import axios from 'axios';
+import productSkeletonLoader from '../../../../../screens/authentication/authenticationScreen/module/Home/productListSkeletonLoader';
+import ProductSkeletonLoader from '../../../../../screens/authentication/authenticationScreen/module/Home/productListSkeletonLoader';
+import CategorySkeletonLoader from './CategorySkeletonLoader';
 
 const Home = ({navigation}) => {
   const [showModal, setShowModal] = useState(false);
   const [showOrderIdbar, setShowOrderIdbar] = useState(false);
+  const [projectData, setProjectData] = useState([]);
+  const [categoryData, setCategoryData] = useState([]);
+  const [loader, setLoader] = useState(false);
+  const [categoryLoader, setCategoryLoader] = useState(false);
   const productData = [
     {
       id: 1,
@@ -203,6 +211,41 @@ const Home = ({navigation}) => {
     setShowOrderIdbar(true);
   };
 
+  const fetchDataFromApi = async () => {
+    setLoader(true);
+    try {
+      const response = await axios.get(
+        'http://192.168.31.72:8080/dashboard/restockProducts',
+      ); // Make a GET request
+      console.log('response>>>>', response?.data);
+      setProjectData(response?.data ?? []);
+      setLoader(false);
+    } catch (error) {
+      setLoader(false);
+
+      console.log('error>>>>', error?.response);
+    }
+  };
+
+  const getCategoryData = async () => {
+    setCategoryLoader(true);
+    try {
+      const response = await axios.get(
+        'http:/192.168.31.72:8080/product/getAllCategory',
+      );
+
+      setCategoryData(response?.data ?? []);
+      setCategoryLoader(false);
+    } catch (error) {
+      setCategoryLoader(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchDataFromApi();
+    getCategoryData();
+  }, []);
+
   const renderProductList = item => {
     return (
       <View style={style.productWidth}>
@@ -224,45 +267,28 @@ const Home = ({navigation}) => {
   };
 
   const renderIdList = (item, index) => {
-    console.log('item', item?.isChecked);
     return (
-      <View style={{paddingHorizontal: hp(4)}}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <View style={{width: '55%'}}>
-            <View
-              style={{
-                flexDirection: 'row',
-              }}>
+      <View style={style.renderListHorizontalPadding}>
+        <View style={style.renderIdFlexView}>
+          <View style={style.chechBoxWidth}>
+            <View style={style.commonFlex}>
               <View>
                 <CheckBox
                   isTrue={item?.isChecked ?? false}
                   onPress={() => onPressCheckBox(item?.id)}
                 />
               </View>
-              <View style={{width: '6%'}} />
+              <View style={style.dividerWidth} />
               <View>
-                <Text
-                  style={{
-                    fontSize: 18,
-                    color: color.darkblue,
-                    fontWeight: '600',
-                  }}
-                  numberOfLines={1}>
+                <Text style={style.idTextStyle} numberOfLines={1}>
                   {item?.id ?? ''}
                 </Text>
                 <View style={styles.smallHeight} />
-                <Text style={{fontSize: 15, color: color.grey1}}>
-                  {item?.items ?? ''}
-                </Text>
+                <Text style={style.itemTextStyle}>{item?.items ?? ''}</Text>
               </View>
             </View>
           </View>
-          <View style={{width: '43%'}}>
+          <View style={style.costItemWidth}>
             <Text style={style.actualcostTextStyle}>
               {item?.actualcost ?? ''}
             </Text>
@@ -327,27 +353,33 @@ const Home = ({navigation}) => {
           <ImageSliderV2 />
         </View>
         <View style={styles.doubleHeight} />
-        <View style={style.categoryFlex}>
-          <View>
-            <TouchableOpacity style={style.sortIconView}>
-              <SvgImage Source={SORT_ICON} height={hp(6)} width={wp(9)} />
-            </TouchableOpacity>
+        {categoryLoader ? (
+          <CategorySkeletonLoader />
+        ) : (
+          <View style={style.categoryFlex}>
+            <View>
+              <TouchableOpacity style={style.sortIconView}>
+                <SvgImage Source={SORT_ICON} height={hp(6)} width={wp(9)} />
+              </TouchableOpacity>
+            </View>
+            <View style={style.sortIconButtonDivider} />
+            <View>
+              <FlatList
+                data={categoryData ?? []}
+                renderItem={({item}) => renderFilterButtonList(item)}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                style={style.filterButtonEndMargin}
+              />
+            </View>
           </View>
-          <View style={style.sortIconButtonDivider} />
-          <View>
-            <FlatList
-              data={filterOption}
-              renderItem={({item}) => renderFilterButtonList(item)}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              style={style.filterButtonEndMargin}
-            />
-          </View>
-        </View>
+        )}
+
         <View style={styles.doubleHeight} />
+        {loader && <ProductSkeletonLoader />}
         <View style={style.productView}>
           <FlatList
-            data={productData}
+            data={projectData ?? []}
             renderItem={({item}) => renderProductList(item)}
             ItemSeparatorComponent={itemSeperator()}
             showsVerticalScrollIndicator={false}
@@ -404,42 +436,16 @@ const Home = ({navigation}) => {
       {showOrderIdbar && (
         <View style={style.touchableStyle}>
           <View style={style.whiteBackground}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}>
-              <View
-                style={{
-                  backgroundColor: color.boxGrey,
-                  borderRadius: hp(1),
-                  height: hp(8),
-                  padding: hp(1),
-                  width: '60%',
-                  paddingBottom: hp(1),
-                }}>
+            <View style={style.fullFlex}>
+              <View style={style.showOrderViewStyle}>
                 <View>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      marginLeft: wp(2),
-                    }}>
+                  <View style={style.showOrderSubFlex}>
                     <View>
-                      <Text
-                        style={{
-                          fontSize: 18,
-                          fontWeight: '600',
-                          color: color.darkblue,
-                        }}>
-                        OID1245245
-                      </Text>
+                      <Text style={style.listIdTextStyle}>OID1245245</Text>
                     </View>
-
-                    <View style={{width: '10%'}} />
+                    <View style={style.idDivider} />
                     <TouchableOpacity
-                      style={{margin: hp(-1)}}
+                      style={style.blueDownIconStyle}
                       onPress={() => setShowModal(true)}>
                       <SvgImage
                         Source={BLUE_DOWN_ICON}
@@ -449,45 +455,23 @@ const Home = ({navigation}) => {
                     </TouchableOpacity>
                   </View>
                   <View style={styles.smallHeight} />
-                  <View style={{marginLeft: wp(2)}}>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        // justifyContent: 'space-around',
-                      }}>
-                      <Text style={{fontSize: 17}}>16 items</Text>
-                      <View
-                        style={{
-                          borderLeftWidth: hp(0.05),
-                          color: color.underLineColor,
-                          height: hp(2),
-                          marginLeft: wp(2),
-                        }}
-                      />
-                      <Text
-                        style={{
-                          marginLeft: wp(2),
-                          color: color.darkCyan,
-                          fontSize: 17,
-                        }}>
+                  <View style={style.leftMargin}>
+                    <View style={style.itemFlex}>
+                      <Text style={style.subItemTextStyle}>16 items</Text>
+                      <View style={style.smallDividerLine} />
+                      <Text style={style.costTextStyle}>
                         {INDIAN_RUPEE_SYMBOL} 25000
                       </Text>
                     </View>
                   </View>
                 </View>
               </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                }}>
+              <View style={style.renderIdFlexView}>
                 <AppButton
                   title={'    View    '}
-                  customButtonStyle={{borderRadius: hp(1)}}
+                  customButtonStyle={style.viewButtonStyle}
                 />
-                <View style={{width: '4%'}} />
+                <View style={style.buttonDivider} />
                 <TouchableOpacity onPress={() => setShowOrderIdbar(false)}>
                   <SvgImage Source={CLOSE_ICON} height={hp(7)} width={wp(8)} />
                 </TouchableOpacity>
@@ -599,5 +583,67 @@ const style = StyleSheet.create({
     padding: hp(2),
     paddingHorizontal: '4%',
   },
+  renderListHorizontalPadding: {paddingHorizontal: hp(4)},
+  renderIdFlexView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  chechBoxWidth: {width: '55%'},
+  commonFlex: {
+    flexDirection: 'row',
+  },
+  dividerWidth: {width: '6%'},
+  idTextStyle: {
+    fontSize: 18,
+    color: color.darkblue,
+    fontWeight: '600',
+  },
+  itemTextStyle: {fontSize: 15, color: color.grey1},
+  costItemWidth: {width: '43%'},
+  itemFlex: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  subItemTextStyle: {fontSize: 17},
+  smallDividerLine: {
+    borderLeftWidth: hp(0.05),
+    color: color.underLineColor,
+    height: hp(2),
+    marginLeft: wp(2),
+  },
+  costTextStyle: {
+    marginLeft: wp(2),
+    color: color.darkCyan,
+    fontSize: 17,
+  },
+  viewButtonStyle: {borderRadius: hp(1)},
+  buttonDivider: {width: '4%'},
+  fullFlex: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  showOrderViewStyle: {
+    backgroundColor: color.boxGrey,
+    borderRadius: hp(1),
+    height: hp(8),
+    padding: hp(1),
+    width: '60%',
+    paddingBottom: hp(1),
+  },
+  showOrderSubFlex: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: wp(2),
+  },
+  listIdTextStyle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: color.darkblue,
+  },
+  idDivider: {width: '10%'},
+  blueDownIconStyle: {margin: hp(-1)},
+  leftMargin: {marginLeft: wp(2)},
 });
 export default Home;
