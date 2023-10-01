@@ -89,7 +89,6 @@ const Profile = ({navigation}) => {
               <View style={styles.midDivider} />
               <View style={styles.verticalLine} />
               <View style={styles.midDivider} />
-
               <View style={style.whiteCard}>
                 <View style={styles.midDivider} />
                 <View style={style.flexView}>
@@ -115,18 +114,16 @@ const Profile = ({navigation}) => {
                 <View style={styles.midDivider} />
               </View>
 
-              <View style={{marginBottom: hp(5)}} />
+              <View style={style.bottomMargin} />
             </View>
           </View>
-
-          {/* <View style={{height: '15%'}} /> */}
           <View style={styles.doubleContentDivider} />
           <View style={styles.doubleContentDivider} />
           <View>
             <View style={style.whiteCard}>
               <View style={styles.midDivider} />
               <View style={style.flexView}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={style.subFlex}>
                   <SvgImage
                     Source={GREY_CONTACT_ICON}
                     height={hp(3)}
@@ -150,7 +147,7 @@ const Profile = ({navigation}) => {
               <View style={styles.midDivider} />
             </View>
           </View>
-          <View style={{marginBottom: hp(7)}} />
+          <View style={style.maxBottomMargin} />
         </View>
       </ScrollView>
     </View>
@@ -216,5 +213,8 @@ const style = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
   },
+  subFlex: {flexDirection: 'row', alignItems: 'center'},
+  bottomMargin: {marginBottom: hp(5)},
+  maxBottomMargin: {marginBottom: hp(7)},
 });
 export default Profile;

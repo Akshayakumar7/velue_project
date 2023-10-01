@@ -33,3 +33,7 @@ export const REGISTER_SCREEN_INDEX = {
   second: 1,
   third: 2,
 };
+export const UPLOAD_CAMERA_TEXT = 'Upload from camera';
+export const UPLOAD_FROM_GALLERY = 'Upload from gallery';
+export const VERIFY_BUTTON_TEXT = 'Verify';
+export const VEREFIED_BUTTON_TEXT = 'Verified';

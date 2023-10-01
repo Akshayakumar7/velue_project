@@ -215,15 +215,20 @@ const Home = ({navigation}) => {
     setLoader(true);
     try {
       const response = await axios.get(
-        'http://192.168.31.72:8080/dashboard/restockProducts',
+        'http://192.168.0.128:8080/dashboard/restockProducts',
       ); // Make a GET request
       console.log('response>>>>', response?.data);
       setProjectData(response?.data ?? []);
       setLoader(false);
     } catch (error) {
       setLoader(false);
-
-      console.log('error>>>>', error?.response);
+      ShowToastMessage(
+        TOAST_MESSAGE_TYPE.error,
+        '',
+        error?.response?.data?.message == 'No message available'
+          ? 'Something went wrong'
+          : error?.response?.data?.message,
+      );
     }
   };
 
@@ -231,13 +236,20 @@ const Home = ({navigation}) => {
     setCategoryLoader(true);
     try {
       const response = await axios.get(
-        'http:/192.168.31.72:8080/product/getAllCategory',
+        'http:/192.168.0.128:8080/product/getAllCategory',
       );
 
       setCategoryData(response?.data ?? []);
       setCategoryLoader(false);
     } catch (error) {
       setCategoryLoader(false);
+      ShowToastMessage(
+        TOAST_MESSAGE_TYPE.error,
+        '',
+        error?.response?.data?.message == 'No message available'
+          ? 'Something went wrong'
+          : error?.response?.data?.message,
+      );
     }
   };
 

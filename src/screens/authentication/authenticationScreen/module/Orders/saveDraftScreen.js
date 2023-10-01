@@ -12,6 +12,7 @@ import {SCREEN_NAME} from '../../../../../general/screenName';
 import {ShowToastMessage} from '../../../../../commonMethod/toastMessage';
 import {TOAST_MESSAGE_TYPE} from '../../../../../general/generalConst';
 import Toast from 'react-native-toast-message';
+import { ORDER_DRAFTED_TEXT, YOU_CAN_SEE_YOUR_LISTING_IN_ORDER_TAB } from './OrderSceenUtility';
 
 const SaveDraft = ({navigation}) => {
   useEffect(() => {
@@ -28,11 +29,11 @@ const SaveDraft = ({navigation}) => {
     <View style={style.mainView}>
       <SvgImage Source={DRAFR_ICON} height={hp(30)} width={wp(60)} />
       <View style={styles.doubleHeight} />
-      <Text style={style.greatTextStyle}>{'Order Drafted'}</Text>
+      <Text style={style.greatTextStyle}>{ORDER_DRAFTED_TEXT}</Text>
       <View style={styles.singleHeight} />
       <View style={style.successTextWidth}>
         <Text style={style.successfullyTextStyle}>
-          {'You can see your listings in orders tab'}
+          {YOU_CAN_SEE_YOUR_LISTING_IN_ORDER_TAB}
         </Text>
       </View>
       <Toast />

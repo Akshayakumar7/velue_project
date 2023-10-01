@@ -15,6 +15,7 @@ import {
   HEADING_TEXT,
   INVALID_EMAIL_ADDRESS_ERROR_TEXT,
   LOGIN_TEXT,
+  MOBILE_NUMBER_TEXT,
   REGISTER_HERE_TEXT,
   SENT_OTP_TEXT,
 } from './loginUtility';
@@ -24,6 +25,7 @@ import {LOGO, PERSON_ICON} from '../../../../assets/imagepath/imagepath';
 import styles from '../../../../general/generalStyleSheet';
 import CustomTextInput from '../../../../component/common/customTextInput';
 import {KEYBOARD_TYPE} from '../../../../general/generalConst';
+import {SCREEN_NAME} from '../../../../general/screenName';
 
 const ForgotPassword = ({navigation}) => {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -33,7 +35,7 @@ const ForgotPassword = ({navigation}) => {
   };
 
   const onPressSendOtp = () => {
-    navigation.navigate('OtpVerification');
+    navigation.navigate(SCREEN_NAME.OtpVerification);
   };
 
   return (
@@ -60,7 +62,7 @@ const ForgotPassword = ({navigation}) => {
                 <View style={styles.doubleContentDivider} />
                 <View style={styles.thirpleHeight} />
                 <CustomTextInput
-                  placeholder={'Mobile Number'}
+                  placeholder={MOBILE_NUMBER_TEXT}
                   leftIcon={PERSON_ICON}
                   leftIconHeight={hp(5)}
                   leftIconWidth={wp(6)}
@@ -75,7 +77,6 @@ const ForgotPassword = ({navigation}) => {
                   onPress={() => onPressSendOtp()}
                 />
                 <View style={styles.doubleHeight} />
-                {/* <View style={styles.doubleContentDivider} /> */}
               </View>
             </View>
           </ScrollView>

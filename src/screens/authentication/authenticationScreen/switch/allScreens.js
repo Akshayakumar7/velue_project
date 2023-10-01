@@ -5,7 +5,7 @@ import {
   PracticeContext,
   PracticeProvider,
 } from '../../../../useContext/PracticeContext';
-import {SCREEN_NAME} from '../../../../general/screenName';
+import {BOTTOM_TAB, SCREEN_NAME} from '../../../../general/screenName';
 import GetStarted from '../login/getStartedScreen';
 import Login from '../login/loginScreen';
 import ForgotPassword from '../login/forgotPasswordScreen';
@@ -30,13 +30,13 @@ const AllScreen = () => {
   var ans = userLoggedIn;
 
   const getData = async () => {
-    const aksh = await AsyncStorage.getItem('user')
-      .then(res => {
-        console.log(res, 'res');
-      })
-      .catch(e => {
-        console.log('e', e);
-      });
+    // const aksh = await AsyncStorage.getItem('user')
+    //   .then(res => {
+    //     console.log(res, 'res');
+    //   })
+    //   .catch(e => {
+    //     console.log('e', e);
+    //   });
   };
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const AllScreen = () => {
       <Stack.Navigator>
         {ans ? (
           <Stack.Screen
-            name={'BottomTab'}
+            name={BOTTOM_TAB}
             component={BottomTab}
             options={{
               headerShown: false,

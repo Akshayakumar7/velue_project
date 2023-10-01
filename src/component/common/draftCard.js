@@ -19,7 +19,7 @@ const DraftCard = props => {
       <TouchableOpacity onPress={onPress}>
         <View style={style.whiteBorder}>
           <View style={style.commanPadding}>
-            <Text style={style.orderIdTextStyle}>{data?.orderId ?? ''}</Text>
+            <Text style={style.orderIdTextStyle}>{"Order ID - "}{data?.orderId ?? ''}</Text>
             <View style={styles.smallHeight} />
             <Text style={style.dateTextStyle}>{data?.date ?? ''}</Text>
             <View style={styles.singleHeight} />

@@ -39,8 +39,12 @@ import {
   REGISTER_SCREEN_INDEX,
   REGISTRATION_TEXT,
   UPLOAD_AADHAR_TEXT,
+  UPLOAD_CAMERA_TEXT,
+  UPLOAD_FROM_GALLERY,
   UPLOAD_GST_CERTIFICATE_TEXT,
   UPLOAD_PAN_CARD_TEXT,
+  VEREFIED_BUTTON_TEXT,
+  VERIFY_BUTTON_TEXT,
   WHATSAPP_UPDATES_TEXT,
 } from './registerUtility';
 import {color} from '../../../../assets/colors/color';
@@ -105,7 +109,7 @@ import {
 } from './registerNetworkCall';
 import {requestCameraPermission} from '../../../../commonMethod/permission';
 import PhoneNumerTextInput from '../../../../component/common/phoneNumberTextInput';
-import { EDIT_PROFILE_TEXT } from '../module/Account/AccountUtility';
+import {EDIT_PROFILE_TEXT} from '../module/Account/AccountUtility';
 
 const Register = ({navigation, route}) => {
   const isFromEditProfile = route?.params?.isFromEditProfile;
@@ -434,7 +438,7 @@ const Register = ({navigation, route}) => {
             <View style={styles.singleHeight} />
 
             <View style={style.gstPlaceHolderFlex}>
-              <View style={{width: '67%'}}>
+              <View style={style.gstTextInputWidth}>
                 <CustomTextInput
                   placeholder={'                                             '}
                   needIconDivider={false}
@@ -448,7 +452,7 @@ const Register = ({navigation, route}) => {
                 {isVerfied ? (
                   <View>
                     <AppButton
-                      title={'Verify'}
+                      title={VERIFY_BUTTON_TEXT}
                       customButtonStyle={style.blueVerifyButton}
                       rightIconHeight={hp(4)}
                       rightIconWidth={wp(5)}
@@ -458,7 +462,7 @@ const Register = ({navigation, route}) => {
                 ) : (
                   <View>
                     <AppButton
-                      title={'Verified'}
+                      title={VEREFIED_BUTTON_TEXT}
                       customButtonStyle={style.verifyButton}
                       rightIcon={RIGHT_MARK}
                       rightIconHeight={hp(4)}
@@ -516,7 +520,6 @@ const Register = ({navigation, route}) => {
               <View style={styles.doubleHeight} />
             </View>
             <View style={styles.doubleHeight} />
-
             <View>
               <MandatoryText
                 mandatoryText={GST_CERTIFICATE_TEXT}
@@ -818,26 +821,23 @@ const Register = ({navigation, route}) => {
           <View style={styles.doubleContentDivider} />
           <View style={styles.doubleContentDivider} />
           <View style={style.uploadImageModal}>
-            <View style={{alignSelf: 'flex-end', width: '10%'}}>
+            <View style={style.flexEndView}>
               <TouchableOpacity
                 onPress={() =>
                   setUploadcertificateModal(!uploadCertificateModal)
                 }>
-                <Image
-                  source={CROSS_ICON}
-                  style={{width: wp(5), height: hp(4)}}
-                />
+                <Image source={CROSS_ICON} style={style.crossIconStyle} />
               </TouchableOpacity>
             </View>
             <View style={styles.singleHeight} />
             <View style={styles.verticalLine} />
             <View style={styles.doubleHeight} />
             <TouchableOpacity onPress={() => onPressUploadFromCamera()}>
-              <Text style={style.uploadText}>Upload from camera</Text>
+              <Text style={style.uploadText}>{UPLOAD_CAMERA_TEXT}</Text>
             </TouchableOpacity>
             <View style={styles.thirpleHeight} />
             <TouchableOpacity onPress={() => onPressUploadFromGallery()}>
-              <Text style={style.uploadText}>Upload from gallery</Text>
+              <Text style={style.uploadText}>{UPLOAD_FROM_GALLERY}</Text>
             </TouchableOpacity>
           </View>
         </Modal>
@@ -1065,5 +1065,8 @@ const style = StyleSheet.create({
     fontSize: 20,
     color: color.grey1,
   },
+  gstTextInputWidth: {width: '67%'},
+  flexEndView: {alignSelf: 'flex-end', width: '10%'},
+  crossIconStyle: {width: wp(5), height: hp(4)},
 });
 export default Register;

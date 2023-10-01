@@ -32,6 +32,7 @@ import {
 } from '../../../../assets/imagepath/imagepath';
 import CustomTextInput from '../../../../component/common/customTextInput';
 import {
+  ACTIVITY_INDICATOR,
   KEYBOARD_TYPE,
   TOAST_MESSAGE_TYPE,
 } from '../../../../general/generalConst';
@@ -41,6 +42,7 @@ import {SCREEN_NAME} from '../../../../general/screenName';
 import AsynStorage from '@react-native-async-storage/async-storage';
 import {PracticeContext} from '../../../../useContext/PracticeContext';
 import {ShowToastMessage} from '../../../../commonMethod/toastMessage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({navigation}) => {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -48,8 +50,8 @@ const Login = ({navigation}) => {
   const [showPassword, setShowPassword] = useState(true);
   const [errorText, setErrorText] = useState('');
   const [buttonLoader, setButtonLoader] = useState(false);
-  const tempMobileNumber = '8088187007';
-  const tempPassword = 'devi@123456';
+  const tempMobileNumber = '9611623802';
+  const tempPassword = 'mobilenumber';
   const {setUserLOggedIn} = useContext(PracticeContext);
 
   const onChanePhoneNumber = e => {
@@ -76,6 +78,7 @@ const Login = ({navigation}) => {
     console.log(buttonLoader);
     if (phoneNumber == tempMobileNumber && password == tempPassword) {
       await setUserLOggedIn(true);
+      // const aksh = await AsyncStorage.setItem('userLoggedIn')
       ShowToastMessage(
         TOAST_MESSAGE_TYPE.success,
         'Hello',
@@ -102,9 +105,7 @@ const Login = ({navigation}) => {
                 <Text style={style.loginText}>{LOGIN_TEXT}</Text>
                 <View style={style.itemDivider} />
                 <Text style={style.errorText}>{errorText}</Text>
-
-                {buttonLoader && <ActivityIndicator size="large" />}
-
+                {buttonLoader && <ActivityIndicator size={ACTIVITY_INDICATOR.large} />}
                 <View style={style.itemDivider} />
                 <View>
                   <CustomTextInput

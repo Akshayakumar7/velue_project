@@ -23,6 +23,7 @@ import {
 } from '../../../../../assets/imagepath/imagepath';
 import {INDIAN_RUPEE_SYMBOL} from '../../../../../component/common/componentUtility';
 import AppButton from '../../../../../component/common/appButton';
+import { SELECT_ORDER } from './HomeScreenUtility';
 
 const ProductDescription = ({navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(-1);
@@ -157,13 +158,13 @@ const ProductDescription = ({navigation}) => {
                 renderProductDescription(item, index)
               }
               keyExtractor={item => item?.id}
-              style={{marginBottom:hp(10)}}
+              style={style.flatlistBottomMargin}
             />
           </View>
         </ScrollView>
         <View style={style.touchableStyle}>
           <AppButton
-            title={'SELECT ORDER'}
+            title={SELECT_ORDER}
             customButtonStyle={style.selectOrderButtonStyle}
           />
         </View>
@@ -245,7 +246,8 @@ const style = StyleSheet.create({
   },
   selectOrderButtonStyle: {
     borderRadius: hp(2),
-    height:hp(6)
+    height: hp(6),
   },
+  flatlistBottomMargin:{marginBottom: hp(10)}
 });
 export default ProductDescription;

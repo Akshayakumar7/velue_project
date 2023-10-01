@@ -19,10 +19,11 @@ import {BATH_TUB_IMAGE} from '../../../../imagePath/imagePath';
 import {LOGO} from '../../../../assets/imagepath/imagepath';
 import styles from '../../../../general/generalStyleSheet';
 import {PracticeContext} from '../../../../useContext/PracticeContext';
+import { SCREEN_NAME } from '../../../../general/screenName';
 
 const GetStarted = ({navigation}) => {
   const onPressGetStartedScreen = () => {
-    navigation.navigate('Login');
+    navigation.navigate(SCREEN_NAME.Login);
   };
   return (
     <View>

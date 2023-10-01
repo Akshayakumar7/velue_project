@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {View, StyleSheet, FlatList, Keyboard} from 'react-native';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {color} from '../../../../../assets/colors/color';
@@ -15,10 +15,16 @@ import {
   GREY_CROSS_ICON,
   SEARCH_ICON,
 } from '../../../../../assets/imagepath/imagepath';
+import {BASE_URL, TOAST_MESSAGE_TYPE} from '../../../../../general/generalConst';
+import { ShowToastMessage } from '../../../../../commonMethod/toastMessage';
+import axios from 'axios';
+import OrderSkeletonLoader from './OrderScreenLoader';
 
 const Orders = ({navigation}) => {
   const [activeTab, setActiveTab] = useState(true);
   const [searchText, setSearchText] = useState('');
+  const [draftData,setDraftData] = useState([]);
+  const [loader,setLoader] = useState(false)
 
   const data = [
     {
@@ -27,8 +33,7 @@ const Orders = ({navigation}) => {
       amount: 'Order ID - 9865491',
       status: 'Order Placed',
       cost: '10000',
-      color: color.darkblue,
-      status: 'Order Placed',
+      color: color.darkblue,status: 'Order Placed',
     },
     {
       orderId: 'Order ID - 9865492',
@@ -37,7 +42,7 @@ const Orders = ({navigation}) => {
       status: 'Order Placed',
       cost: '20000',
       color: 'green',
-      status: 'Approved',
+     
     },
     {
       orderId: 'Order ID - 9865493',
@@ -46,7 +51,7 @@ const Orders = ({navigation}) => {
       status: 'Order Placed',
       cost: '30000',
       color: 'yellow',
-      status: 'In-Transit',
+      
     },
     {
       orderId: 'Order ID - 9865494',
@@ -55,7 +60,7 @@ const Orders = ({navigation}) => {
       status: 'Order Placed',
       cost: '50000',
       color: '#800080',
-      status: 'Delivered',
+   
     },
     {
       orderId: 'Order ID - 9865495',
@@ -64,7 +69,7 @@ const Orders = ({navigation}) => {
       status: 'Order Placed',
       cost: '10000',
       color: 'pink',
-      status: 'Rejected',
+      
     },
     {
       orderId: 'Order ID - 9865496',
@@ -73,7 +78,7 @@ const Orders = ({navigation}) => {
       status: 'Order Placed',
       cost: '20000',
       color: 'red',
-      status: 'Rejected',
+      
     },
     {
       orderId: 'Order ID - 9865497',
@@ -82,7 +87,6 @@ const Orders = ({navigation}) => {
       status: 'Order Placed',
       cost: '30000',
       backgroundColor: color.darkblue,
-      status: 'Order Placed',
     },
     {
       orderId: 'Order ID - 9865498',
@@ -91,7 +95,6 @@ const Orders = ({navigation}) => {
       status: 'Order Placed',
       cost: '50000',
       color: 'green',
-      status: 'Approved',
     },
   ];
 
@@ -154,6 +157,30 @@ const Orders = ({navigation}) => {
     },
   ];
 
+  const fetchDraftData = async () => {
+    setLoader(true);
+    try {
+      const response = await axios.get('http:/192.168.0.128:8080/order/getAllOrders'); // Make a GET request
+      console.log('response>>>>', response?.data);
+      setDraftData(response?.data ?? []);
+      setLoader(false);
+    } catch (error) {
+      console.log("error",error)
+      setLoader(false);
+      ShowToastMessage(
+        TOAST_MESSAGE_TYPE.error,
+        '',
+        error?.response?.data?.message == 'No message available'
+          ? 'Something went wrong'
+          : error?.response?.data?.message,
+      );
+    }
+  };
+
+  useEffect(()=>{
+    fetchDraftData()
+  },[])
+
   const renderProgressItem = item => {
     return (
       <View key={item.id}>
@@ -166,7 +193,7 @@ const Orders = ({navigation}) => {
     );
   };
 
-  const renderDraftItems = (item,index) => {
+  const renderDraftItems = (item, index) => {
     return (
       <View key={index}>
         <DraftCard
@@ -201,22 +228,25 @@ const Orders = ({navigation}) => {
       <View style={style.backgroundColorView}>
         <View style={styles.doubleHeight} />
         {activeTab ? (
-          <View style={{paddingHorizontal: hp(1)}}>
+          <View style={style.commonHorizontalPadding}>
+            {
+              loader && <OrderSkeletonLoader/>
+            }
             <FlatList
-              data={data}
-              renderItem={({item,index}) => renderDraftItems(item,index)}
+              data={draftData ?? []}
+              renderItem={({item, index}) => renderDraftItems(item, index)}
               keyExtractor={index => index}
               style={style.flatListBottomMargin}
             />
           </View>
         ) : (
-          <View style={{paddingHorizontal: hp(1)}}>
-            <FlatList
+          <View style={style.commonHorizontalPadding}>
+            {/* <FlatList
               data={data}
               renderItem={({item}) => renderProgressItem(item)}
               keyExtractor={item => item?.id}
               style={style.flatListBottomMargin}
-            />
+            /> */}
           </View>
         )}
       </View>
@@ -242,6 +272,7 @@ const style = StyleSheet.create({
   },
   backgroundColorView: {backgroundColor: color.lightGreen},
   flatListBottomMargin: {marginBottom: hp(37)},
+  commonHorizontalPadding:{paddingHorizontal: hp(1)}
 });
 
 export default Orders;

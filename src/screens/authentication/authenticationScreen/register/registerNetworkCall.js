@@ -9,7 +9,7 @@ export const getJoke = async () => {
 };
 
 export const addNewUserData = data => {
-  console.log('sfjkghasdfj')
+  console.log('sfjkghasdfj');
   try {
     const url = 'http://localhost:8080/customer/saveCustomers';
     axios.post(url, data).then(response => {
@@ -21,12 +21,13 @@ export const addNewUserData = data => {
   }
 };
 
-export const apiTest= data => {
-  console.log('sfjkghasdfj',data)
-    const url = 'http://192.168.31.72:8080/customer/saveCustomers';
-    return axios.post(url, data).then(response => response).catch((err) => err)
-  
-
+export const apiTest = data => {
+  console.log('sfjkghasdfj', data);
+  const url = 'http://192.168.31.72:8080/';
+  return axios
+    .post(url, data)
+    .then(response => response)
+    .catch(err => err);
 };
 
 // https://jsonplaceholder.typicode.com/posts?

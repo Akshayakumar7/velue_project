@@ -21,6 +21,8 @@ export const SCREEN_NAME = {
   
 };
 
+export const BOTTOM_TAB = "'BottomTab"
+
 export const BOTTOM_TAB_SCREEN_NAMES = {
   NestedHomeScreenNavigation: 'NestedHomeScreenNavigation',
 };

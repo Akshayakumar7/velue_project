@@ -18,3 +18,5 @@ export const CONFORM_PASSWORD_TEXT = 'Confirm Password';
 export const MOBILE_NUMBER_TEXT = 'Mobile Number';
 export const PASSWORD_TEXT = 'Password';
 export const GET_STARTED_TEXT = 'Get Started';
+export const NEW_PASSWORD = 'New Password';
+export const RE_ENTER_PASSWORD = 'Re-enter Password';

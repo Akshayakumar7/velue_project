@@ -15,9 +15,11 @@ import {
   HEADING_TEXT,
   INVALID_EMAIL_ADDRESS_ERROR_TEXT,
   LOGIN_TEXT,
+  NEW_PASSWORD,
   PASSWORD_RESET_TEXT,
   REGISTER_HERE_TEXT,
   RESET_TEXT,
+  RE_ENTER_PASSWORD,
   SENT_OTP_TEXT,
 } from './loginUtility';
 import AppButton from '../../../../component/common/appButton';
@@ -26,6 +28,7 @@ import {LOGO, PERSON_ICON} from '../../../../assets/imagepath/imagepath';
 import styles from '../../../../general/generalStyleSheet';
 import CustomTextInput from '../../../../component/common/customTextInput';
 import {KEYBOARD_TYPE} from '../../../../general/generalConst';
+import { SCREEN_NAME } from '../../../../general/screenName';
 
 const PasswordReset = ({navigation}) => {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -35,7 +38,7 @@ const PasswordReset = ({navigation}) => {
   };
 
   const onPressSendOtp = () => {
-    navigation.navigate('Login');
+    navigation.navigate(SCREEN_NAME.Login);
   };
 
   return (
@@ -59,12 +62,12 @@ const PasswordReset = ({navigation}) => {
                 <View style={styles.doubleHeight} />
 
                 <CustomTextInput
-                  placeholder={'New Password'}
+                  placeholder={NEW_PASSWORD}
                   needIconDivider={false}
                 />
                 <View style={styles.doubleHeight} />
                 <CustomTextInput
-                  placeholder={'Re-enter Password'}
+                  placeholder={RE_ENTER_PASSWORD}
                   needIconDivider={false}
                 />
                 <View style={styles.doubleContentDivider} />
