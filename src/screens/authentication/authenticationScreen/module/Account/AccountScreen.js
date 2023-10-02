@@ -1,10 +1,11 @@
-import React, {useContext} from 'react';
+import React, {useContext,useState} from 'react';
 import {
   StyleSheet,
   Text,
   View,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import Header from '../../../../../component/common/appHeader';
 import {color} from '../../../../../assets/colors/color';
@@ -28,12 +29,22 @@ import {
 import SvgImage from '../../../../../component/common/svgImage';
 import {PracticeContext} from '../../../../../useContext/PracticeContext';
 import {SCREEN_NAME} from '../../../../../general/screenName';
+import * as Keychain from 'react-native-keychain';
+import {ACTIVITY_INDICATOR} from '../../../../../general/generalConst';
 
 const Profile = ({navigation}) => {
+  const [loader, setLoader] = useState(false);
   const {setUserLOggedIn} = useContext(PracticeContext);
 
   const onPressEditProfile = () => {
     navigation.navigate(SCREEN_NAME.Register, {isFromEditProfile: true});
+  };
+
+  const onPressLogout = async () => {
+    setLoader(true);
+    await Keychain.resetGenericPassword();
+    setUserLOggedIn(false);
+    setLoader(false);
   };
   return (
     <View style={style.mainView}>
@@ -113,12 +124,18 @@ const Profile = ({navigation}) => {
                 </View>
                 <View style={styles.midDivider} />
               </View>
-
               <View style={style.bottomMargin} />
             </View>
           </View>
+          <View style={{height: 20}} />
+          {loader && (
+            <ActivityIndicator
+              color={color.primaryBlue}
+              size={ACTIVITY_INDICATOR.large}
+            />
+          )}
           <View style={styles.doubleContentDivider} />
-          <View style={styles.doubleContentDivider} />
+
           <View>
             <View style={style.whiteCard}>
               <View style={styles.midDivider} />
@@ -134,7 +151,7 @@ const Profile = ({navigation}) => {
                 </View>
 
                 <View>
-                  <TouchableOpacity onPress={() => setUserLOggedIn(false)}>
+                  <TouchableOpacity onPress={() => onPressLogout()}>
                     <SvgImage
                       Source={LOG_OUT_ICON}
                       height={hp(3.5)}

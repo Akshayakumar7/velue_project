@@ -1,28 +1,15 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import {
-  Text,
-  View,
-  ImageBackground,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  KeyboardAvoidingView,
   ActivityIndicator,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import {hp, wp} from '../../../../commonMethod/screenRatio';
-import {color} from '../../../../assets/colors/color';
-import {
-  COMPLETE_SOLUTION_TEXT,
-  FORGOT_PASSWORD_TEXT,
-  HEADING_TEXT,
-  INVALID_EMAIL_ADDRESS_ERROR_TEXT,
-  LOGIN_TEXT,
-  MOBILE_NUMBER_TEXT,
-  PASSWORD_TEXT,
-  REGISTER_HERE_TEXT,
-} from './loginUtility';
-import AppButton from '../../../../component/common/appButton';
-import {BATH_TUB_IMAGE} from '../../../../imagePath/imagePath';
+import * as Keychain from 'react-native-keychain';
+import { color } from '../../../../assets/colors/color';
 import {
   CLOSED_EYE_ICON,
   LOCK_ICON,
@@ -30,6 +17,9 @@ import {
   OPENED_EYE_ICON,
   PERSON_ICON,
 } from '../../../../assets/imagepath/imagepath';
+import { hp, wp } from '../../../../commonMethod/screenRatio';
+import { ShowToastMessage } from '../../../../commonMethod/toastMessage';
+import ApplyCancelButton from '../../../../component/common/applyCancelButton';
 import CustomTextInput from '../../../../component/common/customTextInput';
 import {
   ACTIVITY_INDICATOR,
@@ -37,12 +27,17 @@ import {
   TOAST_MESSAGE_TYPE,
 } from '../../../../general/generalConst';
 import styles from '../../../../general/generalStyleSheet';
-import ApplyCancelButton from '../../../../component/common/applyCancelButton';
-import {SCREEN_NAME} from '../../../../general/screenName';
-import AsynStorage from '@react-native-async-storage/async-storage';
-import {PracticeContext} from '../../../../useContext/PracticeContext';
-import {ShowToastMessage} from '../../../../commonMethod/toastMessage';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SCREEN_NAME } from '../../../../general/screenName';
+import { BATH_TUB_IMAGE } from '../../../../imagePath/imagePath';
+import { PracticeContext } from '../../../../useContext/PracticeContext';
+import {
+  FORGOT_PASSWORD_TEXT,
+  HEADING_TEXT,
+  LOGIN_TEXT,
+  MOBILE_NUMBER_TEXT,
+  PASSWORD_TEXT,
+  REGISTER_HERE_TEXT
+} from './loginUtility';
 
 const Login = ({navigation}) => {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -79,6 +74,7 @@ const Login = ({navigation}) => {
     if (phoneNumber == tempMobileNumber && password == tempPassword) {
       await setUserLOggedIn(true);
       // const aksh = await AsyncStorage.setItem('userLoggedIn')
+      await Keychain.setGenericPassword(phoneNumber, password);
       ShowToastMessage(
         TOAST_MESSAGE_TYPE.success,
         'Hello',
