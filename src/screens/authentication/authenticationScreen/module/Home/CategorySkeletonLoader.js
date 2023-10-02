@@ -8,31 +8,31 @@ const CategorySkeletonLoader = () => {
       <SkeletonPlaceholder borderRadius={4}>
         <SkeletonPlaceholder.Item flexDirection="row" alignItems="center">
           <SkeletonPlaceholder.Item
-            width={45}
-            height={40}
+            width={50}
+            height={50}
             borderRadius={50}
             style={{margin: 10}}
           />
           <SkeletonPlaceholder.Item>
-            <SkeletonPlaceholder.Item
-              width={120}
-              height={40}
-              borderRadius={10}
-            />
+            <SkeletonPlaceholder.Item width={120} height={40} />
           </SkeletonPlaceholder.Item>
           <SkeletonPlaceholder.Item marginLeft={10}>
-            <SkeletonPlaceholder.Item
-              width={120}
-              height={40}
-              borderRadrius={10}
-            />
+            <SkeletonPlaceholder.Item width={120} height={40} />
           </SkeletonPlaceholder.Item>
           <SkeletonPlaceholder.Item marginLeft={10}>
-            <SkeletonPlaceholder.Item
-              width={120}
-              height={40}
-              borderRadius={10}
-            />
+            <SkeletonPlaceholder.Item width={120} height={40} />
+          </SkeletonPlaceholder.Item>
+          <SkeletonPlaceholder.Item marginLeft={10}>
+            <SkeletonPlaceholder.Item width={120} height={40} />
+          </SkeletonPlaceholder.Item>
+          <SkeletonPlaceholder.Item marginLeft={10}>
+            <SkeletonPlaceholder.Item width={120} height={40} />
+          </SkeletonPlaceholder.Item>
+          <SkeletonPlaceholder.Item marginLeft={10}>
+            <SkeletonPlaceholder.Item width={120} height={40} />
+          </SkeletonPlaceholder.Item>
+          <SkeletonPlaceholder.Item marginLeft={10}>
+            <SkeletonPlaceholder.Item width={120} height={40} />
           </SkeletonPlaceholder.Item>
         </SkeletonPlaceholder.Item>
       </SkeletonPlaceholder>

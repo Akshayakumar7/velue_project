@@ -9,15 +9,15 @@ const ProductSkeletonLoader = () => {
       <SkeletonPlaceholder borderRadius={4}>
         <SkeletonPlaceholder.Item>
           <SkeletonPlaceholder.Item
-            width={370}
+            width={'100%'}
             height={140}
             borderRadius={4}
             alignSelf="center"
             marginBottom={10}
-            marginTop={10}
+           
           />  
           <SkeletonPlaceholder.Item
-            width={370}
+            width={'100%'}
             height={140}
             borderRadius={4}
             alignSelf="center"
@@ -25,7 +25,7 @@ const ProductSkeletonLoader = () => {
           />
           
           <SkeletonPlaceholder.Item
-            width={370}
+             width={'100%'}
             height={140}
             borderRadius={4}
             alignSelf="center"
@@ -33,7 +33,7 @@ const ProductSkeletonLoader = () => {
           />
          
           <SkeletonPlaceholder.Item
-            width={370}
+             width={'100%'}
             height={140}
             borderRadius={4}
             alignSelf="center"
@@ -41,7 +41,7 @@ const ProductSkeletonLoader = () => {
           />
           
           <SkeletonPlaceholder.Item
-            width={370}
+             width={'100%'}
             height={140}
             borderRadius={4}
             alignSelf="center"
@@ -49,7 +49,7 @@ const ProductSkeletonLoader = () => {
           />
         
           <SkeletonPlaceholder.Item
-            width={370}
+             width={'100%'}
             height={140}
             borderRadius={4}
             alignSelf="center"
