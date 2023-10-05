@@ -1,19 +1,153 @@
-import React from 'react';
-import {ImageBackground, StyleSheet, Text, View} from 'react-native';
-import {color} from '../../../../assets/colors/color';
-import {LOGO} from '../../../../assets/imagepath/imagepath';
-import {hp, wp} from '../../../../commonMethod/screenRatio';
-import {BATH_TUB_IMAGE} from '../../../../imagePath/imagePath';
-import {HEADING_TEXT} from './loginUtility';
+import React, { useContext, useState } from 'react';
+import {
+  ActivityIndicator,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
+import * as Keychain from 'react-native-keychain';
+import { color } from '../../../../assets/colors/color';
+import {
+  CLOSED_EYE_ICON,
+  LOCK_ICON,
+  LOGO,
+  OPENED_EYE_ICON,
+  PERSON_ICON,
+} from '../../../../assets/imagepath/imagepath';
+import { hp, wp } from '../../../../commonMethod/screenRatio';
+import { ShowToastMessage } from '../../../../commonMethod/toastMessage';
+import ApplyCancelButton from '../../../../component/common/applyCancelButton';
+import CustomTextInput from '../../../../component/common/customTextInput';
+import {
+  ACTIVITY_INDICATOR,
+  KEYBOARD_TYPE,
+  TOAST_MESSAGE_TYPE,
+} from '../../../../general/generalConst';
+import styles from '../../../../general/generalStyleSheet';
+import { SCREEN_NAME } from '../../../../general/screenName';
+import { BATH_TUB_IMAGE } from '../../../../imagePath/imagePath';
+import { PracticeContext } from '../../../../useContext/PracticeContext';
+import {
+  FORGOT_PASSWORD_TEXT,
+  HEADING_TEXT,
+  LOGIN_TEXT,
+  MOBILE_NUMBER_TEXT,
+  PASSWORD_TEXT,
+  REGISTER_HERE_TEXT
+} from './loginUtility';
 
 const LoadingScreen = ({navigation}) => {
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(true);
+  const [errorText, setErrorText] = useState('');
+  const [buttonLoader, setButtonLoader] = useState(false);
+  const tempMobileNumber = '9611623802';
+  const tempPassword = 'mobilenumber';
+  const {setUserLOggedIn} = useContext(PracticeContext);
+
+  const onChanePhoneNumber = e => {
+    setPhoneNumber(e);
+    setErrorText('');
+  };
+
+  const onChanePassword = e => {
+    setPassword(e);
+    setErrorText('');
+  };
+
+  const onPressForgotPassword = () => {
+    navigation.navigate(SCREEN_NAME.ForgotPassword);
+  };
+
+  const onPressRegisterHere = () => {
+    navigation.navigate(SCREEN_NAME.Register);
+  };
+
+  const onPressLogin = async () => {
+    var temp = true;
+    setButtonLoader(temp);
+    console.log(buttonLoader);
+    if (phoneNumber == tempMobileNumber && password == tempPassword) {
+      await setUserLOggedIn(true);
+      // const aksh = await AsyncStorage.setItem('userLoggedIn')
+      await Keychain.setGenericPassword(phoneNumber, password);
+      ShowToastMessage(
+        TOAST_MESSAGE_TYPE.success,
+        'Hello',
+        'Successfully logged In',
+      );
+    } else {
+      setErrorText('Please enter valid Mobile number and Password');
+    }
+    setButtonLoader(false);
+  };
   return (
-    <View >
-      <ImageBackground source={BATH_TUB_IMAGE} >
+    <View>
+      <ImageBackground source={BATH_TUB_IMAGE} style={style.bathTubImageStyle}>
         <View style={style.mainView}>
+          <View style={style.doubleContentDivider} />
           <LOGO style={style.logoStyle} height={hp(22)} width={wp(37)} />
           <View style={style.smallView} />
           <Text style={style.headingText}>{HEADING_TEXT}</Text>
+          <View style={style.contentDivider} />
+          {/* <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={style.whiteContent}>
+              <View style={style.verticalDivider}>
+                <View style={style.itemDivider} />
+                <Text style={style.loginText}>{LOGIN_TEXT}</Text>
+                <View style={style.itemDivider} />
+                <Text style={style.errorText}>{errorText}</Text>
+                {buttonLoader && <ActivityIndicator size={ACTIVITY_INDICATOR.large} />}
+                <View style={style.itemDivider} />
+                <View>
+                  <CustomTextInput
+                    placeholder={MOBILE_NUMBER_TEXT}
+                    leftIcon={PERSON_ICON}
+                    leftIconHeight={hp(5)}
+                    leftIconWidth={wp(6)}
+                    keyboardType={KEYBOARD_TYPE.numeric}
+                    onChangeText={e => onChanePhoneNumber(e)}
+                    value={phoneNumber}
+                  />
+                </View>
+                <View style={styles.doubleHeight} />
+                <View>
+                  <CustomTextInput
+                    placeholder={PASSWORD_TEXT}
+                    leftIcon={LOCK_ICON}
+                    leftIconHeight={hp(5)}
+                    leftIconWidth={wp(6)}
+                    secureTextEntry={showPassword}
+                    onChangeText={e => onChanePassword(e)}
+                    rightIcon={showPassword ? CLOSED_EYE_ICON : OPENED_EYE_ICON}
+                    rightIconHeight={hp(5)}
+                    rightIconWidth={wp(6)}
+                    changeEyeIcon={password}
+                    otherRightIcon={CLOSED_EYE_ICON}
+                    onPressRightIcon={() => setShowPassword(!showPassword)}
+                  />
+                </View>
+                <View style={styles.thirpleHeight} />
+                <TouchableOpacity onPress={() => onPressForgotPassword()}>
+                  <Text style={[styles.commonBlueText, styles.alignText]}>
+                    {FORGOT_PASSWORD_TEXT}
+                  </Text>
+                </TouchableOpacity>
+                <View style={styles.thirpleHeight} />
+                <View style={styles.thirpleHeight} />
+                <ApplyCancelButton
+                  cancelButtonText={REGISTER_HERE_TEXT}
+                  applyButtonText={LOGIN_TEXT}
+                  onPressCancelButton={() => onPressRegisterHere()}
+                  onPressApplyButton={() => onPressLogin()}
+                />
+              </View>
+            </View>
+          </ScrollView> */}
         </View>
       </ImageBackground>
     </View>
@@ -32,9 +166,6 @@ const style = StyleSheet.create({
   mainView: {
     backgroundColor: color.primaryBlue,
     flex: 1,
-    justifyContent: 'center',
-    alignContent: 'center',
-    alignItems: 'center',
   },
   contentDivider: {
     height: hp(7),
@@ -88,23 +219,3 @@ const style = StyleSheet.create({
   },
 });
 export default LoadingScreen;
-
-// import React from 'react';
-// import {Text, View} from 'react-native';
-
-// const SplashScreen = () => {
-//   return (
-//     <View style={style.mainView}>
-//       <Text>Hello, world!</Text>
-//     </View>
-//   );
-// };
-
-// const style = StyleSheet.create({
-//   mainView: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-// });
-// export default SplashScreen;

@@ -1,4 +1,4 @@
-import React, {useContext,useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -134,7 +134,10 @@ const Profile = ({navigation}) => {
               size={ACTIVITY_INDICATOR.large}
             />
           )}
+          <View style={{height: '8%'}} />
+
           <View style={styles.doubleContentDivider} />
+         
 
           <View>
             <View style={style.whiteCard}>
@@ -165,6 +168,8 @@ const Profile = ({navigation}) => {
             </View>
           </View>
           <View style={style.maxBottomMargin} />
+          <View style={styles.midDivider} />
+          <View style={styles.midDivider} />
         </View>
       </ScrollView>
     </View>

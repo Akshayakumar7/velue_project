@@ -77,7 +77,7 @@ const Login = ({navigation}) => {
       await Keychain.setGenericPassword(phoneNumber, password);
       ShowToastMessage(
         TOAST_MESSAGE_TYPE.success,
-        'Hello',
+        'BATHMART',
         'Successfully logged In',
       );
     } else {

@@ -35,6 +35,7 @@ import axios from 'axios';
 import productSkeletonLoader from '../../../../../screens/authentication/authenticationScreen/module/Home/productListSkeletonLoader';
 import ProductSkeletonLoader from '../../../../../screens/authentication/authenticationScreen/module/Home/productListSkeletonLoader';
 import CategorySkeletonLoader from './CategorySkeletonLoader';
+import BottomModal from '../../../../../component/common/bottomModal';
 
 const Home = ({navigation}) => {
   const [showModal, setShowModal] = useState(false);
@@ -43,6 +44,7 @@ const Home = ({navigation}) => {
   const [categoryData, setCategoryData] = useState([]);
   const [loader, setLoader] = useState(false);
   const [categoryLoader, setCategoryLoader] = useState(false);
+  const [sortModal, setSortModal] = useState(false);
   const productData = [
     {
       id: 1,
@@ -224,10 +226,8 @@ const Home = ({navigation}) => {
       setLoader(false);
       ShowToastMessage(
         TOAST_MESSAGE_TYPE.error,
-        '',
-        error?.response?.data?.message == 'No message available'
-          ? 'Something went wrong'
-          : error?.response?.data?.message,
+        'BATHMART',
+        'Something went wrong',
       );
     }
   };
@@ -245,10 +245,8 @@ const Home = ({navigation}) => {
       setCategoryLoader(false);
       ShowToastMessage(
         TOAST_MESSAGE_TYPE.error,
-        '',
-        error?.response?.data?.message == 'No message available'
-          ? 'Something went wrong'
-          : error?.response?.data?.message,
+        'BATHMART',
+        'Something went wrong',
       );
     }
   };
@@ -326,7 +324,7 @@ const Home = ({navigation}) => {
   const showToast = () => {
     ShowToastMessage(
       TOAST_MESSAGE_TYPE.success,
-      'Hello',
+      'BATHMART',
       'This is some something 👋',
     );
   };
@@ -370,7 +368,9 @@ const Home = ({navigation}) => {
         ) : (
           <View style={style.categoryFlex}>
             <View>
-              <TouchableOpacity style={style.sortIconView}>
+              <TouchableOpacity
+                style={style.sortIconView}
+                onPress={() => setSortModal(true)}>
                 <SvgImage Source={SORT_ICON} height={hp(6)} width={wp(9)} />
               </TouchableOpacity>
             </View>
@@ -399,7 +399,27 @@ const Home = ({navigation}) => {
             keyExtractor={item => item?.id}
           />
         </View>
+        {projectData?.length == 0 && !loader && (
+          <View style={{flex: 1}}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: 'bold',
+                textAlign: 'center',
+                color: color.darkblue,
+                marginBottom: hp(30),
+              }}>
+              Currently no data available
+            </Text>
+          </View>
+        )}
       </ScrollView>
+      <View>
+        <BottomModal
+          visible={sortModal}
+          onPressClose={() => setSortModal(!sortModal)}
+        />
+      </View>
       <View>
         <Modal
           animationType="slide"

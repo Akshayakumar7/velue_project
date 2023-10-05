@@ -8,7 +8,6 @@ import BottomTab from '../../../../navigation/BottomNavigation';
 import { PracticeContext } from '../../../../useContext/PracticeContext';
 import ForgotPassword from '../login/forgotPasswordScreen';
 import GetStarted from '../login/getStartedScreen';
-import LoadingScreen from '../login/loadingScreen';
 import Login from '../login/loginScreen';
 import OtpVerfication from '../login/otpVerification';
 import PasswordReset from '../login/passwordResetScreen';
@@ -21,6 +20,7 @@ import OrderSummary from '../module/Orders/OrderSummary';
 import SaveDraft from '../module/Orders/saveDraftScreen';
 import OnboardingCompleted from '../register/onBoardingCompletedScreen';
 import Register from '../register/registerScreen';
+import LoadingScreen from '../login/LoadingScreen';
 
 const Stack = createNativeStackNavigator();
 
