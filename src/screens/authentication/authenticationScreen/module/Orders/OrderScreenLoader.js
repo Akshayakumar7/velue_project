@@ -8,7 +8,7 @@ const OrderSkeletonLoader = () => {
       <SkeletonPlaceholder borderRadius={4}>
         <SkeletonPlaceholder.Item>
           <SkeletonPlaceholder.Item
-            width={370}
+            width={'90%'}
             height={160}
             borderRadius={4}
             alignSelf="center"
@@ -16,7 +16,7 @@ const OrderSkeletonLoader = () => {
             marginTop={10}
           />
           <SkeletonPlaceholder.Item
-            width={370}
+            width={'90%'}
             height={160}
             borderRadius={4}
             alignSelf="center"
@@ -24,7 +24,7 @@ const OrderSkeletonLoader = () => {
           />
 
           <SkeletonPlaceholder.Item
-            width={370}
+            width={'90%'}
             height={160}
             borderRadius={4}
             alignSelf="center"
@@ -32,7 +32,7 @@ const OrderSkeletonLoader = () => {
           />
 
           <SkeletonPlaceholder.Item
-            width={370}
+            width={'90%'}
             height={160}
             borderRadius={4}
             alignSelf="center"
@@ -40,7 +40,7 @@ const OrderSkeletonLoader = () => {
           />
 
           <SkeletonPlaceholder.Item
-            width={370}
+            width={'90%'}
             height={160}
             borderRadius={4}
             alignSelf="center"
@@ -48,14 +48,14 @@ const OrderSkeletonLoader = () => {
           />
 
           <SkeletonPlaceholder.Item
-            width={370}
+            width={'90%'}
             height={160}
             borderRadius={4}
             alignSelf="center"
             marginBottom={10}
           />
           <SkeletonPlaceholder.Item
-            width={370}
+            width={'90%'}
             height={160}
             borderRadius={4}
             alignSelf="center"
@@ -63,39 +63,35 @@ const OrderSkeletonLoader = () => {
             marginTop={10}
           />
           <SkeletonPlaceholder.Item
-            width={370}
+            width={'90%'}
             height={160}
             borderRadius={4}
             alignSelf="center"
             marginBottom={10}
           />
-
           <SkeletonPlaceholder.Item
-            width={370}
+            width={'90%'}
             height={160}
             borderRadius={4}
             alignSelf="center"
             marginBottom={10}
           />
-
           <SkeletonPlaceholder.Item
-            width={370}
+            width={'90%'}
             height={160}
             borderRadius={4}
             alignSelf="center"
             marginBottom={10}
           />
-
           <SkeletonPlaceholder.Item
-            width={370}
+            width={'90%'}
             height={160}
             borderRadius={4}
             alignSelf="center"
             marginBottom={10}
           />
-
           <SkeletonPlaceholder.Item
-            width={370}
+            width={'90%'}
             height={160}
             borderRadius={4}
             alignSelf="center"

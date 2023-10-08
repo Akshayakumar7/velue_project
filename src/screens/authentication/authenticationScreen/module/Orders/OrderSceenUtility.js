@@ -18,4 +18,6 @@ export const SAVE_TEXT = 'SAVE';
 export const ORDER_PLACED = 'Order Placed';
 export const YOU_CAN_SEE = 'You can see your listings in orders tab';
 export const ORDER_DRAFTED_TEXT = 'Order Drafted';
-export const YOU_CAN_SEE_YOUR_LISTING_IN_ORDER_TAB = 'You can see your listings in orders tab'
+export const YOU_CAN_SEE_YOUR_LISTING_IN_ORDER_TAB =
+  'You can see your listings in orders tab';
+export const NO_DATA_AVAILABLE_TEXT = 'Currently No Data Available';

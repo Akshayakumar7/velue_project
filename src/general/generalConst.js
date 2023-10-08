@@ -9,13 +9,13 @@ export const TOAST_MESSAGE_TYPE = {
   info: 'info',
 };
 
-export const ACTIVITY_INDICATOR ={
-  large:"large",
-  small:"small"
-}
+export const ACTIVITY_INDICATOR = {
+  large: 'large',
+  small: 'small',
+};
 export const AADHAR_REGEX = /^\d{12}$/;
 
 export const DRAFT_TEXT = 'Draft';
 export const IN_PROGRESS_TEXT = 'In Progress';
 
-export const BASE_URL = "'http://172.20.10.3:8080"
+export const BASE_URL = 'http://192.168.0.128:8081';

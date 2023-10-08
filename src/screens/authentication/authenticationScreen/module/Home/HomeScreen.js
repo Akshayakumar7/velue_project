@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  RefreshControl
 } from 'react-native';
 import Toast from 'react-native-toast-message';
 import {color} from '../../../../../assets/colors/color';
@@ -36,6 +37,7 @@ import productSkeletonLoader from '../../../../../screens/authentication/authent
 import ProductSkeletonLoader from '../../../../../screens/authentication/authenticationScreen/module/Home/productListSkeletonLoader';
 import CategorySkeletonLoader from './CategorySkeletonLoader';
 import BottomModal from '../../../../../component/common/bottomModal';
+import {fetchDataFromApi, getCategoryData} from './HomeScreenNetworkCall';
 
 const Home = ({navigation}) => {
   const [showModal, setShowModal] = useState(false);
@@ -213,56 +215,44 @@ const Home = ({navigation}) => {
     setShowOrderIdbar(true);
   };
 
-  const fetchDataFromApi = async () => {
-    setLoader(true);
+  const getNewData = async () => {
     try {
-      const response = await axios.get(
-        'http://192.168.0.128:8080/dashboard/restockProducts',
-      ); // Make a GET request
-      console.log('response>>>>', response?.data);
-      setProjectData(response?.data ?? []);
+      setLoader(true);
+      const allProductData = await fetchDataFromApi();
+      setProjectData(allProductData ?? []);
       setLoader(false);
     } catch (error) {
       setLoader(false);
-      ShowToastMessage(
-        TOAST_MESSAGE_TYPE.error,
-        'BATHMART',
-        'Something went wrong',
-      );
+      console.log('>>>>', error);
     }
   };
 
-  const getCategoryData = async () => {
-    setCategoryLoader(true);
+  const getAllCategoryData = async () => {
     try {
-      const response = await axios.get(
-        'http:/192.168.0.128:8080/product/getAllCategory',
-      );
-
-      setCategoryData(response?.data ?? []);
+      setCategoryLoader(true);
+      const tempCategoryData = await getCategoryData();
+      setCategoryData(tempCategoryData ?? []);
       setCategoryLoader(false);
     } catch (error) {
       setCategoryLoader(false);
-      ShowToastMessage(
-        TOAST_MESSAGE_TYPE.error,
-        'BATHMART',
-        'Something went wrong',
-      );
+      console.log('categoryError', error);
     }
   };
 
   useEffect(() => {
-    fetchDataFromApi();
-    getCategoryData();
+    getNewData();
+    getAllCategoryData();
   }, []);
 
-  const renderProductList = item => {
+  const renderProductList = (item, index) => {
+  
     return (
-      <View style={style.productWidth}>
+      <View style={style.productWidth} key={index}>
         <ListProductCard
           data={item}
           onPressCard={() => onPressCard()}
-          onPressSelectOrder={() => handleModal()}
+          onPressSelectOrder={()=>handleModal()}
+          // value={index}
         />
       </View>
     );
@@ -337,6 +327,10 @@ const Home = ({navigation}) => {
     setShowModal(!showModal);
   };
 
+  const onRefreshProductData = () => {
+    getNewData();
+  };
+
   return (
     <View style={style.mainView}>
       <View style={styles.doubleHeight} />
@@ -378,7 +372,10 @@ const Home = ({navigation}) => {
             <View>
               <FlatList
                 data={categoryData ?? []}
-                renderItem={({item}) => renderFilterButtonList(item)}
+                renderItem={({item, index}) =>
+                  renderFilterButtonList(item, index)
+                }
+                // keyExtractor={index => index}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 style={style.filterButtonEndMargin}
@@ -392,11 +389,11 @@ const Home = ({navigation}) => {
         <View style={style.productView}>
           <FlatList
             data={projectData ?? []}
-            renderItem={({item}) => renderProductList(item)}
+            renderItem={({item, index}) => renderProductList(item, index)}
             ItemSeparatorComponent={itemSeperator()}
             showsVerticalScrollIndicator={false}
             style={style.flatListMargin}
-            keyExtractor={item => item?.id}
+            keyExtractor={index => index}
           />
         </View>
         {projectData?.length == 0 && !loader && (
@@ -459,7 +456,7 @@ const Home = ({navigation}) => {
                 title={CREATE_NEW_ORDER}
                 customButtonStyle={style.createOrderButtonStyle}
                 customButtonTextStyle={style.createOrderButtonTextStyle}
-                onPress={() => handleModal()}
+                onPress={() => console.log(item?.id)}
               />
             </View>
           </View>

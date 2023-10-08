@@ -9,53 +9,51 @@ const ProductSkeletonLoader = () => {
       <SkeletonPlaceholder borderRadius={4}>
         <SkeletonPlaceholder.Item>
           <SkeletonPlaceholder.Item
-            width={'100%'}
-            height={140}
-            borderRadius={4}
-            alignSelf="center"
-            marginBottom={10}
-           
-          />  
-          <SkeletonPlaceholder.Item
-            width={'100%'}
+            width={'90%'}
             height={140}
             borderRadius={4}
             alignSelf="center"
             marginBottom={10}
           />
-          
           <SkeletonPlaceholder.Item
-             width={'100%'}
+            width={'90%'}
             height={140}
             borderRadius={4}
             alignSelf="center"
             marginBottom={10}
           />
-         
+
           <SkeletonPlaceholder.Item
-             width={'100%'}
+            width={'90%'}
             height={140}
             borderRadius={4}
             alignSelf="center"
             marginBottom={10}
           />
-          
+
           <SkeletonPlaceholder.Item
-             width={'100%'}
+            width={'90%'}
             height={140}
             borderRadius={4}
             alignSelf="center"
             marginBottom={10}
           />
-        
+
           <SkeletonPlaceholder.Item
-             width={'100%'}
+            width={'90%'}
             height={140}
             borderRadius={4}
             alignSelf="center"
             marginBottom={10}
           />
-          
+
+          <SkeletonPlaceholder.Item
+            width={'90%'}
+            height={140}
+            borderRadius={4}
+            alignSelf="center"
+            marginBottom={10}
+          />
         </SkeletonPlaceholder.Item>
       </SkeletonPlaceholder>
     </View>

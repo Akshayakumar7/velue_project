@@ -1,11 +1,11 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, FlatList, Keyboard} from 'react-native';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {color} from '../../../../../assets/colors/color';
 import {hp, wp} from '../../../../../commonMethod/screenRatio';
 import TabButton from '../../../../../component/common/tabButton';
 import Header from '../../../../../component/common/appHeader';
-import {ORDER_TEXT} from './OrderSceenUtility';
+import {NO_DATA_AVAILABLE_TEXT, ORDER_TEXT} from './OrderSceenUtility';
 import OrderIdCard from '../../../../../component/common/orderIdCard';
 import styles from '../../../../../general/generalStyleSheet';
 import DraftCard from '../../../../../component/common/draftCard';
@@ -15,16 +15,20 @@ import {
   GREY_CROSS_ICON,
   SEARCH_ICON,
 } from '../../../../../assets/imagepath/imagepath';
-import {BASE_URL, TOAST_MESSAGE_TYPE} from '../../../../../general/generalConst';
-import { ShowToastMessage } from '../../../../../commonMethod/toastMessage';
+import {
+  BASE_URL,
+  TOAST_MESSAGE_TYPE,
+} from '../../../../../general/generalConst';
+import {ShowToastMessage} from '../../../../../commonMethod/toastMessage';
 import axios from 'axios';
 import OrderSkeletonLoader from './OrderScreenLoader';
+import NoDataText from '../../../../../component/common/noDataText';
 
 const Orders = ({navigation}) => {
   const [activeTab, setActiveTab] = useState(true);
   const [searchText, setSearchText] = useState('');
-  const [draftData,setDraftData] = useState([]);
-  const [loader,setLoader] = useState(false)
+  const [draftData, setDraftData] = useState([]);
+  const [loader, setLoader] = useState(false);
 
   const data = [
     {
@@ -33,7 +37,8 @@ const Orders = ({navigation}) => {
       amount: 'Order ID - 9865491',
       status: 'Order Placed',
       cost: '10000',
-      color: color.darkblue,status: 'Order Placed',
+      color: color.darkblue,
+      status: 'Order Placed',
     },
     {
       orderId: 'Order ID - 9865492',
@@ -42,7 +47,6 @@ const Orders = ({navigation}) => {
       status: 'Order Placed',
       cost: '20000',
       color: 'green',
-     
     },
     {
       orderId: 'Order ID - 9865493',
@@ -51,7 +55,6 @@ const Orders = ({navigation}) => {
       status: 'Order Placed',
       cost: '30000',
       color: 'yellow',
-      
     },
     {
       orderId: 'Order ID - 9865494',
@@ -60,7 +63,6 @@ const Orders = ({navigation}) => {
       status: 'Order Placed',
       cost: '50000',
       color: '#800080',
-   
     },
     {
       orderId: 'Order ID - 9865495',
@@ -69,7 +71,6 @@ const Orders = ({navigation}) => {
       status: 'Order Placed',
       cost: '10000',
       color: 'pink',
-      
     },
     {
       orderId: 'Order ID - 9865496',
@@ -78,7 +79,6 @@ const Orders = ({navigation}) => {
       status: 'Order Placed',
       cost: '20000',
       color: 'red',
-      
     },
     {
       orderId: 'Order ID - 9865497',
@@ -160,26 +160,24 @@ const Orders = ({navigation}) => {
   const fetchDraftData = async () => {
     setLoader(true);
     try {
-      const response = await axios.get('http:/192.168.0.128:8080/order/getAllOrders'); // Make a GET request
+      const response = await axios.get(BASE_URL + '/order/getAllOrders'); // Make a GET request
       console.log('response>>>>', response?.data);
       setDraftData(response?.data ?? []);
       setLoader(false);
     } catch (error) {
-      console.log("error",error)
+      console.log('error>>>', error);
       setLoader(false);
       ShowToastMessage(
         TOAST_MESSAGE_TYPE.error,
-        '',
-        error?.response?.data?.message == 'No message available'
-          ? 'Something went wrong'
-          : error?.response?.data?.message,
+        'BATHMART',
+        error?.response?.data?.message ?? 'Something went wrong',
       );
     }
   };
 
-  useEffect(()=>{
-    fetchDraftData()
-  },[])
+  useEffect(() => {
+    fetchDraftData();
+  }, []);
 
   const renderProgressItem = item => {
     return (
@@ -229,15 +227,18 @@ const Orders = ({navigation}) => {
         <View style={styles.doubleHeight} />
         {activeTab ? (
           <View style={style.commonHorizontalPadding}>
-            {
-              loader && <OrderSkeletonLoader/>
-            }
+            {loader && <OrderSkeletonLoader />}
             <FlatList
               data={draftData ?? []}
               renderItem={({item, index}) => renderDraftItems(item, index)}
               keyExtractor={index => index}
               style={style.flatListBottomMargin}
             />
+            {draftData?.length == 0 && (
+              <View style={{marginBottom: '70%'}}>
+                <NoDataText label={NO_DATA_AVAILABLE_TEXT} />
+              </View>
+            )}
           </View>
         ) : (
           <View style={style.commonHorizontalPadding}>
@@ -272,7 +273,7 @@ const style = StyleSheet.create({
   },
   backgroundColorView: {backgroundColor: color.lightGreen},
   flatListBottomMargin: {marginBottom: hp(37)},
-  commonHorizontalPadding:{paddingHorizontal: hp(1)}
+  commonHorizontalPadding: {paddingHorizontal: hp(1)},
 });
 
 export default Orders;

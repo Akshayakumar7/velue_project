@@ -7,11 +7,13 @@ import styles from '../../general/generalStyleSheet';
 import {INDIAN_RUPEE_SYMBOL} from './componentUtility';
 import AppButton from './appButton';
 import {SELECT_ORDER} from './componentConst';
+import { CREATE_NEW_ORDER } from '../../screens/authentication/authenticationScreen/module/Home/HomeScreenUtility';
 
 const ListProductCard = props => {
-  const {data, onPressCard, onPressSelectOrder} = props;
+  // console.log("clicked",value)
+  const {data, onPressCard, onPressSelectOrder, value} = props;
   return (
-    <View key={data?.id}>
+    <View key={value}>
       <TouchableOpacity onPress={onPressCard}>
         <View style={style.cardView}>
           <View style={style.flexView}>
@@ -19,12 +21,7 @@ const ListProductCard = props => {
               {data?.imageUrl != undefined && (
                 <Image
                   source={{uri: data?.image ?? ''}}
-                  style={{
-                    height: hp(14),
-                    width: wp(28),
-                    borderRadius: hp(1),
-                    marginRight: wp(2),
-                  }}
+                  style={style.imageProductStyle}
                 />
               )}
             </View>
@@ -46,9 +43,7 @@ const ListProductCard = props => {
                       {data?.mrp ?? ''}
                     </Text>
                   )}
-               
                   <View style={{width: wp(2)}} />
-
                   {data?.discount != undefined && (
                     <Text style={style.actualPriceText}>
                       {INDIAN_RUPEE_SYMBOL}
@@ -61,10 +56,11 @@ const ListProductCard = props => {
           </View>
           <View style={styles.midDivider} />
           <AppButton
-            title={SELECT_ORDER}
+            title={CREATE_NEW_ORDER}
             customButtonStyle={style.buttonStyle}
             customButtonTextStyle={style.buttonTextStyle}
             onPress={onPressSelectOrder}
+            // key={value}
           />
         </View>
       </TouchableOpacity>
@@ -108,5 +104,11 @@ const style = StyleSheet.create({
   flexEndView: {alignSelf: 'flex-end', marginRight: wp(2)},
   buttonStyle: {height: hp(5.5), borderRadius: hp(1)},
   buttonTextStyle: {fontSize: 14},
+  imageProductStyle: {
+    height: hp(14),
+    width: wp(28),
+    borderRadius: hp(1),
+    marginRight: wp(2),
+  },
 });
 export default ListProductCard;
