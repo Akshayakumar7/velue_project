@@ -218,7 +218,7 @@ const Home = ({navigation}) => {
   const getNewData = async () => {
     try {
       setLoader(true);
-      const allProductData = await fetchDataFromApi();
+      const allProductData = await fetchDaataFromApi();
       setProjectData(allProductData ?? []);
       setLoader(false);
     } catch (error) {
